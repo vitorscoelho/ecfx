@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="820.0" styleClass="backgroundWhite" stylesheets="@Geral.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorcoelho.interfaceGrafica.ControllerCenaCalculadora">
+   <children>
+      <TabPane layoutX="349.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="461.0" styleClass="borderLightGray" AnchorPane.leftAnchor="349.0" AnchorPane.topAnchor="21.0">
+         <tabs>
+            <Tab closable="false" text="Dimensionamento">
+               <content>
+                  <AnchorPane prefHeight="240.0" prefWidth="459.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" layoutX="217.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="147.0" text="Esforços Solicitantes" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="138.0">
+                                 <children>
+                                    <GridPane hgap="2.0" layoutX="-25.0" layoutY="6.0" vgap="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                                          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Nk=" />
+                                          <Label text="Vk=" GridPane.rowIndex="1" />
+                                          <Label text="Mk=" GridPane.rowIndex="2" />
+                                          <Label text="kN" GridPane.columnIndex="2" />
+                                          <Label text="kN" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <Label text="kN.m" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <TextField fx:id="textFieldNkDim" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="1000" GridPane.columnIndex="1" />
+                                          <TextField fx:id="textFieldVkDim" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="40" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="textFieldMkDim" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="100" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                        <Button layoutX="52.0" layoutY="151.0" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionDimensionar" prefHeight="25.0" text="Dimensionar" />
+                        <TextArea fx:id="textAreaDim" editable="false" layoutX="209.0" layoutY="20.0" prefHeight="149.0" prefWidth="244.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Verificação Cisalhamento">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" layoutX="113.0" layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="194.0" text="Dados de entrada" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="138.0">
+                                 <children>
+                                    <GridPane hgap="2.0" layoutX="-25.0" layoutY="6.0" vgap="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label text="Nk=" />
+                                          <Label text="Mk=" GridPane.rowIndex="1" />
+                                          <Label text="Espaçamento=" GridPane.rowIndex="2" />
+                                          <Label text="kN" GridPane.columnIndex="2" />
+                                          <Label text="kN.m" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <Label text="cm" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <TextField fx:id="textFieldNkVerCis" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="1000" GridPane.columnIndex="1" />
+                                          <TextField fx:id="textFieldMkVerCis" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="40" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="textFieldEspacamento" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="20" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="80.0" />
+                                          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                                          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                        <Button layoutX="87.0" layoutY="151.0" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionVerificarCisalhamento" prefHeight="25.0" text="Verificar" />
+                        <TextArea fx:id="textAreaVerCis" editable="false" layoutX="223.0" layoutY="20.0" prefHeight="149.0" prefWidth="230.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab closable="false" text="Verificação Flexo-Compressão">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TitledPane animated="false" collapsible="false" layoutX="256.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="98.0" prefWidth="164.0" text="Dados de entrada" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="138.0">
+                                 <children>
+                                    <GridPane hgap="2.0" layoutX="-25.0" layoutY="6.0" vgap="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <Label text="Nk=" />
+                                          <Label text="nBarras=" GridPane.rowIndex="1" />
+                                          <Label text="kN" GridPane.columnIndex="2" />
+                                          <Label text="unid" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <TextField fx:id="textFieldNkVerFlex" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosReais" text="1000" GridPane.columnIndex="1" />
+                                          <TextField fx:id="textFieldNBarras" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosNaturais" text="20" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
+                                          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                                          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                        <Button layoutX="72.0" layoutY="127.0" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onActionVerificarFlexoCompressao" prefHeight="25.0" text="Verificar" />
+                        <TextArea fx:id="textAreaVerFlex" editable="false" layoutX="209.0" layoutY="20.0" prefHeight="149.0" prefWidth="244.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+      <TitledPane animated="false" collapsible="false" layoutX="22.0" layoutY="224.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="98.0" prefWidth="319.0" text="Armadura Transversal">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="187.0">
+               <children>
+                  <GridPane hgap="2.0" layoutX="14.0" layoutY="14.0" vgap="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="fywk=" />
+                        <Label text="MPa" GridPane.columnIndex="2" />
+                        <TextField fx:id="textFieldFykTransv" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="500" GridPane.columnIndex="1" />
+                        <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4">
+                           <children>
+                              <Label text="g">
+                                 <font>
+                                    <Font name="GreekC" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="s=" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="textFieldGamaSTransv" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="1.15" GridPane.columnIndex="5" />
+                        <Label layoutX="50.0" layoutY="42.0" text="Bitola=" GridPane.rowIndex="1" />
+                        <Label layoutX="139.0" layoutY="42.0" text="mm" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="textFieldBitolaTransv" alignment="CENTER_RIGHT" layoutX="72.0" layoutY="38.0" onKeyTyped="#onKeyTypedNumerosPositivos" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" collapsible="false" layoutX="22.0" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="319.0" text="Armadura Longitudinal">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="187.0">
+               <children>
+                  <GridPane hgap="2.0" layoutX="14.0" layoutY="14.0" vgap="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="fyk=" />
+                        <Label text="MPa" GridPane.columnIndex="2" />
+                        <TextField fx:id="textFieldFykLong" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="500" GridPane.columnIndex="1" />
+                        <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4">
+                           <children>
+                              <Label text="g">
+                                 <font>
+                                    <Font name="GreekC" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="s=" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="textFieldGamaSLong" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="1.15" GridPane.columnIndex="5" />
+                        <Label layoutX="46.0" layoutY="14.0" text="Es=" GridPane.rowIndex="1" />
+                        <Label layoutX="139.0" layoutY="14.0" text="MPa" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="textFieldEsLong" alignment="CENTER_RIGHT" layoutX="72.0" layoutY="10.0" onKeyTyped="#onKeyTypedNumerosPositivos" text="210000" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label layoutX="50.0" layoutY="42.0" text="Bitola=" GridPane.rowIndex="2" />
+                        <Label layoutX="139.0" layoutY="42.0" text="mm" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="textFieldBitolaLong" alignment="CENTER_RIGHT" layoutX="72.0" layoutY="38.0" onKeyTyped="#onKeyTypedNumerosPositivos" text="16" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" collapsible="false" layoutX="22.0" layoutY="330.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="98.0" prefWidth="319.0" text="Características geométricas e majorador de esforços">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="187.0">
+               <children>
+                  <GridPane hgap="2.0" layoutX="14.0" layoutY="14.0" vgap="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="Diâmetro=" />
+                        <Label text="cm" GridPane.columnIndex="2" />
+                        <Label text="Cobrimento=" GridPane.rowIndex="1" />
+                        <Label text="cm" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="textFieldDiametro" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="60" GridPane.columnIndex="1" />
+                        <TextField fx:id="textFieldCobrimento" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="3.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="3">
+                           <children>
+                              <Label text="g">
+                                 <font>
+                                    <Font name="GreekC" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="n=" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="textFieldGamaN" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="1.4" GridPane.columnIndex="4" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="35.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <TitledPane animated="false" collapsible="false" layoutX="22.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="67.0" prefWidth="319.0" text="Concreto">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="185.0" prefWidth="187.0">
+               <children>
+                  <GridPane hgap="2.0" layoutX="14.0" layoutY="14.0" vgap="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label text="fck=" />
+                        <Label text="MPa" GridPane.columnIndex="2" />
+                        <TextField fx:id="textFieldFck" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="20" GridPane.columnIndex="1" />
+                        <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="4">
+                           <children>
+                              <Label text="g">
+                                 <font>
+                                    <Font name="GreekC" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label text="c=" />
+                           </children>
+                        </HBox>
+                        <TextField fx:id="textFieldGamaC" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="1.6" GridPane.columnIndex="5" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="40.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </TitledPane>
+      <AnchorPane layoutX="350.0" layoutY="240.0" prefHeight="195.0" prefWidth="461.0" styleClass="backgroundWhite">
+         <children>
+            <Circle centerX="90.0" centerY="90.0" fill="WHITE" radius="80.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle centerX="90.0" centerY="90.0" fill="WHITE" radius="70.0" stroke="#3973e0" strokeType="INSIDE" strokeWidth="2.3" />
+            <VBox alignment="CENTER" layoutX="275.0" layoutY="20.0">
+               <children>
+                  <Circle fx:id="circleEstribo" centerX="90.0" centerY="90.0" fill="WHITE" layoutX="255.0" radius="70.0" stroke="#3973e0" strokeType="INSIDE" strokeWidth="2.3" />
+                  <HBox fx:id="hBoxTransversal" alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="331.0" layoutY="166.0" text="F" textAlignment="CENTER">
+                           <font>
+                              <Font name="GreekC" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelEstribos" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="10.0" text="16mm c/20 cm" textAlignment="CENTER" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Line endX="10.0" endY="195.0" startX="10.0" startY="90.0" stroke="#c80000" />
+            <Line endX="170.0" endY="195.0" startX="170.0" startY="90.0" stroke="#c80000" />
+            <Line endX="175.0" endY="190.0" startX="5.0" startY="190.0" stroke="#c80000" />
+            <Line endX="15.0" endY="185.0" startX="5.0" startY="195.0" stroke="#c80000" />
+            <Line endX="175.0" endY="185.0" startX="165.0" startY="195.0" stroke="#c80000" />
+            <Label fx:id="labelCotaDiametro" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="174.0" text="xx.xx" textFill="#c80000" />
+            <Circle fill="DODGERBLUE" layoutX="90.0" layoutY="27.0" radius="4.0" stroke="#3973e0" strokeType="INSIDE" />
+            <Circle fill="DODGERBLUE" layoutX="90.0" layoutY="153.0" radius="4.0" stroke="#3973e0" strokeType="INSIDE" />
+            <Circle fill="DODGERBLUE" layoutX="153.0" layoutY="90.0" radius="4.0" stroke="#3973e0" strokeType="INSIDE" />
+            <Circle fill="DODGERBLUE" layoutX="27.0" layoutY="90.0" radius="4.0" stroke="#3973e0" strokeType="INSIDE" />
+            <Circle fill="DODGERBLUE" layoutX="46.0" layoutY="46.0" radius="4.0" stroke="#3973e0" strokeType="INSIDE" />
+            <Circle fill="DODGERBLUE" layoutX="134.0" layoutY="46.0" radius="4.0" stroke="#3973e0" strokeType="INSIDE" />
+            <Circle fill="DODGERBLUE" layoutX="134.0" layoutY="134.0" radius="4.0" stroke="#3973e0" strokeType="INSIDE" />
+            <Circle fill="DODGERBLUE" layoutX="46.0" layoutY="134.0" radius="4.0" stroke="#3973e0" strokeType="INSIDE" />
+            <Line fx:id="line1" endX="190.0" endY="40.0" startX="90.0" startY="27.0" strokeWidth="0.5" />
+            <Line fx:id="line2" endX="190.0" endY="40.0" startX="90.0" startY="153.0" strokeWidth="0.5" />
+            <Line fx:id="line3" endX="190.0" endY="40.0" startX="153.0" startY="90.0" strokeWidth="0.5" />
+            <Line fx:id="line4" endX="190.0" endY="40.0" startX="27.0" startY="90.0" strokeWidth="0.5" />
+            <Line fx:id="line5" endX="190.0" endY="40.0" startX="46.0" startY="46.0" strokeWidth="0.5" />
+            <Line fx:id="line6" endX="190.0" endY="40.0" startX="134.0" startY="46.0" strokeWidth="0.5" />
+            <Line fx:id="line7" endX="190.0" endY="40.0" startX="134.0" startY="134.0" strokeWidth="0.5" />
+            <Line fx:id="line8" endX="190.0" endY="40.0" startX="46.0" startY="134.0" strokeWidth="0.5" />
+            <HBox fx:id="hBoxLongitudinal" alignment="CENTER_LEFT" layoutX="192.0" layoutY="27.0">
+               <children>
+                  <Label fx:id="labelNBarras" layoutX="203.0" layoutY="31.0" text="xx" />
+                  <Label layoutX="10.0" layoutY="10.0" text="F">
+                     <font>
+                        <Font name="GreekC" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelBitola" layoutX="22.0" layoutY="10.0" text="16mm" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <TextArea fx:id="textAreaConsole" disable="true" layoutX="22.0" layoutY="442.0" prefHeight="17.0" prefWidth="790.0" visible="false" />
+   </children>
+</AnchorPane>

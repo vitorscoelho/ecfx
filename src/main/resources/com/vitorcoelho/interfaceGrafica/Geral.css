@@ -1,0 +1,25 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.backgroundWhite{
+    -fx-background-color: white;
+}
+.backgroundRed{
+    -fx-background-color: red;
+}
+.backgroundGray{
+    -fx-background-color: #cccccc;
+}
+.backgroundTransparent{
+    -fx-background-color: transparent;
+}
+.borderLightGray{
+    -fx-border-color: lightgray;
+}
+.linhaSelecionada{
+    -fx-stroke:red;
+}
+.linhaNaoSelecionada{
+    -fx-stroke:black;
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="215.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorcoelho.interfaceGrafica.ControllerCenaParametros">
+   <children>
+      <GridPane hgap="2.0" layoutX="28.0" layoutY="28.0" prefHeight="109.0" prefWidth="52.0" vgap="3.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="45.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="30.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="textFieldCoeficienteDeSeguranca" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="1" GridPane.columnIndex="1" />
+            <TextField fx:id="textFieldCoeficienteDeSegurancaMaximo" alignment="CENTER_RIGHT" layoutX="72.0" layoutY="10.0" onKeyTyped="#onKeyTypedNumerosPositivos" text="20" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="textFieldMajoradorFlexoCompressao" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="1.3" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="textFieldTaxaMinimaLongitudinal" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="0.5" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="textFieldTaxaMaximaLongitudinal" alignment="CENTER_RIGHT" onKeyTyped="#onKeyTypedNumerosPositivos" text="8.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="C.S.mín=" />
+            <Label text="Mfc=" GridPane.rowIndex="2" />
+            <Label text="\%As,mín=" GridPane.rowIndex="3" />
+            <Label text="\%As,máx=" GridPane.rowIndex="4" />
+            <Label text="\%" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label text="\%" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label layoutX="22.0" layoutY="14.0" text="C.S.máx=" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <HBox layoutX="76.0" layoutY="176.0" spacing="6.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onActionButtonOk" text="Ok" />
+            <Button mnemonicParsing="false" onAction="#onActionButtonCancelar" text="Cancelar" />
+            <Button mnemonicParsing="false" onAction="#onActionRestaurarPadroes" text="Restaurar padrões do software" />
+         </children>
+      </HBox>
+      <TextArea fx:id="textAreaDescricao" editable="false" layoutX="167.0" layoutY="37.0" prefHeight="119.0" prefWidth="210.0" />
+   </children>
+</AnchorPane>

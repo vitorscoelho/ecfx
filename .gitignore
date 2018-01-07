@@ -1,0 +1,6 @@
+.git
+**/.idea/workspace.xml
+workspace.xml
+build/
+out/
+.gradle
