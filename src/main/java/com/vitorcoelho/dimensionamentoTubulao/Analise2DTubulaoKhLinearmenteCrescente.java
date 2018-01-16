@@ -8,10 +8,10 @@ package com.vitorcoelho.dimensionamentoTubulao;
 import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
 import com.vitorcoelho.auxiliarMath.Funcao;
 import com.vitorcoelho.interfaceGrafica.Resultados;
+
 import static java.lang.StrictMath.*;
 
 /**
- *
  * @author Vítor
  */
 public strictfp class Analise2DTubulaoKhLinearmenteCrescente implements Analise2DTubulao {
@@ -49,8 +49,8 @@ public strictfp class Analise2DTubulaoKhLinearmenteCrescente implements Analise2
 
     //Construtores
     public Analise2DTubulaoKhLinearmenteCrescente(Tubulao tubulao,
-            double normal, double forcaHorizontal, double momento, double gamaN, double nh, double kv,
-            double coesao, double anguloDeAtritoGraus, double pesoEspecificoSolo, double tensaoVAdmissivel) {
+                                                  double normal, double forcaHorizontal, double momento, double gamaN, double nh, double kv,
+                                                  double coesao, double anguloDeAtritoGraus, double pesoEspecificoSolo, double tensaoVAdmissivel) {
         this.tubulao = tubulao;
         this.secaoFuste = tubulao.getSecaoFuste();
         this.secaoBase = tubulao.getSecaoBase();
@@ -84,7 +84,7 @@ public strictfp class Analise2DTubulaoKhLinearmenteCrescente implements Analise2
         funcaoMomentoFuste = new FuncaoMomentoFuste();
     }
 
-//Getters
+    //Getters
     @Override
     public double limiteComprimentoTubulaoCurto() {
         double moduloDeElasticidade = this.secaoFuste.getSecaoConcretoArmado().getConcreto().getModuloDeDeformacaoSecante();
@@ -122,19 +122,19 @@ public strictfp class Analise2DTubulaoKhLinearmenteCrescente implements Analise2
     public Solicitacao getSolicitacaoTopo() {
         return (new Solicitacao(normal, forcaHorizontal, momento, gamaN));
     }
-    
+
     @Override
-    public double getKa(){
+    public double getKa() {
         return this.ka;
     }
 
     @Override
-    public double getKp(){
+    public double getKp() {
         return this.kp;
     }
 
     @Override
-    public double getAnguloDeAtrito(){
+    public double getAnguloDeAtrito() {
         return this.anguloDeAtrito;
     }
 
@@ -248,7 +248,7 @@ public strictfp class Analise2DTubulaoKhLinearmenteCrescente implements Analise2
 
         @Override
         public double getFx(double x) {
-            return (Z1 * x * (deltaH - rotacao * x));
+            return (-Z1 * x * (deltaH - rotacao * x));
         }
     }
 
@@ -258,8 +258,8 @@ public strictfp class Analise2DTubulaoKhLinearmenteCrescente implements Analise2
         private double Z2;
 
         private FuncaoTensaoHorizontalAdmissivel() {
-            this.Z1 = kp - ka;
-            this.Z2 = 2 * coesao * (sqrt(kp) + sqrt(ka));
+            this.Z1 = 0.5 * kp - ka;
+            this.Z2 = 2 * coesao * (0.5 * sqrt(kp) + sqrt(ka));
         }
 
         @Override
@@ -277,8 +277,8 @@ public strictfp class Analise2DTubulaoKhLinearmenteCrescente implements Analise2
 
         private FuncaoCoeficienteSegurancaEstabilidade() {
             this.Z1 = kh / comprimento;
-            this.Z2 = kp - ka;
-            this.Z3 = 2 * coesao * (sqrt(kp) + sqrt(ka));
+            this.Z2 = 0.5 * kp - ka;
+            this.Z3 = 2 * coesao * (0.5 * sqrt(kp) + sqrt(ka));
         }
 
         @Override

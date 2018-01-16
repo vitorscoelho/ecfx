@@ -1,448 +1,405 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="1162.0" styleClass="backgroundWhite" stylesheets="@Geral.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorcoelho.interfaceGrafica.ControllerCenaValoresSugeridos">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="backgroundWhite" stylesheets="@Geral.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorcoelho.interfaceGrafica.ControllerCenaValoresSugeridos">
    <children>
-      <VBox layoutX="14.0" layoutY="18.0">
+      <HBox layoutX="13.0" layoutY="-0.5" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
-            <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="14.0" prefHeight="427.0" prefWidth="216.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <GridPane gridLinesVisible="true" prefWidth="339.0" GridPane.rowIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="190.0" />
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Solo" textAlignment="CENTER" />
-                        <HBox alignment="CENTER" prefWidth="110.0" styleClass="backgroundGray" stylesheets="@Geral.css" GridPane.columnIndex="1">
-                           <children>
-                              <Label text="g">
-                                 <font>
-                                    <Font name="GreekC" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label text="(kN/m³)" />
-                           </children>
-                        </HBox>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia fofa" textAlignment="CENTER" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="17" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Areia compacta" textAlignment="CENTER" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="18" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia muito compacta" textAlignment="CENTER" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Pedregulho limpo" textAlignment="CENTER" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="17" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Pedregulho e areia não uniforme" textAlignment="CENTER" GridPane.rowIndex="5" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Pedra sem areia" textAlignment="CENTER" GridPane.rowIndex="6" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="17" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia dura" textAlignment="CENTER" GridPane.rowIndex="7" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="21" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila rija" textAlignment="CENTER" GridPane.rowIndex="8" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="20" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila mole" textAlignment="CENTER" GridPane.rowIndex="9" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="18" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila arenosa rija ou dura" textAlignment="CENTER" GridPane.rowIndex="10" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="22" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila arenosa mole" textAlignment="CENTER" GridPane.rowIndex="11" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="20" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Silte rijo ou duro" textAlignment="CENTER" GridPane.rowIndex="12" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="20" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Silte mole" textAlignment="CENTER" GridPane.rowIndex="13" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila e silte orgânico" textAlignment="CENTER" GridPane.rowIndex="14" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="17" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Solo turfoso" textAlignment="CENTER" GridPane.rowIndex="15" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="11" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                     </children>
-                  </GridPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Peso específico">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-            <Label layoutX="14.0" layoutY="459.0" text="Adaptado de Davisson (1963)" />
-         </children>
-      </VBox>
-      <VBox layoutX="552.0" layoutY="18.0">
-         <children>
-            <GridPane gridLinesVisible="true" layoutX="524.0" layoutY="489.0" prefHeight="137.0" prefWidth="250.0">
-               <children>
-                  <GridPane gridLinesVisible="true" prefWidth="339.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Compacidade da areia seca" textAlignment="CENTER" />
-                        <HBox alignment="CENTER" prefWidth="110.0" styleClass="backgroundGray" stylesheets="@Geral.css" GridPane.columnIndex="1">
-                           <children>
-                              <Label text="h">
-                                 <font>
-                                    <Font name="GreekC" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label text="h(kN/m³)" />
-                           </children>
-                        </HBox>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia fofa" textAlignment="CENTER" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="2.600" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Areia medianamente compacta" textAlignment="CENTER" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="8.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia compacta" textAlignment="CENTER" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="20.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="190.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="65.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <VBox>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Taxa de crescimento do">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="coeficiente de reação horizontal">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="255.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Label layoutX="536.0" layoutY="639.0" text="Adaptado de Timerman (1980)" />
-         </children>
-      </VBox>
-      <VBox layoutX="821.0" layoutY="339.0">
-         <children>
-            <GridPane gridLinesVisible="true" layoutX="796.0" layoutY="347.0" prefHeight="219.0" prefWidth="320.0">
+            <HBox spacing="10.0">
                <children>
                   <VBox>
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Coeficiente de reação horizontal">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="maximo incorporando a dimensão">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="35.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="transversal da estaca">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <GridPane gridLinesVisible="true" GridPane.rowIndex="1">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <GridPane gridLinesVisible="true" GridPane.rowIndex="1">
+                        <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="14.0" prefHeight="427.0" prefWidth="216.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila média" textAlignment="CENTER" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila rija" textAlignment="CENTER" GridPane.rowIndex="1" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila muito rija" textAlignment="CENTER" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila dura" textAlignment="CENTER" GridPane.rowIndex="3" />
-                           </children>
-                        </GridPane>
-                        <GridPane gridLinesVisible="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="115.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="85.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="700 a 4.000" textAlignment="CENTER" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="3.000 a 6.500" textAlignment="CENTER" GridPane.rowIndex="1" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="6.500 a 13.000" textAlignment="CENTER" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="&gt; 13.000" textAlignment="CENTER" GridPane.rowIndex="3" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="800" textAlignment="CENTER" GridPane.columnIndex="1" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="5.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="10.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="19.500" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                           </children>
-                        </GridPane>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Consistência da argila" textAlignment="CENTER" />
-                        <GridPane gridLinesVisible="true" GridPane.columnIndex="1">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <GridPane gridLinesVisible="true" GridPane.rowIndex="1">
+                              <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.rowIndex="1">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="115.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="85.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="70.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Ordem de grandeza" textAlignment="CENTER" />
-                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Valor provável" textAlignment="CENTER" GridPane.columnIndex="1" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Solo" textAlignment="CENTER" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia fofa" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="17" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Areia compacta" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="18" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia muito compacta" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Pedregulho limpo" textAlignment="CENTER" GridPane.rowIndex="4" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="17" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Pedregulho e areia não uniforme" textAlignment="CENTER" GridPane.rowIndex="5" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Pedra sem areia" textAlignment="CENTER" GridPane.rowIndex="6" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="17" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia dura" textAlignment="CENTER" GridPane.rowIndex="7" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="21" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila rija" textAlignment="CENTER" GridPane.rowIndex="8" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="20" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila mole" textAlignment="CENTER" GridPane.rowIndex="9" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="18" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila arenosa rija ou dura" textAlignment="CENTER" GridPane.rowIndex="10" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="22" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila arenosa mole" textAlignment="CENTER" GridPane.rowIndex="11" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="20" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Silte rijo ou duro" textAlignment="CENTER" GridPane.rowIndex="12" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="20" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Silte mole" textAlignment="CENTER" GridPane.rowIndex="13" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="19" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila e silte orgânico" textAlignment="CENTER" GridPane.rowIndex="14" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="17" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Solo turfoso" textAlignment="CENTER" GridPane.rowIndex="15" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="11" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="γ (kN/m³)" GridPane.columnIndex="1"/>
                                  </children>
                               </GridPane>
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="K1 (kN/m²)" textAlignment="CENTER" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Peso específico"/>
                            </children>
                         </GridPane>
+                        <Label layoutX="14.0" layoutY="459.0" text="Adaptado de Davisson (1963)" />
                      </children>
-                  </GridPane>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="325.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="150.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Label layoutX="821.0" layoutY="584.0" text="Adaptado de Davisson (1963)" />
-         </children>
-      </VBox>
-      <VBox layoutX="821.0" layoutY="18.0">
-         <children>
-            <GridPane gridLinesVisible="true" layoutX="821.0" layoutY="14.0" prefHeight="275.0" prefWidth="295.0">
-               <children>
-                  <GridPane gridLinesVisible="true" prefWidth="339.0" GridPane.rowIndex="1">
+                  </VBox>
+                  <VBox spacing="12.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Solo" textAlignment="CENTER" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia de granulação fina úmida" textAlignment="CENTER" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="10.000 a 20.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Areia de granulação fina seca" textAlignment="CENTER" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="60.000 a 90.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia com cascalho grosso" textAlignment="CENTER" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="110.000 a 130.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Solo arenoso bastante compacto grosso" textAlignment="CENTER" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="130.000 a 160.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila mole" textAlignment="CENTER" GridPane.rowIndex="5" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="20.000 a 40.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila média" textAlignment="CENTER" GridPane.rowIndex="6" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="50.000 a 80.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila rija" textAlignment="CENTER" GridPane.rowIndex="7" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="100.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Aterro fofo de terra" textAlignment="CENTER" GridPane.rowIndex="8" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="10.000 a 20.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Turfa, pântano" textAlignment="CENTER" GridPane.rowIndex="9" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="5.000 a 10.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Kv (kN/m³)" textAlignment="CENTER" GridPane.columnIndex="1" />
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="220.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="105.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Coeficiente de reação vertical">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="325.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="250.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Label layoutX="844.0" layoutY="319.0" text="Adaptado de Timerman (1980)" />
-         </children>
-      </VBox>
-      <VBox layoutX="284.0" layoutY="18.0">
-         <children>
-            <GridPane gridLinesVisible="true" layoutX="284.0" layoutY="14.0" prefHeight="199.0" prefWidth="195.0">
-               <children>
-                  <GridPane gridLinesVisible="true" prefWidth="339.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Consistência da argila" textAlignment="CENTER" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Muito mole" textAlignment="CENTER" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt; 10" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Mole" textAlignment="CENTER" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="10 a 25" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Média" textAlignment="CENTER" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="25 a 50" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Rija" textAlignment="CENTER" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="50 a 100" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Muito rija" textAlignment="CENTER" GridPane.rowIndex="5" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="100 a 200" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="c (kN/m²)" textAlignment="CENTER" GridPane.columnIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Dura" textAlignment="CENTER" GridPane.rowIndex="6" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="160.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="&gt; 200" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                     </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="125.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="70.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Coesão">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="195.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="175.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Label layoutX="306.0" layoutY="236.0" text="Adaptado de Alonso (2010)" />
-         </children>
-      </VBox>
-      <VBox layoutX="284.0" layoutY="268.0">
-         <children>
-            <GridPane gridLinesVisible="true" layoutX="284.0" layoutY="264.0" prefHeight="169.0" prefWidth="250.0">
-               <children>
-                  <GridPane gridLinesVisible="true" prefWidth="339.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Compacidade da areia" textAlignment="CENTER" />
-                        <HBox alignment="CENTER" prefWidth="110.0" styleClass="backgroundGray" stylesheets="@Geral.css" GridPane.columnIndex="1">
+                        <VBox>
                            <children>
-                              <Label text="f">
-                                 <font>
-                                    <Font name="GreekC" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Label text="(°)" />
+                              <GridPane gridLinesVisible="true" layoutX="284.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Consistência da argila" textAlignment="CENTER" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Muito mole" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt; 10" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Mole" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="10 a 25" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Média" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="25 a 50" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Rija" textAlignment="CENTER" GridPane.rowIndex="4" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="50 a 100" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Muito rija" textAlignment="CENTER" GridPane.rowIndex="5" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="100 a 200" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="c (kN/m²)" textAlignment="CENTER" GridPane.columnIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Dura" textAlignment="CENTER" GridPane.rowIndex="6" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="160.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="&gt; 200" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="145.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="70.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Coesão"/>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="175.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <Label layoutX="306.0" layoutY="236.0" text="Adaptado de Alonso (2010)" />
                            </children>
-                        </HBox>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fofa" textAlignment="CENTER" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt; 30" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Pouco compacta" textAlignment="CENTER" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="30 a 35" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Medianamente compacta" textAlignment="CENTER" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="35 a 40" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Compacta" textAlignment="CENTER" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="40 a 45" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Muito compacta" textAlignment="CENTER" GridPane.rowIndex="5" />
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&gt; 45" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <GridPane gridLinesVisible="true" layoutX="284.0" layoutY="264.0" prefHeight="169.0" prefWidth="250.0">
+                                 <children>
+                                    <GridPane gridLinesVisible="true" prefWidth="339.0" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Compacidade da areia" textAlignment="CENTER" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fofa" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&lt; 30" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Pouco compacta" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="30 a 35" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Medianamente compacta" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="35 a 40" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Compacta" textAlignment="CENTER" GridPane.rowIndex="4" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="40 a 45" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Muito compacta" textAlignment="CENTER" GridPane.rowIndex="5" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&gt; 45" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Φ(°)" textAlignment="CENTER" GridPane.columnIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="190.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Ângulo de atrito"/>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="150.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <Label layoutX="292.0" layoutY="467.0" text="Adaptado de Alonso (2010)" />
+                           </children>
+                        </VBox>
                      </children>
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="190.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                  </GridPane>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Ângulo de atrito">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
+                  </VBox>
                </children>
-               <columnConstraints>
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="150.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-            </GridPane>
-            <Label layoutX="292.0" layoutY="467.0" text="Adaptado de Alonso (2010)" />
+            </HBox>
+            <HBox spacing="10.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <GridPane gridLinesVisible="true" layoutX="524.0" layoutY="489.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                           <children>
+                              <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.rowIndex="1">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Compacidade da areia seca" textAlignment="CENTER" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia fofa" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="2.600" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Areia medianamente compacta" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="8.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia compacta" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="20.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="ηh (kN/m³)" GridPane.columnIndex="1" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="190.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="75.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <VBox>
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Taxa de crescimento do"/>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="coeficiente de reação horizontal"/>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <Label layoutX="536.0" layoutY="639.0" text="Adaptado de Timerman (1980)" />
+                     </children>
+                  </VBox>
+                  <VBox spacing="10.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <GridPane gridLinesVisible="true" layoutX="821.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+                                 <children>
+                                    <GridPane gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.rowIndex="1">
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Solo" textAlignment="CENTER" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia de granulação fina úmida" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="10.000 a 20.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Areia de granulação fina seca" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="60.000 a 90.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Areia com cascalho grosso" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="110.000 a 130.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Solo arenoso bastante compacto grosso" textAlignment="CENTER" GridPane.rowIndex="4" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="130.000 a 160.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila mole" textAlignment="CENTER" GridPane.rowIndex="5" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="20.000 a 40.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila média" textAlignment="CENTER" GridPane.rowIndex="6" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="50.000 a 80.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila rija" textAlignment="CENTER" GridPane.rowIndex="7" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="100.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Aterro fofo de terra" textAlignment="CENTER" GridPane.rowIndex="8" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="10.000 a 20.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Turfa, pântano" textAlignment="CENTER" GridPane.rowIndex="9" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="5.000 a 10.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Kv (kN/m³)" textAlignment="CENTER" GridPane.columnIndex="1" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="255.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Coeficiente de reação vertical"/>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="45.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="250.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <Label layoutX="844.0" layoutY="319.0" text="Adaptado de Timerman (1980)" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <GridPane gridLinesVisible="true" layoutX="796.0" layoutY="347.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="370.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Coeficiente de reação horizontal"/>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="maximo incorporando a dimensão"/>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="35.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="transversal da estaca"/>
+                                       </children>
+                                    </VBox>
+                                    <GridPane gridLinesVisible="true" GridPane.rowIndex="1">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="140.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="230.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <GridPane gridLinesVisible="true" GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila média" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila rija" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Argila muito rija" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Argila dura" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                             </children>
+                                          </GridPane>
+                                          <GridPane gridLinesVisible="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="130.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="700 a 4.000" textAlignment="CENTER" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="3.000 a 6.500" textAlignment="CENTER" GridPane.rowIndex="1" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="6.500 a 13.000" textAlignment="CENTER" GridPane.rowIndex="2" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="&gt; 13.000" textAlignment="CENTER" GridPane.rowIndex="3" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="800" textAlignment="CENTER" GridPane.columnIndex="1" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="5.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="10.000" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="19.500" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                             </children>
+                                          </GridPane>
+                                          <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="backgroundGray" text="Consistência da argila" textAlignment="CENTER" />
+                                          <GridPane gridLinesVisible="true" GridPane.columnIndex="1">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <GridPane gridLinesVisible="true" GridPane.rowIndex="1">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="130.0" />
+                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                   <children>
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Ordem de grandeza" textAlignment="CENTER" />
+                                                      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="Valor provável" textAlignment="CENTER" GridPane.columnIndex="1" />
+                                                   </children>
+                                                </GridPane>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="backgroundGray" text="K1 (kN/m²)" textAlignment="CENTER" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="370.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="150.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <Label layoutX="821.0" layoutY="584.0" text="Adaptado de Davisson (1963)" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
          </children>
-      </VBox>
-      <Line endY="600.0" layoutX="542.0" />
+      </HBox>
+      <Line endY="600.0" layoutX="549.0" layoutY="-46.0" />
    </children>
 </AnchorPane>

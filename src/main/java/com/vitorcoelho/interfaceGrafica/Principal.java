@@ -16,8 +16,10 @@ import com.vitorcoelho.dimensionamentoTubulao.SecaoBase;
 import com.vitorcoelho.dimensionamentoTubulao.SecaoBaseCircular;
 import com.vitorcoelho.dimensionamentoTubulao.SecaoFuste;
 import com.vitorcoelho.dimensionamentoTubulao.Tubulao;
+
 import java.io.IOException;
 import java.util.Optional;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -27,16 +29,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
- *
  * @author Vítor
  */
 public strictfp class Principal extends Application {
+
+    public static final String VERSAO_DO_PROGRAMA = "0.2";
 
     private static Stage stageCenaInicial;
     private static ControllerCenaInicial controllerCenaInicial;
@@ -64,6 +68,8 @@ public strictfp class Principal extends Application {
 
     @Override
     public void start(Stage stageCenaInicial) throws Exception {
+        this.carregarFontes();
+
         criarCenaInicial();
         criarCenaSobre();
         criarCenaValoresSugeridos();
@@ -73,6 +79,25 @@ public strictfp class Principal extends Application {
         criarCenaResultadosFuste();
 
         criarFuncionalidadesAdicionais();
+
+        Principal.stageCenaSobre.showAndWait();
+        Principal.stageCenaInicial.show();
+    }
+
+    private void carregarFontes() {
+        //Carregando fontes
+        /*
+        Para poder usar fontes no arquivo css, o procedimento é o seguinte:
+        1) Carregar a fonte através do método  "javafx.scene.text.Font.loadFont", como no exemplo abaixo (tanto faz o tamanho que colocar para a fonte no método):
+            javafx.scene.text.Font.loadFont(getClass().getResourceAsStream("fonts/GloriaHallelujah.ttf"), 15);
+        2) Clicar duas vezes na fonte para ver qual é o nome real dela.
+        3) No arquivo css, fazer como no exemplo abaixo:
+            -fx-font-family: "First Shine";
+        4) Para a fonte aparecer normalmente no scene builder, deve estar instalada no sistema operacional
+         */
+
+        javafx.scene.text.Font.loadFont(getClass().getResourceAsStream("/vitorscoelho/interfacegrafica/fontes/NotoSerif-Regular.ttf"), 15);
+        javafx.scene.text.Font.loadFont(getClass().getResourceAsStream("/vitorscoelho/interfacegrafica/fontes/NotoSerif-Bold.ttf"), 15);
     }
 
     //Métodos de criação
@@ -84,7 +109,7 @@ public strictfp class Principal extends Application {
         Scene sceneCenaInicial = new Scene(loaderCenaInicial.load());
 
         Principal.stageCenaInicial.setScene(sceneCenaInicial);
-        Principal.stageCenaInicial.setTitle("ECFX - Dimensionamento de estacas curtas");
+        Principal.stageCenaInicial.setTitle("ECFX: Versão " + Principal.VERSAO_DO_PROGRAMA + " - Programa auxiliar para dimensionamento de estacas curtas");
         Principal.stageCenaInicial.setResizable(false);
         Principal.stageCenaInicial.centerOnScreen();
 
@@ -92,8 +117,6 @@ public strictfp class Principal extends Application {
 
         //Image icone = new Image(getClass().getResourceAsStream("ImagemTubulao.jpg"));
         //Principal.stageCenaInicial.getIcons().add(icone);
-
-        Principal.stageCenaInicial.show();
     }
 
     private void criarCenaSobre() throws IOException {
@@ -107,6 +130,10 @@ public strictfp class Principal extends Application {
         Principal.stageCenaSobre.setTitle("Sobre");
         Principal.stageCenaSobre.setResizable(false);
         Principal.stageCenaSobre.centerOnScreen();
+        Principal.stageCenaSobre.initStyle(StageStyle.UTILITY);//Faz com que a janela não possa ser nem minimizada nem maximizada
+
+        stageCenaSobre.initModality(Modality.WINDOW_MODAL);
+        stageCenaSobre.initOwner(stageCenaInicial);
 
         Principal.controllerCenaSobre = loaderCenaSobre.getController();
     }
@@ -209,6 +236,7 @@ public strictfp class Principal extends Application {
             dialogAviso.setTitle("Janela de confirmação");
             dialogAviso.setHeaderText("Deseja fechar o programa?");
             dialogAviso.setContentText("");
+            dialogAviso.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 
             ButtonType buttonTypeSim = new ButtonType("Sim");
             ButtonType buttonTypeNao = new ButtonType("Não");
@@ -245,7 +273,7 @@ public strictfp class Principal extends Application {
     public static ControllerCenaSobre getControllerCenaSobre() {
         return controllerCenaSobre;
     }
-    
+
     public static Stage getStageCenaValoresSugeridos() {
         return stageCenaValoresSugeridos;
     }

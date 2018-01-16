@@ -26,10 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
@@ -95,6 +92,28 @@ public strictfp class ControllerCenaCalculadora extends ControllerCenaPadrao imp
     PrintStream outPadrao = System.out;
     PrintStream outTextArea;
 
+    private void aplicarTooltips() {
+        this. textFieldFck.setTooltip(new Tooltip("Resistência característica à compressão do concreto."));
+        this. textFieldGamaC.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do concreto."));
+        this. textFieldFykLong.setTooltip(new Tooltip("Resistência característica ao escoamento do aço da armadura longitudinal."));
+        this. textFieldGamaSLong.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do aço da armadura longitudinal."));
+        this. textFieldEsLong.setTooltip(new Tooltip("Módulo de deformação do aço da armadura longitudinal."));
+        this. textFieldBitolaLong.setTooltip(new Tooltip("Bitola da barra utilizada na armadura longitudinal."));
+        this. textFieldFykTransv.setTooltip(new Tooltip("Resistência característica ao escoamento do aço da armadura transversal."));
+        this. textFieldGamaSTransv.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do aço da armadura transversal."));
+        this. textFieldBitolaTransv.setTooltip(new Tooltip("Bitola da barra utilizada na armadura transversal."));
+        this. textFieldDiametro.setTooltip(new Tooltip("Diâmetro da seção transversal de concreto."));
+        this. textFieldGamaN.setTooltip(new Tooltip("Majorador de esforços para ELU."));
+        this. textFieldCobrimento.setTooltip(new Tooltip("Cobrimento do estribo."));
+        this.textFieldNkDim.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
+        this.textFieldVkDim.setTooltip(new Tooltip("Esforço horizontal característico atuante no topo da estaca."));
+        this.textFieldMkDim.setTooltip(new Tooltip("Esforço de momento fletor característico atuante no topo da estaca."));
+        this. textFieldNkVerCis.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
+        this. textFieldMkVerCis.setTooltip(new Tooltip("Esforço de momento fletor característico atuante no topo da estaca."));
+        this. textFieldEspacamento.setTooltip(new Tooltip("Espaçamento entre estribos."));
+        this. textFieldNkVerFlex.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
+        this. textFieldNBarras.setTooltip(new Tooltip("Quantidade de barras longitudinais na seção transversal."));
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -118,6 +137,8 @@ public strictfp class ControllerCenaCalculadora extends ControllerCenaPadrao imp
         //Criando stream para transformar a caixa de texto em console pro System.println
         TextAreaOutputStream textOut = new TextAreaOutputStream(this.textAreaConsole);
         outTextArea = new PrintStream(textOut, true);
+
+        this.aplicarTooltips();
     }
 
     @FXML

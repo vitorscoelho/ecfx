@@ -7,9 +7,11 @@ package com.vitorcoelho.interfaceGrafica;
 
 import com.vitorcoelho.dimensionamentoEstrutural.FlexoCompressao;
 import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulao;
+
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -23,6 +25,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.WindowEvent;
 
 /**
@@ -32,21 +35,29 @@ import javafx.stage.WindowEvent;
  */
 public class ControllerCenaParametros extends ControllerCenaPadrao implements Initializable {
 
-    @FXML TextField textFieldCoeficienteDeSeguranca;
-    @FXML TextField textFieldCoeficienteDeSegurancaMaximo;
-    @FXML TextField textFieldMajoradorFlexoCompressao;
-    @FXML TextField textFieldTaxaMinimaLongitudinal;
-    @FXML TextField textFieldTaxaMaximaLongitudinal;
-    @FXML TextArea textAreaDescricao;
+    @FXML
+    TextField textFieldCoeficienteDeSeguranca;
+    @FXML
+    TextField textFieldCoeficienteDeSegurancaMaximo;
+    @FXML
+    TextField textFieldMajoradorFlexoCompressao;
+    @FXML
+    TextField textFieldTaxaMinimaLongitudinal;
+    @FXML
+    TextField textFieldTaxaMaximaLongitudinal;
+    @FXML
+    TextArea textAreaDescricao;
 
-    String coeficienteDeSegurancaAtual = "1.0";
+    String coeficienteDeSegurancaAtual = "2.0";
     String coeficienteDeSegurancaMaximoAtual = "20.0";
-    String majoradorFlexoCompressaoAtual = "1.3";
+    String majoradorFlexoCompressaoAtual = "1.0";
     String taxaMinimaLongitudinalAtual;
     String taxaMaximaLongitudinalAtual;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.textAreaDescricao.setWrapText(true);
+
         //Mudando o funcionamento do botão "x" que fecha a janela
         Principal.getStageCenaParametros().setOnCloseRequest((WindowEvent we) -> {
             we.consume();
@@ -58,35 +69,60 @@ public class ControllerCenaParametros extends ControllerCenaPadrao implements In
         //Adicionando os listeners nos TextFields para aparecer a descrição do campo
         this.textFieldCoeficienteDeSeguranca.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (newValue) {
-                this.textAreaDescricao.setText("Descrição:\r\nCoeficiente de segurança mínimo\r\naos esforços horizontais para que\r\no elemento de fundação seja\r\nconsiderado como estável");
+                this.textAreaDescricao.setText("Descrição: Coeficiente de segurança mínimo aos esforços horizontais para que o elemento de fundação seja considerado como estável");
             }
         });
         this.textFieldCoeficienteDeSegurancaMaximo.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (newValue) {
-                this.textAreaDescricao.setText("Descrição:\r\nCoeficiente de segurança máximo\r\naos esforços horizontais que será\r\napresentado no gráfico dos\r\nresultados.");
+                this.textAreaDescricao.setText("Descrição: Coeficiente de segurança máximo aos esforços horizontais que será apresentado no gráfico dos resultados.");
             }
         });
         this.textFieldMajoradorFlexoCompressao.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (newValue) {
-                this.textAreaDescricao.setText("Descrição:\r\nMajorador da tensão admissível\r\nvertical para tensão máxima em\r\nflexo compressão na base.");
+                this.textAreaDescricao.setText("Descrição: Majorador da tensão admissível vertical para tensão máxima em flexo compressão na base.");
             }
         });
         this.textFieldTaxaMinimaLongitudinal.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (newValue) {
-                this.textAreaDescricao.setText("Descrição:\r\nPorcentagem mínima de área de\r\naço da armadura longitudinal em\r\nrelação a área de concreto da\r\nseção transversal.");
+                this.textAreaDescricao.setText("Descrição: Porcentagem mínima de área de aço da armadura longitudinal em relação a área de concreto da seção transversal.");
             }
         });
         this.textFieldTaxaMaximaLongitudinal.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (newValue) {
-                this.textAreaDescricao.setText("Descrição:\r\nPorcentagem máxima de área de\r\naço da armadura longitudinal em\r\nrelação a área de concreto da\r\nseção transversal.");
+                this.textAreaDescricao.setText("Descrição: Porcentagem máxima de área de aço da armadura longitudinal em relação a área de concreto da seção transversal.");
             }
         });
     }
 
     @FXML
     void onActionButtonOk(ActionEvent event) {
-        setDadosAtuais();
-        Principal.getStageCenaParametros().close();
+        final double CSmin = Double.parseDouble(this.textFieldCoeficienteDeSeguranca.getText());
+        final double CSmax = Double.parseDouble(this.textFieldCoeficienteDeSegurancaMaximo.getText());
+
+        final double ASmin = Double.parseDouble(this.textFieldTaxaMinimaLongitudinal.getText());
+        final double ASmax = Double.parseDouble(this.textFieldTaxaMaximaLongitudinal.getText());
+
+        String descricaoErro="";
+        boolean erro = false;
+        if (CSmin >= CSmax) {
+            erro = true;
+            descricaoErro = "CSmax deve ser maior do que CSmin.\r\nReedite os parâmetros.";
+        }
+        if (ASmin >= ASmax) {
+            erro = true;
+            descricaoErro = "A taxa de armadura máxima deve ser maior do que a mínima.\r\nReedite os parâmetros.";
+        }
+        if (erro) {
+            Alert dialogErro = new Alert(Alert.AlertType.ERROR);
+            dialogErro.setTitle("Erro!");
+            dialogErro.setHeaderText("Parâmetros inconsistentes");
+            dialogErro.setContentText(descricaoErro);
+            dialogErro.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            dialogErro.showAndWait();
+        } else {
+            setDadosAtuais();
+            Principal.getStageCenaParametros().close();
+        }
     }
 
     @FXML
@@ -105,6 +141,7 @@ public class ControllerCenaParametros extends ControllerCenaPadrao implements In
         dialogAviso.setTitle("Janela de confirmação");
         dialogAviso.setHeaderText("Deseja aplicar os valores padrões do software aos parâmetros?");
         dialogAviso.setContentText("");
+        dialogAviso.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 
         ButtonType buttonTypeSim = new ButtonType("Sim");
         ButtonType buttonTypeNao = new ButtonType("Não");
@@ -112,9 +149,9 @@ public class ControllerCenaParametros extends ControllerCenaPadrao implements In
 
         Optional<ButtonType> escolha = dialogAviso.showAndWait();
         if (escolha.get() == buttonTypeSim) {
-            textFieldCoeficienteDeSeguranca.setText("1.0");
+            textFieldCoeficienteDeSeguranca.setText("2.0");
             textFieldCoeficienteDeSegurancaMaximo.setText("20.0");
-            textFieldMajoradorFlexoCompressao.setText("1.3");
+            textFieldMajoradorFlexoCompressao.setText("1.0");
             textFieldTaxaMinimaLongitudinal.setText("0.5");
             textFieldTaxaMaximaLongitudinal.setText("8.0");
         }

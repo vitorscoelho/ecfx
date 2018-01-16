@@ -2,6 +2,16 @@
  * Empty Stylesheet file.
  */
 
+.root{
+    -fx-font-family: "Noto Serif";
+    -fx-font-size: 13px;
+}
+
+.tooltip{
+    -fx-font-family: "Noto Serif";
+    -fx-font-size: 12px;
+}
+
 .backgroundWhite{
     -fx-background-color: white;
 }

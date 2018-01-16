@@ -31,6 +31,10 @@ import java.io.ObjectOutputStream;
 import static java.lang.StrictMath.*;
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -46,8 +50,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.util.StringConverter;
 
 /**
  * @author Vítor
@@ -150,14 +156,136 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
 
     private boolean prosseguirDimensionamento = true;
 
+    private StringConverter<Double> stringConverterSpinner = new StringConverter<Double>() {
+        private final DecimalFormat df = new DecimalFormat("#.##", DecimalFormatSymbols.getInstance(Locale.US));
+
+
+        @Override
+        public String toString(Double value) {
+            // If the specified value is null, return a zero-length String
+            if (value == null) {
+                return "";
+            }
+
+            return df.format(value);
+        }
+
+        @Override
+        public Double fromString(String value) {
+            try {
+                // If the specified value is null or zero-length, return null
+                if (value == null) {
+                    return null;
+                }
+
+                value = value.trim();
+
+                if (value.length() < 1) {
+                    return null;
+                }
+
+                // Perform the requested parsing
+                return df.parse(value).doubleValue();
+            } catch (ParseException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    };
+
+    private void aplicarTooltips() {
+        this.textFieldFck.setTooltip(new Tooltip("Resistência característica à compressão do concreto."));
+        this.textFieldGamaC.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do concreto."));
+        this.textFieldEci.setTooltip(new Tooltip("Módulo de elasticidade inicial (ou tangente) do concreto."));
+        this.textFieldEcs.setTooltip(new Tooltip("Módulo de elasticidade secante do concreto."));
+        this.checkBoxEcAutomatico.setTooltip(new Tooltip("Se marcado, os módulos de elasticidade serão calculados\r\nnautomaticamente de acordo com a NBR:6118 (2014)."));
+        this.comboBoxAgregado.setTooltip(new Tooltip("Agregado graúdo utilizado no concreto."));
+
+        this.textFieldFykLong.setTooltip(new Tooltip("Resistência característica ao escoamento do aço da armadura longitudinal."));
+        this.textFieldEsLong.setTooltip(new Tooltip("Módulo de deformação do aço da armadura longitudinal."));
+        this.textFieldBitolaLong.setTooltip(new Tooltip("Bitola da barra utilizada na armadura longitudinal."));
+        this.textFieldGamaSLong.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do aço da armadura longitudinal."));
+        this.textFieldFykTransv.setTooltip(new Tooltip("Resistência característica ao escoamento do aço da armadura transversal."));
+        this.textFieldBitolaTransv.setTooltip(new Tooltip("Bitola da barra utilizada na armadura transversal."));
+        this.textFieldGamaSTransv.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do aço da armadura transversal."));
+
+        Tooltip tooltipTextFieldCobrimento = new Tooltip();
+        Tooltip tooltipTextFieldDiametroFuste = new Tooltip();
+        Tooltip tooltipTextFieldProfundidade = new Tooltip();
+        if (((dimensionamentoEstruturalTubulao.TipoEstaca) this.comboBoxTipoFundacao.getSelectionModel().selectedItemProperty().get()).isTubulao()) {
+            tooltipTextFieldCobrimento.setText("Cobrimento do estribo do fuste do tubulão.");
+            tooltipTextFieldDiametroFuste.setText("Diâmetro do fuste do tubulão.");
+            tooltipTextFieldProfundidade.setText("Profundidade total do tubulão.");
+        } else {
+            tooltipTextFieldCobrimento.setText("Cobrimento do estribo do fuste da estaca.");
+            tooltipTextFieldDiametroFuste.setText("Diâmetro do fuste da estaca.");
+            tooltipTextFieldProfundidade.setText("Profundidade total da estaca.");
+        }
+        this.comboBoxTipoFundacao.getSelectionModel().selectedItemProperty().addListener((ObservableValue observable, Object oldValue, Object newValue) -> {
+            dimensionamentoEstruturalTubulao.TipoEstaca tipo = (dimensionamentoEstruturalTubulao.TipoEstaca) newValue;
+            if (tipo.isTubulao()) {
+                tooltipTextFieldCobrimento.setText("Cobrimento do estribo do fuste do tubulão.");
+                tooltipTextFieldDiametroFuste.setText("Diâmetro do fuste do tubulão.");
+                tooltipTextFieldProfundidade.setText("Profundidade total do tubulão.");
+            } else {
+                tooltipTextFieldCobrimento.setText("Cobrimento do estribo do fuste da estaca.");
+                tooltipTextFieldDiametroFuste.setText("Diâmetro do fuste da estaca.");
+                tooltipTextFieldProfundidade.setText("Profundidade total da estaca.");
+            }
+        });
+        this.textFieldCobrimento.setTooltip(tooltipTextFieldCobrimento);
+        this.textFieldDiametroFuste.setTooltip(tooltipTextFieldDiametroFuste);
+        this.textFieldDiametroBase.setTooltip(new Tooltip("Diâmetro da base do tubulão."));
+        this.textFieldHbase.setTooltip(new Tooltip("Altura da base do tubulão."));
+        this.textFieldRodape.setTooltip(new Tooltip("Altura do rodapé da base do tubulão."));
+        this.textFieldProfundidade.setTooltip(tooltipTextFieldProfundidade);
+
+        this.textFieldNk.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
+        this.textFieldHk.setTooltip(new Tooltip("Esforço horizontal característico atuante no topo da estaca."));
+        this.textFieldMk.setTooltip(new Tooltip("Esforço de momento fletor característico atuante no topo da estaca."));
+        this.textFieldGamaN.setTooltip(new Tooltip("Majorador de esforços para ELU. Utilizado para o dimensionamento das armaduras."));
+
+        Tooltip tooltipTextFieldEtaOuKh = new Tooltip();
+        if (this.radioButtonAreia.isSelected()) {
+            tooltipTextFieldEtaOuKh.setText("Taxa de crescimento do coeficiente de reação horizontal.");
+        } else {
+            tooltipTextFieldEtaOuKh.setText("Coeficiente de reação horizontal máximo.");
+        }
+        this.radioButtonAreia.selectedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (newValue) {
+                tooltipTextFieldEtaOuKh.setText("Taxa de crescimento do coeficiente de reação horizontal.");
+            } else {
+                tooltipTextFieldEtaOuKh.setText("Coeficiente de reação horizontal máximo.");
+            }
+        });
+        this.textFieldEtaOuKh.setTooltip(tooltipTextFieldEtaOuKh);
+        this.textFieldKv.setTooltip(new Tooltip("Coeficiente de reação vertical\r\nna base do elemento de fundação."));
+        this.textFieldCoesao.setTooltip(new Tooltip("Coesão do solo."));
+        this.textFieldAnguloAtrito.setTooltip(new Tooltip("Ângulo de atrito do solo."));
+        this.textFieldPesoEspecificoSolo.setTooltip(new Tooltip("Peso específico do solo."));
+        this.textFieldTensaoAdmissivel.setTooltip(new Tooltip("Tensão vertical admissível do solo\r\nna base do elemento de fundação"));
+
+        this.comboBoxTipoFundacao.setTooltip(new Tooltip("Tipo de fundação."));
+        this.spinnerComprimentoMinimoArmadura.getEditor().setTooltip(new Tooltip("Profundidade mínima  exigida\r\npara a armadura longitudinal."));
+        this.spinnerTensaoMaximaSemArmadura.getEditor().setTooltip(new Tooltip("Tensão média atuante (no fuste) abaixo da qual não é\r\nnecessário armar (exceto até a profundidade mínima informada)."));
+
+        //Listener para fazer a base ficar igual ao fuste quando não é tubulão
+        this.textFieldDiametroFuste.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!((dimensionamentoEstruturalTubulao.TipoEstaca) comboBoxTipoFundacao.getSelectionModel().getSelectedItem()).isTubulao()) {
+                textFieldDiametroBase.setText(newValue);
+            }
+        });
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Inicializando os Spinners
         SpinnerValueFactory<Double> svf1 = new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 1000, 0, 0.5);
+        svf1.setConverter(this.stringConverterSpinner);
         this.spinnerComprimentoMinimoArmadura.setValueFactory(svf1);
         this.spinnerComprimentoMinimoArmadura.getEditor().setStyle("-fx-alignment: CENTER_RIGHT;");
 
         SpinnerValueFactory<Double> svf2 = new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 1000, 0, 0.5);
+        svf2.setConverter(this.stringConverterSpinner);
         this.spinnerTensaoMaximaSemArmadura.setValueFactory(svf2);
         this.spinnerTensaoMaximaSemArmadura.getEditor().setStyle("-fx-alignment: CENTER_RIGHT;");
 
@@ -188,8 +316,7 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
 
             if (newValue) {
                 //Linearmente crescente
-                this.labelEtaOuKh.setFont(Font.font("GreekC", 14));
-                this.labelEtaOuKh.setText("h");
+                this.labelEtaOuKh.setText("ηh=");
                 this.labelUnidadeEtaOuKh.setText("kN/m³");
 
                 if (tipoEstaca.isTubulao()) {
@@ -202,8 +329,7 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
 
             } else {
                 //Degrau
-                this.labelEtaOuKh.setFont(Font.font("System", 12));
-                this.labelEtaOuKh.setText("K");
+                this.labelEtaOuKh.setText("Kh=");
                 this.labelUnidadeEtaOuKh.setText("kN/m²");
 
                 if (tipoEstaca.isTubulao()) {
@@ -216,6 +342,7 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
 
             }
         });
+        this.aplicarTooltips();
     }
 
     //Eventos de Menu
@@ -285,6 +412,7 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
         dialogAviso.setTitle("Janela de confirmação");
         dialogAviso.setHeaderText("Deseja fechar o programa?");
         dialogAviso.setContentText("");
+        dialogAviso.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 
         ButtonType buttonTypeSim = new ButtonType("Sim");
         ButtonType buttonTypeNao = new ButtonType("Não");
@@ -317,6 +445,7 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
             dialogErro.setTitle(tituloErro);
             dialogErro.setHeaderText(textoPrincipalErro);
             dialogErro.setContentText(descricaoErro);
+            dialogErro.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             dialogErro.showAndWait();
         } else {
             //Avisos que não impedem o prosseguimento do dimensionamento, mas o torna desaconselhável
@@ -334,6 +463,7 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
                 dialogAviso.setTitle("Aviso!");
                 dialogAviso.setHeaderText("Aviso importante!");
                 dialogAviso.setContentText(descricaoDoAviso);
+                dialogAviso.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
 
                 ButtonType buttonTypeSim = new ButtonType("Sim");
                 ButtonType buttonTypeNao = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -411,6 +541,9 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
             dialogErro.setTitle(tituloErro);
             dialogErro.setHeaderText(textoPrincipalErro);
             dialogErro.setContentText(descricaoErro);
+
+            dialogErro.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+
             dialogErro.showAndWait();
         }
     }
@@ -418,7 +551,7 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
     private void verificacoesDepoisDoProcessamentoDosGraficos(Analise2DTubulao analise2D, Resultados resultados) {
         //////////Verificações que não precisam dos gráficos//////////
         double coeficienteDeSegurancaMinimo = resultados.getGraficoCoeficienteSegurancaEstabilidade().getValorMaximo();
-        double profCoeficienteDeSegurancaMinimo = resultados.getGraficoCoeficienteSegurancaEstabilidade().getProfundidadeValorMaximo();
+        double profCoeficienteDeSegurancaMinimo = resultados.getGraficoCoeficienteSegurancaEstabilidade().getProfundidadeValorMaximo() / 100.0;
         double coeficienteDeSegurancaAdmissivel = Principal.getControllerCenaParametros().getCoeficienteDeSeguranca();
 
         double gamaN = analise2D.getSolicitacaoTopo().getNd() / analise2D.getSolicitacaoTopo().getNk();
@@ -465,6 +598,7 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
             dialogErro.setTitle(tituloErro);
             dialogErro.setHeaderText(textoPrincipalErro);
             dialogErro.setContentText(descricaoErro);
+            dialogErro.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             dialogErro.showAndWait();
         }
     }
