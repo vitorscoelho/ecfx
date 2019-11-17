@@ -1,0 +1,35 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.root{
+    -fx-font-family: "Noto Serif";
+    -fx-font-size: 13px;
+}
+
+.tooltip{
+    -fx-font-family: "Noto Serif";
+    -fx-font-size: 12px;
+}
+
+.backgroundWhite{
+    -fx-background-color: white;
+}
+.backgroundRed{
+    -fx-background-color: red;
+}
+.backgroundGray{
+    -fx-background-color: #cccccc;
+}
+.backgroundTransparent{
+    -fx-background-color: transparent;
+}
+.borderLightGray{
+    -fx-border-color: lightgray;
+}
+.linhaSelecionada{
+    -fx-stroke:red;
+}
+.linhaNaoSelecionada{
+    -fx-stroke:black;
+}
