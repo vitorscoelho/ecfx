@@ -1,112 +1,95 @@
 package vitorscoelho.ecfx.gui.view
 
-import javafx.beans.binding.Bindings
-import javafx.beans.property.*
 import javafx.geometry.Orientation
-import javafx.util.StringConverter
-import tech.units.indriya.quantity.Quantities
-import tech.units.indriya.unit.Units.NEWTON
+import javafx.scene.control.ToggleGroup
 import tornadofx.*
+import vitorscoelho.ecfx.dimensionamento.geotecnico.AnaliseKhDegrau
+import vitorscoelho.ecfx.dimensionamento.geotecnico.AnaliseKhLinearmenteVariavel
 import vitorscoelho.ecfx.gui.estilo.DELAY_TOOLTIP
 import vitorscoelho.ecfx.gui.model.AGREGADOS_DISPONIVEIS
 import vitorscoelho.ecfx.gui.model.AGREGADO_QUALQUER
 import vitorscoelho.ecfx.gui.model.Dados
+import vitorscoelho.ecfx.gui.model.TipoSoloModel
 import vitorscoelho.ecfx.utils.*
-import javax.measure.Quantity
-import javax.measure.Unit
-import javax.measure.quantity.Force
 
 
-class ViewInicial : View() {
+class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
     val dados = Dados()
     override val root = vbox {
         form {
-            fieldset("Concreto") {
-                labelPosition = Orientation.VERTICAL
-                fieldQuantity(property = dados.fckProperty)
-                fieldQuantity(property = dados.gamaCProperty)
-                fieldQuantity(property = dados.moduloDeformacaoConcretoProperty) { tf ->
-                    tf.editableWhen(dados.agregadoProperty.isEqualTo(AGREGADO_QUALQUER))
-                }
-                field("Agregado graúdo") {
-                    combobox(values = AGREGADOS_DISPONIVEIS, property = dados.agregadoProperty) {
-                        tooltip(
-                            """
+            hbox {
+                vbox {
+                    fieldset("Concreto") {
+                        labelPosition = Orientation.VERTICAL
+                        fieldQuantity(property = dados.fckProperty)
+                        fieldQuantity(property = dados.gamaCProperty)
+                        fieldQuantity(property = dados.moduloDeformacaoConcretoProperty) { tf ->
+                            tf.editableWhen(dados.agregadoProperty.isEqualTo(AGREGADO_QUALQUER))
+                        }
+                        field("Agregado graúdo") {
+                            combobox(values = AGREGADOS_DISPONIVEIS, property = dados.agregadoProperty) {
+                                tooltip(
+                                    """
                                 Selecione o agregado graúdo usado no concreto.
                                 O módulo de deformação será calculado baseado no agregado selecionado.
                                 Para informar manualmente o módulo de deformação, selecione "Outro".
                             """.trimIndent()
-                        ).apply { showDelay = DELAY_TOOLTIP }
+                                ).apply { showDelay = DELAY_TOOLTIP }
+                            }
+                        }
+                    }
+                    fieldset("Armadura transversal\r\n(Estribos)") {
+                        labelPosition = Orientation.VERTICAL
+                        fieldQuantity(property = dados.estriboFywkProperty)
+                        fieldQuantity(property = dados.estriboGamaSProperty)
+                        fieldQuantity(property = dados.estriboBitolaProperty)
+                    }
+                    fieldset("Armadura longitudinal") {
+                        labelPosition = Orientation.VERTICAL
+                        fieldQuantity(property = dados.longitudinalFykProperty)
+                        fieldQuantity(property = dados.longitudinalGamaSProperty)
+                        fieldQuantity(property = dados.longitudinalModuloDeformacaoProperty)
+                        fieldQuantity(property = dados.longitudinalBitolaProperty)
+                    }
+                }
+                vbox {
+                    fieldset("Características geométricas") {
+                        labelPosition = Orientation.VERTICAL
+                        fieldQuantity(property = dados.cobrimentoProperty)
+                        fieldQuantity(property = dados.diametroFusteProperty)
+                        fieldQuantity(property = dados.diametroBaseProperty)
+                        fieldQuantity(property = dados.alturaBaseProperty)
+                        fieldQuantity(property = dados.rodapeBaseProperty)
+                        fieldQuantity(property = dados.profundidadeProperty)
+                    }
+                    fieldset("Cargas no topo") {
+                        labelPosition = Orientation.VERTICAL
+                        fieldQuantity(property = dados.normalProperty)
+                        fieldQuantity(property = dados.forcaHorizontalProperty)
+                        fieldQuantity(property = dados.momentoProperty)
+                        fieldQuantity(property = dados.gamaNProperty)
+                    }
+                }
+                vbox {
+                    fieldset("Características do elemento de fundação") {
+                        labelPosition = Orientation.VERTICAL
+                        field("Tipo") {
+                            combobox(property = dados.tipoEstaca)
+                        }
+                    }
+                    fieldset("Características do solo") {
+                        labelPosition = Orientation.VERTICAL
+                        field("Tipo do solo") {
+                            combobox(property = dados.tipoSolo, values = TipoSoloModel.values().toList()) { }
+                        }
+                        fieldQuantity(property = dados.kvProperty)
+                        fieldQuantity(property = dados.coesaoProperty)
+                        fieldQuantity(property = dados.anguloDeAtritoProperty)
+                        fieldQuantity(property = dados.pesoEspecificoProperty)
+                        fieldQuantity(property = dados.tensaoAdmissivelProperty)
                     }
                 }
             }
-            fieldset("Armadura transversal\r\n(Estribos)") {
-                labelPosition = Orientation.VERTICAL
-                fieldQuantity(property = dados.estriboFywkProperty)
-                fieldQuantity(property = dados.estriboGamaS)
-                fieldQuantity(property = dados.estriboBitola)
-            }
-            fieldset("Armadura longitudinal") {
-                labelPosition = Orientation.VERTICAL
-                fieldQuantity(property = dados.longitudinalFykProperty)
-                fieldQuantity(property = dados.longitudinalGamaS)
-                fieldQuantity(property = dados.longitudinalModuloDeformacao)
-                fieldQuantity(property = dados.longitudinalBitola)
-            }
         }
-//        spacing = 10.0
-//        label {
-//            textProperty().bind(Bindings.concat("Força (", forca.unidadeTextProperty, ")"))
-//        }
-//        textfield(property = forca.valorProperty) {
-//
-//        }
-//        combobox<Unit<Force>>(
-//            values = listOf(QUILOGRAMA_FORCA, TONELADA_FORCA, NEWTON, QUILONEWTON, MEGANEWTON),
-//            property = unidadeForca
-//        ) {
-//            converter = UnitStringConverter()
-//        }
-//        form {
-//            fieldset("Concreto") {
-//                field("fck") {
-//                    textfield { }
-//                }
-//                field("gamaC") {
-//                    textfield { }
-//                }
-//                field("Ecs") {
-//                    textfield { }
-//                }
-//                field("Agregado") {
-//                    combobox<String> { }
-//                }
-//            }
-//            fieldset("Armadura transversal (Estribos)") {
-//                field("fywk") {
-//                    textfield { }
-//                }
-//                field("gamaS") {
-//                    textfield { }
-//                }
-//                field("Bitola") {
-//                    textfield { }
-//                }
-//            }
-//            fieldset("Armadura longitudinal"){
-//                field("fyk"){
-//                    textfield {  }
-//                }
-//                field("gamaS"){
-//                    textfield {  }
-//                }
-//                field("Es"){
-//                    textfield {  }
-//                }
-//                field("Bitola"){
-//                    textfield {  }
-//                }
-//            }
-//        }
     }
 }

@@ -11,6 +11,7 @@ import javax.measure.MetricPrefix
 import javax.measure.Quantity
 import javax.measure.Unit
 import javax.measure.quantity.Force
+import javax.measure.quantity.Length
 import javax.measure.quantity.Pressure
 
 interface Moment : Quantity<Moment>
@@ -44,6 +45,11 @@ val QUILONEWTON: Unit<Force> = MetricPrefix.KILO(NEWTON)
 val MEGANEWTON: Unit<Force> = MetricPrefix.MEGA(NEWTON)
 val QUILOGRAMA_FORCA: Unit<Force> = QUILONEWTON.multiply(100)
 val TONELADA_FORCA: Unit<Force> = QUILONEWTON.divide(10)
+
+val MILIMETRO: Unit<Length> = MetricPrefix.MILLI(METRE)
+val CENTIMETRO: Unit<Length> = MetricPrefix.CENTI(METRE)
+
+val MEGAPASCAL: Unit<Pressure> = MetricPrefix.MEGA(PASCAL)
 
 val QUILONEWTON_POR_CENTIMETRO_QUADRADO: Unit<Pressure> =
     QUILONEWTON.divide(MetricPrefix.CENTI(SQUARE_METRE)).asType(Pressure::class.java)
