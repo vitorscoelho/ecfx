@@ -27,7 +27,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-mainClassName = 'vitorscoelho.dimensionamentosapata.gui.MainKt'
+mainClassName = 'vitorscoelho.ecfx.gui.MainKt'
 task jarApp(type: Jar) {
     group 'build'
     description 'Cria o jar da aplicação'

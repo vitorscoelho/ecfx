@@ -2,9 +2,11 @@ package vitorscoelho.ecfx.gui.view
 
 import javafx.geometry.Orientation
 import javafx.scene.control.ToggleGroup
+import javafx.scene.image.Image
 import tornadofx.*
 import vitorscoelho.ecfx.dimensionamento.geotecnico.AnaliseKhDegrau
 import vitorscoelho.ecfx.dimensionamento.geotecnico.AnaliseKhLinearmenteVariavel
+import vitorscoelho.ecfx.gui.controller.ControllerInicial
 import vitorscoelho.ecfx.gui.estilo.DELAY_TOOLTIP
 import vitorscoelho.ecfx.gui.model.AGREGADOS_DISPONIVEIS
 import vitorscoelho.ecfx.gui.model.AGREGADO_QUALQUER
@@ -14,6 +16,16 @@ import vitorscoelho.ecfx.utils.*
 
 
 class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
+    private val controller: ControllerInicial by inject()
+
+    init {
+        setStageIcon(icon = Image("/vitorscoelho/ecfx/gui/icones/icone.png"))//vitorscoelho/ecfx/gui/icones
+        primaryStage.setOnCloseRequest { windowEvent ->
+            windowEvent.consume()
+            controller.acaoFecharPrograma(currentWindow!!)
+        }
+    }
+
     val dados = Dados()
     override val root = vbox {
         form {
