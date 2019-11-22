@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.interfaceGrafica;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
-/**
- * FXML Controller class
- *
- * @author Vítor
- */
+import java.net.URL;
+import java.util.ResourceBundle;
+
 abstract class ControllerCenaPadrao implements Initializable {
 
     /**
@@ -73,12 +64,12 @@ abstract class ControllerCenaPadrao implements Initializable {
             texto.setText(textoArmazenado);
         }
     }
-    
+
     @FXML
-    protected void onKeyReleasedNumerosReais(KeyEvent event){
+    protected void onKeyReleasedNumerosReais(KeyEvent event) {
         //Sempre usar junto com o onKeyTypedNumerosReais
         TextField texto = (TextField) event.getTarget();
-        
+
         String negativo = "-";
         if (texto.getText().contains(negativo) && !texto.getText(0, 1).equals(negativo)) {
             int indiceDoNegativo = texto.getText().indexOf(negativo);
@@ -114,23 +105,23 @@ abstract class ControllerCenaPadrao implements Initializable {
         N = (double) (N / x);
         return N;
     }
-    
-    public static String arredondarToString(double valor, int nCasas){
+
+    public static String arredondarToString(double valor, int nCasas) {
         double resposta = arredondar(valor, nCasas);
         return (Double.toString(resposta));
     }
-    
-    public static String arredondarToString(String valor, int nCasas){
+
+    public static String arredondarToString(String valor, int nCasas) {
         double valorD = Double.parseDouble(valor);
         double resposta = arredondar(valorD, nCasas);
         return (Double.toString(resposta));
     }
-    
-    public void travarStage(){
+
+    public void travarStage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void destravarStage(){
+
+    public void destravarStage() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

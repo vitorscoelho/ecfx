@@ -1,23 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.auxiliarMath;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Vítor
- */
 public strictfp final class Quadratura {
 
     //Variáveis de instância
     private static final ArrayList<ConjuntoPontosDeGauss> pontosDeGauss = ConjuntoPontosDeGauss.criarConjuntos();
-    
+
     //Contrutores
-    private Quadratura(){
+    private Quadratura() {
     }
 
     //Métodos públicos
@@ -99,7 +90,7 @@ public strictfp final class Quadratura {
             conjuntos.clear();
             double[] r;
             double[] w;
-            
+
             //Constantes para 1 ponto de Gauss
             conjunto = new ConjuntoPontosDeGauss(1);
             conjuntos.add(conjunto);

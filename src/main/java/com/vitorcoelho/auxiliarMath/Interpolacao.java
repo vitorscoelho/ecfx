@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.auxiliarMath;
 
-import static java.lang.StrictMath.*;
+import static java.lang.StrictMath.abs;
 
-/**
- *
- * @author Vítor
- */
 public strictfp class Interpolacao {
 
     //Construtores
@@ -91,7 +82,7 @@ public strictfp class Interpolacao {
             fx2 = fx3;
 
             nIter++;
-        } while (abs(fx3)>=tolerancia);
+        } while (abs(fx3) >= tolerancia);
 
         return x3;
     }

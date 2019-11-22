@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoEstrutural;
 
 import static java.lang.StrictMath.*;
 
-/**
- *
- * @author Vítor
- */
 public strictfp final class Concreto {
 
     //Todas as unidades desta classe deverão estar em kN e cm.
@@ -135,7 +126,7 @@ public strictfp final class Concreto {
         }
         return (this.K_MOD * this.fcd);
     }
-    
+
     public static double moduloDeDeformacaoInicial(double fck, AgregadoGraudo agregadoGraudo) {
         if (fck <= 5) {
             return (agregadoGraudo.getAlphaE() * 560 * sqrt(fck * 10));
@@ -143,7 +134,7 @@ public strictfp final class Concreto {
             return (agregadoGraudo.getAlphaE() * 2150 * pow((fck + 1.25), (1D / 3D)));
         }
     }
-    
+
     public static double moduloDeDeformacaoSecante(double fck, double moduloDeDeformacaoInicial) {
         double alphaI = min((0.8 + 0.2 * fck / 8), 1);
         return (alphaI * moduloDeDeformacaoInicial);
@@ -201,13 +192,13 @@ public strictfp final class Concreto {
     public double getAlphaV2() {
         return alphaV2;
     }
-    
-    public double getTwrdSimples(double tensaoMediaConcretoComprimido){
-        double parcelaNormal=1+3*tensaoMediaConcretoComprimido/this.fck;
-        parcelaNormal=max(1,min(parcelaNormal,2));
-        
-        double resistente=0.25*this.fctd*parcelaNormal;   //Já está considerando que, para concreto simples, deve-se multiplicar o gamac por 1,2
-        
+
+    public double getTwrdSimples(double tensaoMediaConcretoComprimido) {
+        double parcelaNormal = 1 + 3 * tensaoMediaConcretoComprimido / this.fck;
+        parcelaNormal = max(1, min(parcelaNormal, 2));
+
+        double resistente = 0.25 * this.fctd * parcelaNormal;   //Já está considerando que, para concreto simples, deve-se multiplicar o gamac por 1,2
+
         return resistente;
     }
 }

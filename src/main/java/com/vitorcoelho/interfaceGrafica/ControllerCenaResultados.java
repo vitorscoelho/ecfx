@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.interfaceGrafica;
 
 import com.vitorcoelho.dimensionamentoEstrutural.Cisalhamento;
@@ -11,60 +6,87 @@ import com.vitorcoelho.dimensionamentoEstrutural.Secao;
 import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulao;
 import com.vitorcoelho.dimensionamentoTubulao.Tubulao;
 import com.vitorcoelho.dimensionamentoTubulao.dimensionamentoEstruturalTubulao;
-import static java.lang.StrictMath.toDegrees;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-/**
- * FXML Controller class
- *
- * @author Vítor
- */
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static java.lang.StrictMath.toDegrees;
+
 public strictfp class ControllerCenaResultados extends ControllerCenaPadrao implements Initializable {
 
-    @FXML Label labelArmaduraAoLongoDoFuste;
+    @FXML
+    Label labelArmaduraAoLongoDoFuste;
 
-    @FXML Label labelCotaDiametro;
-    @FXML Label labelNBarras;
-    @FXML Label labelBitolaLongitudinal;
-    @FXML Label labelBitolaEstribo;
-    @FXML Label labelEspacamentoEstribo;
+    @FXML
+    Label labelCotaDiametro;
+    @FXML
+    Label labelNBarras;
+    @FXML
+    Label labelBitolaLongitudinal;
+    @FXML
+    Label labelBitolaEstribo;
+    @FXML
+    Label labelEspacamentoEstribo;
 
-    @FXML TextField textFieldRotacao;
-    @FXML TextField textFieldTranslacaoH;
-    @FXML TextField textFieldTranslacaoV;
+    @FXML
+    TextField textFieldRotacao;
+    @FXML
+    TextField textFieldTranslacaoH;
+    @FXML
+    TextField textFieldTranslacaoV;
 
-    @FXML TextField textFieldTensaoMediaBaseAtuante;
-    @FXML TextField textFieldTensaoMaximaBaseAtuante;
-    @FXML TextField textFieldTensaoMinimaBaseAtuante;
-    @FXML TextField textFieldTensaoMediaBaseAdmissivel;
-    @FXML TextField textFieldTensaoMaximaBaseAdmissivel;
+    @FXML
+    TextField textFieldTensaoMediaBaseAtuante;
+    @FXML
+    TextField textFieldTensaoMaximaBaseAtuante;
+    @FXML
+    TextField textFieldTensaoMinimaBaseAtuante;
+    @FXML
+    TextField textFieldTensaoMediaBaseAdmissivel;
+    @FXML
+    TextField textFieldTensaoMaximaBaseAdmissivel;
 
-    @FXML TextField textFieldNormal;
-    @FXML TextField textFieldCortante;
-    @FXML TextField textFieldMomento;
-    @FXML TextField textFieldTensaoHorizontal;
+    @FXML
+    TextField textFieldNormal;
+    @FXML
+    TextField textFieldCortante;
+    @FXML
+    TextField textFieldMomento;
+    @FXML
+    TextField textFieldTensaoHorizontal;
 
-    @FXML TextField textFieldVolFuste;
-    @FXML TextField textFieldVolBase;
-    @FXML TextField textFieldVolTotal;
+    @FXML
+    TextField textFieldVolFuste;
+    @FXML
+    TextField textFieldVolBase;
+    @FXML
+    TextField textFieldVolTotal;
 
-    @FXML TextField textFieldTensaoMediaAtuanteFuste;
-    @FXML TextField textFieldTensaoMediaLimiteFuste;
+    @FXML
+    TextField textFieldTensaoMediaAtuanteFuste;
+    @FXML
+    TextField textFieldTensaoMediaLimiteFuste;
 
-    @FXML TextField textFieldKa;
-    @FXML TextField textFieldKp;
-    @FXML TextField textFieldAnguloDeAtrito;
+    @FXML
+    TextField textFieldKa;
+    @FXML
+    TextField textFieldKp;
+    @FXML
+    TextField textFieldAnguloDeAtrito;
 
-    @FXML TextField textFieldAslMin;
-    @FXML TextField textFieldAslMax;
-    @FXML TextField textFieldAslAdot;
-    @FXML TextField textFieldAstAdot;
+    @FXML
+    TextField textFieldAslMin;
+    @FXML
+    TextField textFieldAslMax;
+    @FXML
+    TextField textFieldAslAdot;
+    @FXML
+    TextField textFieldAstAdot;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -131,7 +153,7 @@ public strictfp class ControllerCenaResultados extends ControllerCenaPadrao impl
         this.textFieldAslMax.setText(arredondarToString(secaoFuste.getArea() * FlexoCompressao.getPorcentagemAsMax() / 100, 2));
         this.textFieldAslAdot.setText(arredondarToString(Double.parseDouble(this.labelNBarras.getText()) * secaoFuste.getBarraLongitudinal().getArea(), 2));
 
-        this.textFieldAstAdot.setText(arredondarToString(100*Cisalhamento.asw(secaoFuste, resultados.getGraficoEspacamentoEstribos().getValorMaximo(), 2), 2));
+        this.textFieldAstAdot.setText(arredondarToString(100 * Cisalhamento.asw(secaoFuste, resultados.getGraficoEspacamentoEstribos().getValorMaximo(), 2), 2));
 
         Principal.getControllerCenaResultadosFuste().textFieldProfundidade.setText("0.00");
         Principal.getControllerCenaResultadosFuste().labelValorMouseGrafico1.setText("");

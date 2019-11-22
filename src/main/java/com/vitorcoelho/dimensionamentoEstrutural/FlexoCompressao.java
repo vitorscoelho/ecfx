@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoEstrutural;
 
 import com.vitorcoelho.auxiliarMath.Funcao;
 import com.vitorcoelho.auxiliarMath.Interpolacao;
 import com.vitorcoelho.auxiliarMath.Quadratura;
+
 import static java.lang.StrictMath.*;
 
-/**
- *
- * @author Vítor
- */
 public strictfp class FlexoCompressao {
 
     //Todas as unidades desta classe deverão estar em kN e cm.
@@ -152,7 +144,7 @@ public strictfp class FlexoCompressao {
         resposta[4] = mRd;
         resposta[5] = nBarras;
         resposta[6] = nBarras * secao.getBarraLongitudinal().getArea();
-        System.out.println("Área= " +resposta[6]);
+        System.out.println("Área= " + resposta[6]);
 
         return resposta;
     }

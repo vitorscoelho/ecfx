@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoEstrutural;
 
-import static java.lang.StrictMath.*;
+import static java.lang.StrictMath.PI;
+import static java.lang.StrictMath.pow;
 
-/**
- *
- * @author Vítor
- */
 public strictfp class Secao {
 
     //Todas as unidades desta classe deverão estar em kN e cm.

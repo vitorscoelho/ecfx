@@ -1,21 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoTubulao;
 
 import com.vitorcoelho.dimensionamentoEstrutural.Cisalhamento;
 import com.vitorcoelho.dimensionamentoEstrutural.FlexoCompressao;
 import com.vitorcoelho.dimensionamentoEstrutural.Secao;
 import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 
-/**
- *
- * @author Vítor
- */
 public class dimensionamentoEstruturalTubulao {
 
     public static double tensaoMediaMaximaConcretoSimples = 0.5;
@@ -118,14 +108,14 @@ public class dimensionamentoEstruturalTubulao {
         }
 
         public double getComprimentoMinimoArmadura(Spinner<Double> spinnerComComprimentoMinimo) {
-            if(this.isPersonalizada){
-                return (spinnerComComprimentoMinimo.getValueFactory().getValue()*100);
+            if (this.isPersonalizada) {
+                return (spinnerComComprimentoMinimo.getValueFactory().getValue() * 100);
             }
             return comprimentoMinimoArmadura;
         }
 
         public double getTensaoMediaLimiteSemArmadura(Spinner<Double> spinnerComValorDaTensao) {
-            if(this.isPersonalizada){
+            if (this.isPersonalizada) {
                 return tensaoMediaLimiteSemArmadura;
             }
             return tensaoMediaLimiteSemArmadura;

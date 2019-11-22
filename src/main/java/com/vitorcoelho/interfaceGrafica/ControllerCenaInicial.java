@@ -1,45 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.interfaceGrafica;
 
-import com.vitorcoelho.dimensionamentoEstrutural.Aco;
-import com.vitorcoelho.dimensionamentoEstrutural.BarraAco;
-import com.vitorcoelho.dimensionamentoEstrutural.Cisalhamento;
-import com.vitorcoelho.dimensionamentoEstrutural.Concreto;
-import com.vitorcoelho.dimensionamentoEstrutural.FlexoCompressao;
-import com.vitorcoelho.dimensionamentoEstrutural.Secao;
-import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulao;
-import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulaoKhDegrau;
-import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulaoKhLinearmenteCrescente;
-import com.vitorcoelho.dimensionamentoTubulao.SecaoBase;
-import com.vitorcoelho.dimensionamentoTubulao.SecaoBaseCircular;
-import com.vitorcoelho.dimensionamentoTubulao.SecaoFuste;
-import com.vitorcoelho.dimensionamentoTubulao.Tubulao;
-import com.vitorcoelho.dimensionamentoTubulao.dimensionamentoEstruturalTubulao;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import static java.lang.StrictMath.*;
-
-import java.net.URL;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.ParseException;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import com.vitorcoelho.dimensionamentoEstrutural.*;
+import com.vitorcoelho.dimensionamentoTubulao.*;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -51,13 +13,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 
-/**
- * @author Vítor
- */
+import java.io.*;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static java.lang.StrictMath.min;
+
 public strictfp class ControllerCenaInicial extends ControllerCenaPadrao implements Initializable {
 
     @FXML

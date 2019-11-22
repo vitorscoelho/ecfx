@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tubulao.iml" filepath="$PROJECT_DIR$/.idea/modules/tubulao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tubulao.iml" filepath="$PROJECT_DIR$/.idea/modules/tubulao.iml" group="tubulao" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tubulao_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tubulao_main.iml" group="tubulao" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/tubulao_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tubulao_test.iml" group="tubulao" />
     </modules>

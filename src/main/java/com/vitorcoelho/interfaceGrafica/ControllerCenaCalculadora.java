@@ -1,91 +1,112 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.interfaceGrafica;
 
-import static java.lang.StrictMath.*;
-import com.vitorcoelho.dimensionamentoEstrutural.Aco;
-import com.vitorcoelho.dimensionamentoEstrutural.BarraAco;
-import com.vitorcoelho.dimensionamentoEstrutural.Cisalhamento;
-import com.vitorcoelho.dimensionamentoEstrutural.Concreto;
-import com.vitorcoelho.dimensionamentoEstrutural.FlexoCompressao;
-import com.vitorcoelho.dimensionamentoEstrutural.Secao;
-import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
+import com.vitorcoelho.dimensionamentoEstrutural.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.NodeOrientation;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
-/**
- * FXML Controller class
- *
- * @author Vítor
- */
+import static java.lang.StrictMath.round;
+
 public strictfp class ControllerCenaCalculadora extends ControllerCenaPadrao implements Initializable {
 
     private int nRamos = 2;
     private int nBarrasMin = 6;
     private int nBarrasMax = 999;
 
-    @FXML private TextField textFieldFck;
-    @FXML private TextField textFieldGamaC;
-    @FXML private TextField textFieldFykLong;
-    @FXML private TextField textFieldGamaSLong;
-    @FXML private TextField textFieldEsLong;
-    @FXML private TextField textFieldBitolaLong;
-    @FXML private TextField textFieldFykTransv;
-    @FXML private TextField textFieldGamaSTransv;
-    @FXML private TextField textFieldBitolaTransv;
-    @FXML private TextField textFieldDiametro;
-    @FXML private TextField textFieldGamaN;
-    @FXML private TextField textFieldCobrimento;
-    @FXML private TextField textFieldNkDim;
-    @FXML private TextField textFieldVkDim;
-    @FXML private TextField textFieldMkDim;
-    @FXML private TextField textFieldNkVerCis;
-    @FXML private TextField textFieldMkVerCis;
-    @FXML private TextField textFieldEspacamento;
-    @FXML private TextField textFieldNkVerFlex;
-    @FXML private TextField textFieldNBarras;
+    @FXML
+    private TextField textFieldFck;
+    @FXML
+    private TextField textFieldGamaC;
+    @FXML
+    private TextField textFieldFykLong;
+    @FXML
+    private TextField textFieldGamaSLong;
+    @FXML
+    private TextField textFieldEsLong;
+    @FXML
+    private TextField textFieldBitolaLong;
+    @FXML
+    private TextField textFieldFykTransv;
+    @FXML
+    private TextField textFieldGamaSTransv;
+    @FXML
+    private TextField textFieldBitolaTransv;
+    @FXML
+    private TextField textFieldDiametro;
+    @FXML
+    private TextField textFieldGamaN;
+    @FXML
+    private TextField textFieldCobrimento;
+    @FXML
+    private TextField textFieldNkDim;
+    @FXML
+    private TextField textFieldVkDim;
+    @FXML
+    private TextField textFieldMkDim;
+    @FXML
+    private TextField textFieldNkVerCis;
+    @FXML
+    private TextField textFieldMkVerCis;
+    @FXML
+    private TextField textFieldEspacamento;
+    @FXML
+    private TextField textFieldNkVerFlex;
+    @FXML
+    private TextField textFieldNBarras;
 
-    @FXML private TextArea textAreaDim;
-    @FXML private TextArea textAreaVerCis;
-    @FXML private TextArea textAreaVerFlex;
-    @FXML private TextArea textAreaConsole;
+    @FXML
+    private TextArea textAreaDim;
+    @FXML
+    private TextArea textAreaVerCis;
+    @FXML
+    private TextArea textAreaVerFlex;
+    @FXML
+    private TextArea textAreaConsole;
 
-    @FXML private Line line1;
-    @FXML private Line line2;
-    @FXML private Line line3;
-    @FXML private Line line4;
-    @FXML private Line line5;
-    @FXML private Line line6;
-    @FXML private Line line7;
-    @FXML private Line line8;
-    @FXML private Circle circleEstribo;
-    @FXML private Label labelNBarras;
-    @FXML private Label labelBitola;
-    @FXML private Label labelCotaDiametro;
-    @FXML private Label labelEstribos;
-    @FXML private HBox hBoxLongitudinal;
-    @FXML private HBox hBoxTransversal;
+    @FXML
+    private Line line1;
+    @FXML
+    private Line line2;
+    @FXML
+    private Line line3;
+    @FXML
+    private Line line4;
+    @FXML
+    private Line line5;
+    @FXML
+    private Line line6;
+    @FXML
+    private Line line7;
+    @FXML
+    private Line line8;
+    @FXML
+    private Circle circleEstribo;
+    @FXML
+    private Label labelNBarras;
+    @FXML
+    private Label labelBitola;
+    @FXML
+    private Label labelCotaDiametro;
+    @FXML
+    private Label labelEstribos;
+    @FXML
+    private HBox hBoxLongitudinal;
+    @FXML
+    private HBox hBoxTransversal;
     Node[] imagensLongitudinal = new Node[9];
     Node[] imagensTransversal = new Node[2];
 
@@ -93,27 +114,28 @@ public strictfp class ControllerCenaCalculadora extends ControllerCenaPadrao imp
     PrintStream outTextArea;
 
     private void aplicarTooltips() {
-        this. textFieldFck.setTooltip(new Tooltip("Resistência característica à compressão do concreto."));
-        this. textFieldGamaC.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do concreto."));
-        this. textFieldFykLong.setTooltip(new Tooltip("Resistência característica ao escoamento do aço da armadura longitudinal."));
-        this. textFieldGamaSLong.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do aço da armadura longitudinal."));
-        this. textFieldEsLong.setTooltip(new Tooltip("Módulo de deformação do aço da armadura longitudinal."));
-        this. textFieldBitolaLong.setTooltip(new Tooltip("Bitola da barra utilizada na armadura longitudinal."));
-        this. textFieldFykTransv.setTooltip(new Tooltip("Resistência característica ao escoamento do aço da armadura transversal."));
-        this. textFieldGamaSTransv.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do aço da armadura transversal."));
-        this. textFieldBitolaTransv.setTooltip(new Tooltip("Bitola da barra utilizada na armadura transversal."));
-        this. textFieldDiametro.setTooltip(new Tooltip("Diâmetro da seção transversal de concreto."));
-        this. textFieldGamaN.setTooltip(new Tooltip("Majorador de esforços para ELU."));
-        this. textFieldCobrimento.setTooltip(new Tooltip("Cobrimento do estribo."));
+        this.textFieldFck.setTooltip(new Tooltip("Resistência característica à compressão do concreto."));
+        this.textFieldGamaC.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do concreto."));
+        this.textFieldFykLong.setTooltip(new Tooltip("Resistência característica ao escoamento do aço da armadura longitudinal."));
+        this.textFieldGamaSLong.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do aço da armadura longitudinal."));
+        this.textFieldEsLong.setTooltip(new Tooltip("Módulo de deformação do aço da armadura longitudinal."));
+        this.textFieldBitolaLong.setTooltip(new Tooltip("Bitola da barra utilizada na armadura longitudinal."));
+        this.textFieldFykTransv.setTooltip(new Tooltip("Resistência característica ao escoamento do aço da armadura transversal."));
+        this.textFieldGamaSTransv.setTooltip(new Tooltip("Coeficiente de ponderação da resistência do aço da armadura transversal."));
+        this.textFieldBitolaTransv.setTooltip(new Tooltip("Bitola da barra utilizada na armadura transversal."));
+        this.textFieldDiametro.setTooltip(new Tooltip("Diâmetro da seção transversal de concreto."));
+        this.textFieldGamaN.setTooltip(new Tooltip("Majorador de esforços para ELU."));
+        this.textFieldCobrimento.setTooltip(new Tooltip("Cobrimento do estribo."));
         this.textFieldNkDim.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
         this.textFieldVkDim.setTooltip(new Tooltip("Esforço horizontal característico atuante no topo da estaca."));
         this.textFieldMkDim.setTooltip(new Tooltip("Esforço de momento fletor característico atuante no topo da estaca."));
-        this. textFieldNkVerCis.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
-        this. textFieldMkVerCis.setTooltip(new Tooltip("Esforço de momento fletor característico atuante no topo da estaca."));
-        this. textFieldEspacamento.setTooltip(new Tooltip("Espaçamento entre estribos."));
-        this. textFieldNkVerFlex.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
-        this. textFieldNBarras.setTooltip(new Tooltip("Quantidade de barras longitudinais na seção transversal."));
+        this.textFieldNkVerCis.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
+        this.textFieldMkVerCis.setTooltip(new Tooltip("Esforço de momento fletor característico atuante no topo da estaca."));
+        this.textFieldEspacamento.setTooltip(new Tooltip("Espaçamento entre estribos."));
+        this.textFieldNkVerFlex.setTooltip(new Tooltip("Esforço normal característico atuante no topo da estaca."));
+        this.textFieldNBarras.setTooltip(new Tooltip("Quantidade de barras longitudinais na seção transversal."));
     }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -425,19 +447,19 @@ public strictfp class ControllerCenaCalculadora extends ControllerCenaPadrao imp
         textFieldDiametro.setText(cenaInicial.textFieldDiametroFuste.getText());
         textFieldGamaN.setText(cenaInicial.textFieldGamaN.getText());
         textFieldCobrimento.setText(cenaInicial.textFieldCobrimento.getText());
-        
+
         textAreaConsole.clear();
         textAreaDim.clear();
         textAreaVerCis.clear();
         textAreaVerFlex.clear();
-        
+
         for (int i = 0; i < imagensLongitudinal.length; i++) {
             imagensLongitudinal[i].setVisible(false);
         }
         imagensTransversal[0].setVisible(false);
-        imagensTransversal[1].setVisible(false); 
-        
+        imagensTransversal[1].setVisible(false);
+
         this.labelCotaDiametro.setText(arredondarToString(Double.parseDouble(this.textFieldDiametro.getText()), 2));
-        
+
     }
 }

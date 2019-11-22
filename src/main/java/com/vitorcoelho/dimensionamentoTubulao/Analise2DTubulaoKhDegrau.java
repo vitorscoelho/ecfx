@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoTubulao;
 
-import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
 import com.vitorcoelho.auxiliarMath.Funcao;
+import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
+
 import static java.lang.StrictMath.*;
 
-/**
- *
- * @author Vítor
- */
 public strictfp class Analise2DTubulaoKhDegrau implements Analise2DTubulao {
 
     private Tubulao tubulao;
@@ -39,8 +31,8 @@ public strictfp class Analise2DTubulaoKhDegrau implements Analise2DTubulao {
 
     //Construtores
     public Analise2DTubulaoKhDegrau(Tubulao tubulao,
-            double normal, double forcaHorizontal, double momento, double gamaN, double k1, double kv,
-            double coesao, double anguloDeAtritoGraus, double pesoEspecificoSolo, double tensaoVAdmissivel) {
+                                    double normal, double forcaHorizontal, double momento, double gamaN, double k1, double kv,
+                                    double coesao, double anguloDeAtritoGraus, double pesoEspecificoSolo, double tensaoVAdmissivel) {
         this.tubulao = tubulao;
         this.secaoFuste = tubulao.getSecaoFuste();
         this.secaoBase = tubulao.getSecaoBase();

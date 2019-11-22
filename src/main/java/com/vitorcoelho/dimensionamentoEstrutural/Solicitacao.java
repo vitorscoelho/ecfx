@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoEstrutural;
 
-/**
- *
- * @author Vítor
- */
 public strictfp final class Solicitacao {
 
     //Todas as unidades desta classe deverão estar em kN e cm.

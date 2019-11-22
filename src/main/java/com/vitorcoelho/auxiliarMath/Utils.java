@@ -1,28 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.auxiliarMath;
 
-/**
- *
- * @author Vítor
- */
 public strictfp class Utils {
 
     public static double minimo(double... valor) {
         double minimo = valor[0];
         for (int i = 1; i < valor.length; i++) {
-            minimo=StrictMath.min(minimo, valor[i]);
+            minimo = StrictMath.min(minimo, valor[i]);
         }
         return minimo;
     }
-    
+
     public static double minimo(String... valor) {
         double minimo = Double.parseDouble(valor[0]);
         for (int i = 1; i < valor.length; i++) {
-            minimo=StrictMath.min(minimo, Double.parseDouble(valor[i]));
+            minimo = StrictMath.min(minimo, Double.parseDouble(valor[i]));
         }
         return minimo;
     }

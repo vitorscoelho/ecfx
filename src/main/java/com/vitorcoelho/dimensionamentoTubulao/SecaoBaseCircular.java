@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoTubulao;
 
 import static java.lang.StrictMath.*;
 
-/**
- *
- * @author Vítor
- */
 public strictfp class SecaoBaseCircular implements SecaoBase {
 
     //Variáveis de instância

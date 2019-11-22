@@ -1,26 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.interfaceGrafica;
 
 import com.vitorcoelho.auxiliarMath.Funcao;
-import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulao;
-import com.vitorcoelho.dimensionamentoTubulao.Tubulao;
 import com.vitorcoelho.interfaceGrafica.Resultados.GraficoTubulao;
-import static java.lang.StrictMath.*;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedAreaChart;
@@ -34,47 +21,70 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 
-/**
- * FXML Controller class
- *
- * @author Vítor
- */
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static java.lang.StrictMath.max;
+import static java.lang.StrictMath.min;
+
 public strictfp class ControllerCenaResultadosFusteBackupTesteComDoisGraficos extends ControllerCenaPadrao implements Initializable {
 
-    @FXML Line lineGrafico;
-    @FXML TextField textFieldProfundidade;
+    @FXML
+    Line lineGrafico;
+    @FXML
+    TextField textFieldProfundidade;
 
-    @FXML ComboBox<TipoGrafico> comboBoxGrafico1;
-    @FXML TextArea textAreaGrafico1;
-    @FXML Label labelGrafico1;
-    @FXML Label labelValorMouseGrafico1;
+    @FXML
+    ComboBox<TipoGrafico> comboBoxGrafico1;
+    @FXML
+    TextArea textAreaGrafico1;
+    @FXML
+    Label labelGrafico1;
+    @FXML
+    Label labelValorMouseGrafico1;
     private Funcao funcaoGrafico1;
     private TipoGrafico tipoGrafico1;
-    @FXML private StackedAreaChart<?, ?> areaChart1;
+    @FXML
+    private StackedAreaChart<?, ?> areaChart1;
 
-    @FXML ComboBox<TipoGrafico> comboBoxGrafico2;
-    @FXML TextArea textAreaGrafico2;
-    @FXML Label labelGrafico2;
-    @FXML Label labelValorMouseGrafico2;
+    @FXML
+    ComboBox<TipoGrafico> comboBoxGrafico2;
+    @FXML
+    TextArea textAreaGrafico2;
+    @FXML
+    Label labelGrafico2;
+    @FXML
+    Label labelValorMouseGrafico2;
     private Funcao funcaoGrafico2;
     private TipoGrafico tipoGrafico2;
-    @FXML private StackedAreaChart<?, ?> areaChart2;
+    @FXML
+    private StackedAreaChart<?, ?> areaChart2;
 
-    @FXML ComboBox<TipoGrafico> comboBoxGrafico3;
-    @FXML TextArea textAreaGrafico3;
-    @FXML Label labelGrafico3;
-    @FXML Label labelValorMouseGrafico3;
+    @FXML
+    ComboBox<TipoGrafico> comboBoxGrafico3;
+    @FXML
+    TextArea textAreaGrafico3;
+    @FXML
+    Label labelGrafico3;
+    @FXML
+    Label labelValorMouseGrafico3;
     private Funcao funcaoGrafico3;
     private TipoGrafico tipoGrafico3;
-    @FXML private StackedAreaChart<?, ?> areaChart3;
+    @FXML
+    private StackedAreaChart<?, ?> areaChart3;
 
-    @FXML ComboBox<TipoGrafico> comboBoxGrafico4;
-    @FXML TextArea textAreaGrafico4;
-    @FXML Label labelGrafico4;
-    @FXML Label labelValorMouseGrafico4;
+    @FXML
+    ComboBox<TipoGrafico> comboBoxGrafico4;
+    @FXML
+    TextArea textAreaGrafico4;
+    @FXML
+    Label labelGrafico4;
+    @FXML
+    Label labelValorMouseGrafico4;
     private Funcao funcaoGrafico4;
     private TipoGrafico tipoGrafico4;
-    @FXML private StackedAreaChart<?, ?> areaChart4;
+    @FXML
+    private StackedAreaChart<?, ?> areaChart4;
 
     private double profundidadeTubulao = 1;
     private final double Y_MINIMO = 181;

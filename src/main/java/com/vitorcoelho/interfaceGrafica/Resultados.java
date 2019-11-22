@@ -1,32 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.interfaceGrafica;
 
-import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
 import com.vitorcoelho.auxiliarMath.Funcao;
+import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
 import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulao;
 import com.vitorcoelho.dimensionamentoTubulao.Tubulao;
 import com.vitorcoelho.dimensionamentoTubulao.dimensionamentoEstruturalTubulao;
-import static java.lang.StrictMath.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.chart.XYChart;
 
-/**
- *
- * @author Vítor
- */
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static java.lang.StrictMath.*;
+
 public strictfp class Resultados {
 
     private final double VARIACAO_PROFUNDIDADE = 1.0;
     private final double VARIACAO_PROFUNDIDADE_TRECHOS = 50.0;
-    
-    public static double coeficienteSegurancaMaximo=20.0;
+
+    public static double coeficienteSegurancaMaximo = 20.0;
 
     Tubulao tubulao;
     Analise2DTubulao analiseTubulao;
@@ -40,7 +31,7 @@ public strictfp class Resultados {
     private GraficoTubulao graficoEspacamentoEstribos;
     private GraficoTubulao graficoTensaoHorizontalResistente;
     private GraficoTubulao graficoCoeficienteSegurancaEstabilidade;
-    
+
     private boolean isArmadoSomentePrimeirosMetros;
 
     public Resultados(Analise2DTubulao analiseTubulao) {
@@ -100,7 +91,7 @@ public strictfp class Resultados {
          t7.join();*/
         //Processamento dos gráficos de armadura
         DadosGraficoArmadurasTubulao dadosGraficoArmaduras = new DadosGraficoArmadurasTubulao(this.graficoMomento.getTrechos(), this.graficoCortante.getTrechos());
-        this.isArmadoSomentePrimeirosMetros=dadosGraficoArmaduras.isArmadoSomentePrimeirosMetros;
+        this.isArmadoSomentePrimeirosMetros = dadosGraficoArmaduras.isArmadoSomentePrimeirosMetros;
         this.graficoNBarrasLongitudinais = new GraficoArmadurasTubulao(tubulao, 1, dadosGraficoArmaduras, TipoGraficoArmadura.Longitudinal);
         this.graficoEspacamentoEstribos = new GraficoArmadurasTubulao(tubulao, 1, dadosGraficoArmaduras, TipoGraficoArmadura.Estribo);
 
@@ -155,8 +146,8 @@ public strictfp class Resultados {
         graficoCortante.refreshGraficoTubulao();
         return this.graficoEspacamentoEstribos;
     }
-    
-    public boolean isArmadoSomentePrimeirosMetros(){
+
+    public boolean isArmadoSomentePrimeirosMetros() {
         return this.isArmadoSomentePrimeirosMetros;
     }
 
@@ -465,8 +456,8 @@ public strictfp class Resultados {
         private double espacamentoMinimoEstribo = 999999.9;
         private double profundidadeNBarrasMaximo = 0.0;
         private double profundidadeEspacamentoMinimoEstribo = 0.0;
-        
-        boolean isArmadoSomentePrimeirosMetros=true;
+
+        boolean isArmadoSomentePrimeirosMetros = true;
 
         public DadosGraficoArmadurasTubulao(TrechoGrafico[] trechosMomentos, TrechoGrafico[] trechoCortantes) {
             qtdTrechos = trechosMomentos.length;
@@ -488,9 +479,9 @@ public strictfp class Resultados {
 
                 nBarras[i] = dimensionamentoEstruturalTubulao.nBarrasLongitudinais(tubulao, solicitacao, 6, 1000, profundidadesIniciais[i] + 0.01);//O valor 0.01 foi somado na profundidade inicial apenas para que um trecho que comece em cima do 300 de profundidade não seja armado
                 espacamentos[i] = dimensionamentoEstruturalTubulao.espacamentoEstribo(tubulao, solicitacao, 2, profundidadesIniciais[i] + 0.01);//O valor 0.01 foi somado na profundidade inicial apenas para que um trecho que comece em cima do 300 de profundidade não seja armado
-                
-                if((espacamentos[i]>=-0.1)&(profundidadesFinais[i]>=(dimensionamentoEstruturalTubulao.comprimentoMinimoArmadura+5))){
-                    isArmadoSomentePrimeirosMetros=false;
+
+                if ((espacamentos[i] >= -0.1) & (profundidadesFinais[i] >= (dimensionamentoEstruturalTubulao.comprimentoMinimoArmadura + 5))) {
+                    isArmadoSomentePrimeirosMetros = false;
                 }
 
                 listaNBarrasLongitudinais.getData().add(new XYChart.Data(profundidadesIniciais[i] / 100, nBarras[i]));

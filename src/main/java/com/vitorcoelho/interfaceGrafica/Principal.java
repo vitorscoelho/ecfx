@@ -1,43 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.interfaceGrafica;
 
-import com.vitorcoelho.dimensionamentoEstrutural.Aco;
-import com.vitorcoelho.dimensionamentoEstrutural.BarraAco;
-import com.vitorcoelho.dimensionamentoEstrutural.Concreto;
-import com.vitorcoelho.dimensionamentoEstrutural.Secao;
 import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulao;
-import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulaoKhDegrau;
-import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulaoKhLinearmenteCrescente;
-import com.vitorcoelho.dimensionamentoTubulao.SecaoBase;
-import com.vitorcoelho.dimensionamentoTubulao.SecaoBaseCircular;
-import com.vitorcoelho.dimensionamentoTubulao.SecaoFuste;
-import com.vitorcoelho.dimensionamentoTubulao.Tubulao;
-
-import java.io.IOException;
-import java.util.Optional;
-
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
-/**
- * @author Vítor
- */
+import java.io.IOException;
+import java.util.Optional;
+
+
 public strictfp class Principal extends Application {
 
     public static final String VERSAO_DO_PROGRAMA = "0.2";

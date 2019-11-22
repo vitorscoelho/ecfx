@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoTubulao;
 
-import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
 import com.vitorcoelho.auxiliarMath.Funcao;
+import com.vitorcoelho.dimensionamentoEstrutural.Solicitacao;
 
-/**
- *
- * @author Vítor
- */
 public strictfp interface Analise2DTubulao {
 
     public double limiteComprimentoTubulaoCurto();

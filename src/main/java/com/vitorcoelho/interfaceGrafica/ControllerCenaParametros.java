@@ -1,38 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.interfaceGrafica;
 
 import com.vitorcoelho.dimensionamentoEstrutural.FlexoCompressao;
-import com.vitorcoelho.dimensionamentoTubulao.Analise2DTubulao;
-
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.WindowEvent;
 
-/**
- * FXML Controller class
- *
- * @author Vítor
- */
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
 public class ControllerCenaParametros extends ControllerCenaPadrao implements Initializable {
 
     @FXML
@@ -102,7 +85,7 @@ public class ControllerCenaParametros extends ControllerCenaPadrao implements In
         final double ASmin = Double.parseDouble(this.textFieldTaxaMinimaLongitudinal.getText());
         final double ASmax = Double.parseDouble(this.textFieldTaxaMaximaLongitudinal.getText());
 
-        String descricaoErro="";
+        String descricaoErro = "";
         boolean erro = false;
         if (CSmin >= CSmax) {
             erro = true;

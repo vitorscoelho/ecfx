@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.vitorcoelho.dimensionamentoEstrutural;
 
 import static java.lang.StrictMath.*;
 
-/**
- *
- * @author Vítor
- */
 public strictfp final class BarraAco {
 
     //Todas as unidades desta classe deverão estar em kN e cm.
@@ -37,10 +28,10 @@ public strictfp final class BarraAco {
             this.eta1 = eta1;
         }
 
-        private String getNome(){
+        private String getNome() {
             return nome;
         }
-        
+
         private double getEta1() {
             return eta1;
         }
@@ -87,7 +78,7 @@ public strictfp final class BarraAco {
         this.aco = aco;
         this.area = PI * pow(bitola, 2) / 4;
         this.eta1 = rugosidade.getEta1();
-        this.rugosidade=rugosidade;
+        this.rugosidade = rugosidade;
 
         if (bitola < 32) {
             this.eta3 = 1;
@@ -142,7 +133,7 @@ public strictfp final class BarraAco {
         return area;
     }
 
-    public Rugosidade getRugosidade(){
+    public Rugosidade getRugosidade() {
         return rugosidade;
     }
 }
