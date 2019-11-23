@@ -18,7 +18,7 @@ import java.util.Optional;
 
 public strictfp class Principal extends Application {
 
-    public static final String VERSAO_DO_PROGRAMA = "0.2";
+    public static final String VERSAO_DO_PROGRAMA = "0.3";
 
     private static Stage stageCenaInicial;
     private static ControllerCenaInicial controllerCenaInicial;
@@ -46,6 +46,10 @@ public strictfp class Principal extends Application {
 
     @Override
     public void start(Stage stageCenaInicial) throws Exception {
+        String versaoJava = System.getProperty("java.version");
+        String versaoJavaFX = System.getProperty("javafx.version");
+        System.out.println("Versão Java: " + versaoJava + " // Versão JavaFX: " + versaoJavaFX);
+
         this.carregarFontes();
 
         criarCenaInicial();

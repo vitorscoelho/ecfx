@@ -236,8 +236,8 @@ public strictfp class ControllerCenaInicial extends ControllerCenaPadrao impleme
         this.textFieldTensaoAdmissivel.setTooltip(new Tooltip("Tensão vertical admissível do solo\r\nna base do elemento de fundação"));
 
         this.comboBoxTipoFundacao.setTooltip(new Tooltip("Tipo de fundação."));
-        this.spinnerComprimentoMinimoArmadura.getEditor().setTooltip(new Tooltip("Profundidade mínima  exigida\r\npara a armadura longitudinal."));
-        this.spinnerTensaoMaximaSemArmadura.getEditor().setTooltip(new Tooltip("Tensão média atuante (no fuste) abaixo da qual não é\r\nnecessário armar (exceto até a profundidade mínima informada)."));
+        this.spinnerComprimentoMinimoArmadura.setTooltip(new Tooltip("Profundidade mínima  exigida\r\npara a armadura longitudinal."));
+        this.spinnerTensaoMaximaSemArmadura.setTooltip(new Tooltip("Tensão média atuante (no fuste) abaixo da qual não é\r\nnecessário armar (exceto até a profundidade mínima informada)."));
 
         //Listener para fazer a base ficar igual ao fuste quando não é tubulão
         this.textFieldDiametroFuste.textProperty().addListener((observable, oldValue, newValue) -> {

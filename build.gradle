@@ -1,51 +1,35 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
 group 'vitorscoelho'
-version '1.0-SNAPSHOT'
-
-buildscript {
-    //ext.kotlin_version = '1.2.10'
-
-    repositories {
-        mavenCentral()
-    }
-    /*dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }*/
-}
-
-apply plugin: 'java'
-//apply plugin: 'kotlin'
-apply plugin: 'application'
-
-def classePrincipal = 'com.vitorcoelho.interfaceGrafica.Principal'
-
-mainClassName = classePrincipal
-
-sourceCompatibility = 1.8
-
-jar {
-    manifest {
-        attributes 'Main-Class': classePrincipal
-    }
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
+version '0.3-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
-/*dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
-    compile 'no.tornado:tornadofx:1.7.14'
+dependencies {
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:win"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:linux"
+    runtimeOnly "org.openjfx:javafx-graphics:$javafx.version:mac"
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+mainClassName = 'com.vitorcoelho.Inicializador'
+task jarApp(type: Jar) {
+    group 'build'
+    description 'Cria o jar da aplicação'
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
 }
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}*/
+
+javafx {
+    version = "11"
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics']
+}
