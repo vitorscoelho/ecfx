@@ -1,4 +1,4 @@
-package vitorscoelho.tfxutils
+package vitorscoelho.utils.tfx
 
 import javafx.beans.DefaultProperty
 import javafx.beans.property.Property

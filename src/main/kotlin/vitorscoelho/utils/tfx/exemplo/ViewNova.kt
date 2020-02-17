@@ -1,18 +1,16 @@
-package vitorscoelho.tfxutils.exemplo
+package vitorscoelho.utils.tfx.exemplo
 
 import javafx.application.Application
 import javafx.beans.property.SimpleObjectProperty
-import javafx.util.Duration
 import tech.units.indriya.quantity.Quantities
 import tech.units.indriya.unit.Units.METRE
 import tech.units.indriya.unit.Units.SQUARE_METRE
 import tornadofx.*
-import vitorscoelho.tfxutils.*
+import vitorscoelho.utils.tfx.*
 import java.util.*
 import javax.measure.MetricPrefix
 import javax.measure.Quantity
 import javax.measure.Unit
-import javax.measure.quantity.Area
 import javax.measure.quantity.Length
 
 internal fun main(args: Array<String>) {

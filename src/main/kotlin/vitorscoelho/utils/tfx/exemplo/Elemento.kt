@@ -1,17 +1,15 @@
-package vitorscoelho.tfxutils.exemplo
+package vitorscoelho.utils.tfx.exemplo
 
 import javafx.beans.property.*
 import javafx.beans.value.ObservableValue
-import javafx.scene.Node
 import javafx.scene.control.TextField
 import javafx.util.Duration
 import tornadofx.*
 import tornadofx.getValue
 import tornadofx.setValue
-import vitorscoelho.tfxutils.Descriptions
-import vitorscoelho.tfxutils.DescriptionsWithResource
-import vitorscoelho.tfxutils.ERROR_IF_NOT_POSITIVE_DOUBLE
-import vitorscoelho.tfxutils.WithDescriptions
+import vitorscoelho.utils.tfx.DescriptionsWithResource
+import vitorscoelho.utils.tfx.ERROR_IF_NOT_POSITIVE_DOUBLE
+import vitorscoelho.utils.tfx.WithDescriptions
 import java.util.*
 import javax.measure.Quantity
 import javax.measure.quantity.Area
@@ -39,7 +37,7 @@ internal class BeanElementoModel(item: BeanElemento) : ItemViewModel<BeanElement
     val quantityReal = bind(BeanElemento::quantityRealProperty)
 
     override val descriptions = DescriptionsWithResource(
-        rb = ResourceBundle.getBundle("vitorscoelho.tfxutils.Textos"),
+        rb = ResourceBundle.getBundle("vitorscoelho.utils.tfxutils.Textos"),
         nameSuffix = "nome",
         descriptionSuffix = "descricao",
         tooltipShowDelay = Duration(100.0)

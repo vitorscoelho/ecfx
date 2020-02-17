@@ -1,4 +1,4 @@
-package vitorscoelho.tfxutils
+package vitorscoelho.utils.tfx
 
 import javafx.scene.control.TextFormatter
 import tornadofx.isDouble

@@ -1,6 +1,5 @@
-package vitorscoelho.tfxutils
+package vitorscoelho.utils.tfx
 
-import javafx.beans.property.Property
 import javafx.util.Duration
 import tornadofx.get
 import java.util.*

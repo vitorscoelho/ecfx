@@ -1,4 +1,4 @@
-package vitorscoelho.tfxutils.exemplo
+package vitorscoelho.utils.tfx.exemplo
 
 import javafx.geometry.Pos
 import javafx.scene.layout.Region

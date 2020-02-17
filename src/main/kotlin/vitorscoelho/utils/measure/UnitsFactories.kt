@@ -1,4 +1,4 @@
-package vitorscoelho.measure
+package vitorscoelho.utils.measure
 
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty

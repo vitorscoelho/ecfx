@@ -1,9 +1,9 @@
-package vitorscoelho.tfxmeasure
+package vitorscoelho.utils.tfxmeasure
 
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.Property
 import tornadofx.ItemViewModel
-import vitorscoelho.tfxutils.conectar
+import vitorscoelho.utils.tfx.conectar
 import javax.measure.Quantity
 import javax.measure.Unit
 import kotlin.reflect.KProperty1

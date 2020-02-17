@@ -1,12 +1,4 @@
-package vitorscoelho.measure
-
-import javafx.beans.property.ObjectProperty
-import javafx.beans.property.SimpleObjectProperty
-import tech.units.indriya.quantity.Quantities
-import vitorscoelho.tfxutils.conectar
-import javax.measure.Quantity
-import javax.measure.Unit
-import javax.measure.quantity.Force
+package vitorscoelho.utils.measure
 
 private val medidas = listOf(
     "Acceleration",

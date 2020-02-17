@@ -1,4 +1,4 @@
-package vitorscoelho.measure
+package vitorscoelho.utils.measure
 
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
@@ -6,7 +6,7 @@ import tech.units.indriya.AbstractUnit
 import tech.units.indriya.quantity.Quantities
 import tech.units.indriya.unit.ProductUnit
 import tech.units.indriya.unit.Units
-import vitorscoelho.tfxutils.conectar
+import vitorscoelho.utils.tfx.conectar
 import javax.measure.Quantity
 import javax.measure.Unit
 import javax.measure.quantity.*

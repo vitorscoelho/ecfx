@@ -1,6 +1,7 @@
 package vitorscoelho.ecfx.gui.view
 
 import javafx.geometry.Orientation
+import javafx.scene.Parent
 import javafx.scene.control.ToggleGroup
 import javafx.scene.image.Image
 import tornadofx.*
@@ -27,7 +28,7 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
     }
 
     val dados = Dados()
-    override val root = vbox {
+    private val conteudo = vbox {
         form {
             hbox {
                 vbox {
@@ -102,6 +103,26 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                     }
                 }
             }
+        }
+    }
+
+    override val root = borderpane {
+        top {
+            menubar {
+                menu("Arquivo") {
+                    item("Sobre")
+                    item("Abrir")
+                    item("Salvar")
+                    item("Fechar"){action { controller.acaoFecharPrograma(currentWindow!!) }}
+                }
+                menu("Opções") {
+                    item("Calculadoras de dimensionamento")
+                    item("Parâmetros")
+                }
+            }
+        }
+        center {
+            this += conteudo
         }
     }
 }

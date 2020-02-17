@@ -1,4 +1,4 @@
-package vitorscoelho.tfxutils
+package vitorscoelho.utils.tfx
 
 import tornadofx.*
 import java.math.BigDecimal
@@ -80,7 +80,7 @@ private fun Number.maiorOuIgualA(outro: Number): Boolean = (this.compare(outro) 
 private fun Number.menorQue(outro: Number): Boolean = (this.compare(outro) < 0)
 private fun Number.menorOuIgualA(outro: Number): Boolean = (this.compare(outro) <= 0)
 
-private val rb: ResourceBundle by lazy { ResourceBundle.getBundle("vitorscoelho.tfxutils.ErrorDescription") }
+private val rb: ResourceBundle by lazy { ResourceBundle.getBundle("vitorscoelho.utils.tfxutils.ErrorDescription") }
 private val must_be: String by lazy { rb["string_must_be"] }
 private val greater_than_or_equal_to: String by lazy { rb["string_greater_than_or_equal_to"] }
 private val greater_than: String by lazy { rb["string_greater_than"] }
