@@ -38,7 +38,8 @@ private val medidas = listOf(
     "SpringStiffness",
     "SpringStiffnessPerUnitLength",
     "SpringStiffnessPerUnitArea",
-    "ForcePerUnitLength"
+    "ForcePerUnitLength",
+    "SpecificWeight"
 )
 
 internal fun criar(nome: String): String {

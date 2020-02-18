@@ -11,7 +11,6 @@ import javax.measure.Unit
 import javax.measure.quantity.Length
 import javax.measure.quantity.Pressure
 
-
 class BeanArmadura(tipo: TipoArmadura) {
     val fykProperty = pressureProp(name = "${tipo.nome}.fyk", value = 0.0)
     val gamaSProperty = SimpleDoubleProperty(null, "${tipo.nome}.gamaS").apply { value = 0.0 }

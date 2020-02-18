@@ -32,7 +32,7 @@ internal class EstiloPrincipal : Stylesheet() {
         }
         val larguraFieldset = 180.px
         val larguraBotaoETextArea = larguraFieldset * 2.0
-        val spacingVBox = 20.px
+        val spacingVBox = 15.px
         vboxDados {
             font = fonteRegular
             fontSize = fontSizePadrao
@@ -41,11 +41,12 @@ internal class EstiloPrincipal : Stylesheet() {
             setMinMaxPrefWidth(Region.USE_COMPUTED_SIZE.px)
             setMinMaxPrefHeight(Region.USE_COMPUTED_SIZE.px)
             Stylesheet.form {
+                spacing = 15.px
                 font = fonteRegular
                 fontSize = fontSizePadrao
                 Stylesheet.legend {
                     font = fonteBold
-                    fontSize = fontSizePadrao * 1.2
+                    fontSize = fontSizePadrao * 1.1
                 }
                 hbox {
                     spacing = 20.px
@@ -61,6 +62,11 @@ internal class EstiloPrincipal : Stylesheet() {
                         alignment = Pos.CENTER_RIGHT
                     }
                 }
+            }
+            Stylesheet.fieldset {
+                backgroundColor = multi(Color.LIGHTGRAY)
+                borderColor = multi(box(Color.BLACK))
+                padding = box(top = 0.px, bottom = 10.px, right = 15.px, left = 15.px)
             }
             Stylesheet.button {
                 setMinMaxPrefWidth(larguraBotaoETextArea)

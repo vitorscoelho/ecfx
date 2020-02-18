@@ -7,3 +7,4 @@ interface SpringStiffness : Quantity<SpringStiffness>
 interface SpringStiffnessPerUnitLength : Quantity<SpringStiffnessPerUnitLength>
 interface SpringStiffnessPerUnitArea : Quantity<SpringStiffnessPerUnitArea>
 interface ForcePerUnitLength : Quantity<ForcePerUnitLength>
+interface SpecificWeight : Quantity<SpecificWeight>

@@ -18,45 +18,18 @@ import javax.measure.Quantity
 
 @DefaultProperty("inputs")
 class InputTextField<T> internal constructor(
-    text: String? = null,
+    text: String?,
     orientation: Orientation,
     forceLabelIndent: Boolean,
-    val property: Property<T>,
+    property: Property<T>,
     filterInput: (formatter: TextFormatter.Change) -> Boolean,
     converter: StringConverter<T>
-) : AbstractField(text, forceLabelIndent) {
-    override val inputContainer = if (orientation == HORIZONTAL) HBox() else VBox()
-    override val inputs: ObservableList<Node> = inputContainer.children
-    private val descriptions: Descriptions?
-        get() {
-            val viewModel: ViewModel = property.viewModel ?: return null
-            if (viewModel !is WithDescriptions) return null
-            return viewModel.descriptions
-        }
-    val textField = TextField()
-    var value by property
-
-    init {
-        inputContainer.addClass(Stylesheet.inputContainer)
-        inputContainer.addPseudoClass(orientation.name.toLowerCase())
-        children.add(inputContainer)
-        /*
-        // Register/deregister with parent Fieldset
-        parentProperty().addListener { _, oldParent, newParent ->
-            ((oldParent as? Fieldset) ?: oldParent?.findParent<Fieldset>())?.fields?.remove(this)
-            ((newParent as? Fieldset) ?: newParent?.findParent<Fieldset>())?.fields?.add(this)
-        }
-         */
-    }
-
+) : InputFields<T, TextField>(text, forceLabelIndent, orientation, property, TextField()) {
     init {
         if (property.value == null) throw NullPointerException("|property.value| não pode ser nulo em um InputTextField")
-        colocarTitulo()
-        inputContainer.add(textField)
-        with(textField) {
+        with(control) {
             filterInput(filterInput)
             textProperty().bindBidirectional(property, converter)
-            adicionarTooltipDescricao()
         }
     }
 
@@ -64,20 +37,12 @@ class InputTextField<T> internal constructor(
         validationContext: ValidationContext,
         validator: ValidationContext.(String?) -> ValidationMessage?
     ): ValidationContext.Validator<String> {
-        val validator = validationContext.addValidator(node = this.textField, validator = validator)
+        val validator = validationContext.addValidator(node = this.control, validator = validator)
         validator.valid.onChange { valido -> if (valido) adicionarTooltipDescricao() }
         return validator
     }
 
-    private fun adicionarTooltipDescricao() {
-        if (descriptions != null) {
-            textField.tooltip = Tooltip(descriptions!!.description(this.property.name)).apply {
-                showDelay = descriptions!!.tooltipShowDelay
-            }
-        }
-    }
-
-    private fun colocarTitulo() {
+    override fun colocarTitulo() {
         if (descriptions != null) {
             val nome = descriptions!!.name(property.name)
             if (property.value is Quantity<*>) {
