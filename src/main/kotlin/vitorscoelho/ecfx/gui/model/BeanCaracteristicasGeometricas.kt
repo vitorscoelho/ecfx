@@ -23,6 +23,12 @@ class BeanCaracteristicasGeometricasModel(
     unitProfundidade: ObjectProperty<Unit<Length>>
 ) : ItemViewModel<BeanCaracteristicasGeometricas>(initialValue = BeanCaracteristicasGeometricas()),
     WithDescriptionsEcfx {
+    constructor(unidades: BeanUnidades) : this(
+        unitCobrimento = unidades.unitCobrimento,
+        unitDimensoesEstaca = unidades.unitDimensoesEstaca,
+        unitProfundidade = unidades.unitProfundidade
+    )
+
     val cobrimento = bind(BeanCaracteristicasGeometricas::cobrimentoProperty, unitCobrimento)
     val diametroFuste = bind(BeanCaracteristicasGeometricas::diametroFusteProperty, unitDimensoesEstaca)
     val diametroBase = bind(BeanCaracteristicasGeometricas::diametroBaseProperty, unitDimensoesEstaca)

@@ -35,6 +35,14 @@ class BeanSoloModel(
     unitPesoEspecifico: ObjectProperty<Unit<SpecificWeight>>,
     unitTensaoSolo: ObjectProperty<Unit<Pressure>>
 ) : ItemViewModel<BeanSolo>(initialValue = BeanSolo()), WithDescriptionsEcfx {
+    constructor(unidades: BeanUnidades) : this(
+        unitCoeficienteReacao = unidades.unitCoeficienteReacao,
+        unitCoesao = unidades.unitCoesao,
+        unitAnguloDeAtrito = unidades.unitAnguloDeAtrito,
+        unitPesoEspecifico = unidades.unitPesoEspecifico,
+        unitTensaoSolo = unidades.unitTensaoSolo
+    )
+
     val tipo = bind(BeanSolo::tipo)
     val kh = bind(BeanSolo::kh, unitCoeficienteReacao)
     val kv = bind(BeanSolo::kv, unitCoeficienteReacao)

@@ -18,7 +18,6 @@ import javax.measure.quantity.Moment
 import javax.measure.quantity.SpecificWeight
 import javax.measure.quantity.SpringStiffnessPerUnitArea
 
-
 class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
     private val controller: ControllerInicial by inject()
 
@@ -30,67 +29,12 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
         }
     }
 
-    val unitResistenciaMaterialProperty = SimpleObjectProperty(PASCAL)
-    val unitModuloElasticidadeConcretoProperty = SimpleObjectProperty(PASCAL)
-    val unitModuloElasticidadeAcoProperty = SimpleObjectProperty(PASCAL)
-    val unitBitolaProperty = SimpleObjectProperty(METRE)
-    val unitCobrimento = SimpleObjectProperty(METRE)
-    val unitDimensoesEstaca = SimpleObjectProperty(METRE)
-    val unitProfundidade = SimpleObjectProperty(METRE)
-    val unitForca = SimpleObjectProperty(NEWTON)
-    val unitMomento = SimpleObjectProperty(NEWTON.multiply(METRE).asType(Moment::class.java))
-    val unitComprimentoArmadura = SimpleObjectProperty(METRE)
-    val unitTensaoConcreto = SimpleObjectProperty(PASCAL)
-    val unitCoeficienteReacao = SimpleObjectProperty(
-        NEWTON.divide(CUBIC_METRE).asType(SpringStiffnessPerUnitArea::class.java)
-    )
-    val unitCoesao = SimpleObjectProperty(PASCAL)
-    val unitAnguloDeAtrito = SimpleObjectProperty(RADIAN)
-    val unitPesoEspecifico = SimpleObjectProperty(NEWTON.divide(CUBIC_METRE).asType(SpecificWeight::class.java))
-    val unitTensaoSolo = SimpleObjectProperty(PASCAL)
-
-    val concreto = BeanConcretoModel(
-        unitResistencia = unitResistenciaMaterialProperty,
-        unitModuloElasticidade = unitModuloElasticidadeConcretoProperty
-    )
-    val armaduraTransversal = BeanArmaduraModel(
-        tipo = TipoArmadura.ESTRIBO,
-        unitResistencia = unitResistenciaMaterialProperty,
-        unitModuloElasticidade = unitModuloElasticidadeAcoProperty,
-        unitBitola = unitBitolaProperty
-    )
-    val armaduraLongitudinal = BeanArmaduraModel(
-        tipo = TipoArmadura.LONGITUDINAL,
-        unitResistencia = unitResistenciaMaterialProperty,
-        unitModuloElasticidade = unitModuloElasticidadeAcoProperty,
-        unitBitola = unitBitolaProperty
-    )
-    val caracteristicasGeometricas = BeanCaracteristicasGeometricasModel(
-        unitCobrimento = unitCobrimento,
-        unitDimensoesEstaca = unitDimensoesEstaca,
-        unitProfundidade = unitProfundidade
-    )
-    val cargasNoTopo = BeanCargasNoTopoModel(
-        unitForca = unitForca,
-        unitMomento = unitMomento
-    )
-    val tipoEstaca = BeanTipoEstacaModel(
-        unitComprimentoArmadura = unitComprimentoArmadura,
-        unitTensaoConcreto = unitTensaoConcreto
-    )
-    val solo = BeanSoloModel(
-        unitCoeficienteReacao = unitCoeficienteReacao,
-        unitCoesao = unitCoesao,
-        unitAnguloDeAtrito = unitAnguloDeAtrito,
-        unitPesoEspecifico = unitPesoEspecifico,
-        unitTensaoSolo = unitTensaoSolo
-    )
     private val conteudo = hbox {
         addClass(EstiloPrincipal.vboxDados)
         form {
             fieldset(text = descricoes.rb["fieldsetConcreto"]) {
                 labelPosition = Orientation.VERTICAL
-                with(concreto) {
+                with(controller.concreto) {
                     inputTextFieldPositiveDouble(property = fck)
                     inputTextFieldPositiveDouble(property = gamaC)
                     inputTextFieldPositiveDouble(property = ecs)
@@ -98,7 +42,7 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             }
             fieldset(text = descricoes.rb["fieldsetArmaduraTransversal"]) {
                 labelPosition = Orientation.VERTICAL
-                with(armaduraTransversal) {
+                with(controller.armaduraTransversal) {
                     inputTextFieldPositiveDouble(property = fyk)
                     inputTextFieldPositiveDouble(property = gamaS)
                     inputTextFieldPositiveDouble(property = bitola)
@@ -106,7 +50,7 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             }
             fieldset(text = descricoes.rb["fieldsetArmaduraLongitudinal"]) {
                 labelPosition = Orientation.VERTICAL
-                with(armaduraLongitudinal) {
+                with(controller.armaduraLongitudinal) {
                     inputTextFieldPositiveDouble(property = fyk)
                     inputTextFieldPositiveDouble(property = gamaS)
                     inputTextFieldPositiveDouble(property = moduloElasticidade)
@@ -117,7 +61,7 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
         form {
             fieldset(text = descricoes.rb["fieldsetTipoEstaca"]) {
                 labelPosition = Orientation.VERTICAL
-                with(tipoEstaca) {
+                with(controller.tipoEstaca) {
                     comboboxField(property = tipo, values = listaEstacas)
                     inputTextFieldPositiveDouble(property = comprimentoMinimoArmadura)
                     inputTextFieldPositiveDouble(property = tensaoMediaMaxima)
@@ -125,7 +69,7 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             }
             fieldset(text = descricoes.rb["fieldsetSolo"]) {
                 labelPosition = Orientation.VERTICAL
-                with(solo) {
+                with(controller.solo) {
                     comboboxField(property = tipo, values = TipoSolo.values().toList().toObservable())
                     inputTextFieldPositiveDouble(property = kh)
                     inputTextFieldPositiveDouble(property = kv)
@@ -139,7 +83,7 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
         form {
             fieldset(text = descricoes.rb["fieldsetCaracteristicasGeometricas"]) {
                 labelPosition = Orientation.VERTICAL
-                with(caracteristicasGeometricas) {
+                with(controller.caracteristicasGeometricas) {
                     inputTextFieldPositiveDouble(property = cobrimento)
                     inputTextFieldPositiveDouble(property = diametroFuste)
                     inputTextFieldPositiveDouble(property = diametroBase)
@@ -150,12 +94,20 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             }
             fieldset(text = descricoes.rb["fieldsetCargasNoTopo"]) {
                 labelPosition = Orientation.VERTICAL
-                with(cargasNoTopo) {
+                with(controller.cargasNoTopo) {
                     inputTextFieldPositiveDouble(property = normal)
                     inputTextFieldPositiveDouble(property = forcaHorizontal)//TODO Na verdade, deveria poder ser negativo. Checar os resultados
                     inputTextFieldPositiveDouble(property = momento)//TODO Na verdade, deveria poder ser negativo. Checar os resultados
                     inputTextFieldPositiveDouble(property = gamaN)
                 }
+            }
+        }
+        vbox {
+            button(descricoes.rb["botao.valoresSugeridos"]) {
+                action { controller.acaoBtnValoresSugeridos() }
+            }
+            button(descricoes.rb["botao.visualizarResultados"]) {
+                action { controller.acaoBtnVisualizarResultados() }
             }
         }
         //        form {
@@ -235,21 +187,23 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
 //        }
     }
 
+    private val menu = menubar {
+        menu(descricoes.rb["menu.arquivo"]) {
+            item(descricoes.rb["menu.item.sobre"]) { action { controller.acaoMenuItemSobre() } }
+            item(descricoes.rb["menu.item.abrir"])
+            item(descricoes.rb["menu.item.salvar"])
+            item(descricoes.rb["menu.item.fechar"]) { action { controller.acaoFecharPrograma(currentWindow!!) } }
+        }
+        menu(descricoes.rb["menu.opcoes"]) {
+            item(descricoes.rb["menu.item.calculadorasDeDimensionamento"])
+            item(descricoes.rb["menu.item.parametros"])
+            item(descricoes.rb["menu.item.unidades"])
+        }
+    }
+
     override val root = borderpane {
         top {
-            menubar {
-                menu(descricoes.rb["menu.arquivo"]) {
-                    item(descricoes.rb["menu.item.sobre"])
-                    item(descricoes.rb["menu.item.abrir"])
-                    item(descricoes.rb["menu.item.salvar"])
-                    item(descricoes.rb["menu.item.fechar"]) { action { controller.acaoFecharPrograma(currentWindow!!) } }
-                }
-                menu(descricoes.rb["menu.opcoes"]) {
-                    item(descricoes.rb["menu.item.calculadorasDeDimensionamento"])
-                    item(descricoes.rb["menu.item.parametros"])
-                    item(descricoes.rb["menu.item.unidades"])
-                }
-            }
+            this += menu
         }
         center {
             this += conteudo

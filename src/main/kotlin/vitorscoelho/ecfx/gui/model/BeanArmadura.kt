@@ -24,6 +24,13 @@ class BeanArmaduraModel(
     unitModuloElasticidade: ObjectProperty<Unit<Pressure>>,
     unitBitola: ObjectProperty<Unit<Length>>
 ) : ItemViewModel<BeanArmadura>(initialValue = BeanArmadura(tipo = tipo)), WithDescriptionsEcfx {
+    constructor(tipo: TipoArmadura, unidades: BeanUnidades) : this(
+        tipo = tipo,
+        unitResistencia = unidades.unitResistenciaMaterialProperty,
+        unitModuloElasticidade = unidades.unitModuloElasticidadeAcoProperty,
+        unitBitola = unidades.unitBitolaProperty
+    )
+
     val fyk = bind(BeanArmadura::fykProperty, unitResistencia)
     val gamaS = bind(BeanArmadura::gamaSProperty)
     val moduloElasticidade = bind(BeanArmadura::moduloElasticidadeProperty, unitModuloElasticidade)

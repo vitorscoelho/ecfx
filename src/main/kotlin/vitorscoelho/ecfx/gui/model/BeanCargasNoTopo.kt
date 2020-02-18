@@ -22,6 +22,11 @@ class BeanCargasNoTopoModel(
     unitForca: ObjectProperty<Unit<Force>>,
     unitMomento: ObjectProperty<Unit<Moment>>
 ) : ItemViewModel<BeanCargasNoTopo>(initialValue = BeanCargasNoTopo()), WithDescriptionsEcfx {
+    constructor(unidades: BeanUnidades) : this(
+        unitForca = unidades.unitForca,
+        unitMomento = unidades.unitMomento
+    )
+
     val normal = bind(BeanCargasNoTopo::normalProperty, unitForca)
     val forcaHorizontal = bind(BeanCargasNoTopo::forcaHorizontalProperty, unitForca)
     val momento = bind(BeanCargasNoTopo::momentoProperty, unitMomento)

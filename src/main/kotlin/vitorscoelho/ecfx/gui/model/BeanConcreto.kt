@@ -19,6 +19,10 @@ class BeanConcretoModel(
     unitResistencia: ObjectProperty<Unit<Pressure>>,
     unitModuloElasticidade: ObjectProperty<Unit<Pressure>>
 ) : ItemViewModel<BeanConcreto>(initialValue = BeanConcreto()), WithDescriptionsEcfx {
+    constructor(unidades: BeanUnidades) : this(
+        unitResistencia = unidades.unitResistenciaMaterialProperty,
+        unitModuloElasticidade = unidades.unitModuloElasticidadeConcretoProperty
+    )
     val fck = bind(BeanConcreto::fckProperty, unitResistencia)
     val gamaC = bind(BeanConcreto::gamaCProperty)
     val ecs = bind(BeanConcreto::ecsProperty, unitModuloElasticidade)

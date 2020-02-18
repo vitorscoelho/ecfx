@@ -21,6 +21,11 @@ class BeanTipoEstacaModel(
     unitComprimentoArmadura: ObjectProperty<Unit<Length>>,
     unitTensaoConcreto: ObjectProperty<Unit<Pressure>>
 ) : ItemViewModel<BeanTipoEstaca>(initialValue = BeanTipoEstaca()), WithDescriptionsEcfx {
+    constructor(unidades: BeanUnidades) : this(
+        unitComprimentoArmadura = unidades.unitComprimentoArmadura,
+        unitTensaoConcreto = unidades.unitTensaoConcreto
+    )
+
     val tipo = bind(BeanTipoEstaca::tipo)
     val comprimentoMinimoArmadura = bind(BeanTipoEstaca::comprimentoMinimoArmaduraProperty, unitComprimentoArmadura)
     val tensaoMediaMaxima = bind(BeanTipoEstaca::tensaoMediaMaximaProperty, unitTensaoConcreto)

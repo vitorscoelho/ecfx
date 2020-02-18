@@ -66,7 +66,9 @@ internal class EstiloPrincipal : Stylesheet() {
             Stylesheet.fieldset {
                 backgroundColor = multi(Color.LIGHTGRAY)
                 borderColor = multi(box(Color.BLACK))
-                padding = box(top = 0.px, bottom = 10.px, right = 15.px, left = 15.px)
+                padding = box(top = 10.px, bottom = 10.px, right = 15.px, left = 15.px)
+                borderRadius = multi(box(10.px))
+                backgroundRadius = borderRadius
             }
             Stylesheet.button {
                 setMinMaxPrefWidth(larguraBotaoETextArea)
