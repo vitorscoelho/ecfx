@@ -16,8 +16,7 @@ import vitorscoelho.utils.measure.toDoubleSU
 internal class ControllerInicial : Controller() {
     val unidades = BeanUnidades()
     val concreto = BeanConcretoModel(unidades = unidades)
-    val armaduraTransversal = BeanArmaduraModel(tipo = TipoArmadura.ESTRIBO, unidades = unidades)
-    val armaduraLongitudinal = BeanArmaduraModel(tipo = TipoArmadura.LONGITUDINAL, unidades = unidades)
+    val armaduras = BeanArmaduraModel(unidades = unidades)
     val dadosDaFundacao = BeanDadosDaFundacaoModel(unidades = unidades)
     val cargasNoTopo = BeanCargasNoTopoModel(unidades = unidades)
     val solo = BeanSoloModel(unidades = unidades)

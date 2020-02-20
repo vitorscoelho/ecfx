@@ -34,21 +34,15 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                     inputTextFieldPositiveDouble(property = ecs)
                 }
             }
-            fieldset(text = descricoes.rb["fieldsetArmaduraTransversal"]) {
+            fieldset(text = descricoes.rb["fieldsetArmaduras"]) {
                 labelPosition = Orientation.VERTICAL
-                with(controller.armaduraTransversal) {
-                    inputTextFieldPositiveDouble(property = fyk)
-                    inputTextFieldPositiveDouble(property = gamaS)
-                    inputTextFieldPositiveDouble(property = bitola)
-                }
-            }
-            fieldset(text = descricoes.rb["fieldsetArmaduraLongitudinal"]) {
-                labelPosition = Orientation.VERTICAL
-                with(controller.armaduraLongitudinal) {
-                    inputTextFieldPositiveDouble(property = fyk)
+                with(controller.armaduras) {
+                    inputTextFieldPositiveDouble(property = fykEstribo)
+                    inputTextFieldPositiveDouble(property = bitolaEstribo)
+                    inputTextFieldPositiveDouble(property = fykLongitudinal)
+                    inputTextFieldPositiveDouble(property = bitolaLongitudinal)
                     inputTextFieldPositiveDouble(property = gamaS)
                     inputTextFieldPositiveDouble(property = moduloElasticidade)
-                    inputTextFieldPositiveDouble(property = bitola)
                 }
             }
         }
