@@ -1,5 +1,6 @@
 package vitorscoelho.utils.tfx
 
+import javafx.beans.property.Property
 import javafx.util.Duration
 import tornadofx.get
 import java.util.*
@@ -8,6 +9,8 @@ interface Descriptions {
     val tooltipShowDelay: Duration
     fun name(id: String): String
     fun description(id: String): String
+    fun name(property: Property<*>): String
+    fun description(property: Property<*>): String
 }
 
 class DescriptionsWithResource(
@@ -18,6 +21,8 @@ class DescriptionsWithResource(
 ) : Descriptions {
     override fun name(id: String): String = rb["$id.${nameSuffix}"]
     override fun description(id: String): String = rb["$id.${descriptionSuffix}"]
+    override fun name(property: Property<*>): String = name(id = property.name)
+    override fun description(property: Property<*>): String = description(id = property.name)
 }
 
 interface WithDescriptions {

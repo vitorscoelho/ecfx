@@ -7,10 +7,7 @@ import tornadofx.get
 import tornadofx.onChange
 import vitorscoelho.ecfx.gui.WithDescriptionsEcfx
 import vitorscoelho.ecfx.gui.descricoes
-import vitorscoelho.utils.measure.angleProp
-import vitorscoelho.utils.measure.pressureProp
-import vitorscoelho.utils.measure.specificWeightProp
-import vitorscoelho.utils.measure.springStiffnessPerUnitAreaProp
+import vitorscoelho.utils.measure.*
 import vitorscoelho.utils.tfxmeasure.bind
 import javax.measure.Unit
 import javax.measure.quantity.Angle
@@ -20,12 +17,21 @@ import javax.measure.quantity.SpringStiffnessPerUnitArea
 
 class BeanSolo {
     val tipo = SimpleObjectProperty<TipoSolo>(null, "solo.tipo").apply { value = TipoSolo.AREIA_OU_ARGILA_MOLE }
-    val kh = springStiffnessPerUnitAreaProp(name = "solo.${tipo.value.idCoeficienteReacaoHorizontal}", value = 0.0)
-    val kv = springStiffnessPerUnitAreaProp(name = "solo.kv", value = 0.0)
-    val coesao = pressureProp(name = "solo.coesao", value = 0.0)
-    val anguloDeAtrito = angleProp(name = "solo.anguloDeAtrito", value = 0.0)
-    val pesoEspecifico = specificWeightProp(name = "solo.pesoEspecifico", value = 0.0)
-    val tensaoAdmissivel = pressureProp(name = "solo.tensaoAdmissivel", value = 0.0)
+    val kh = springStiffnessPerUnitAreaProp(
+        name = "solo.${tipo.value.idCoeficienteReacaoHorizontal}", value = 12_500,
+        unit = KILONEWTON.divide(CUBIC_METRE).asSpringStiffnessPerUnitArea()
+    )
+    val kv = springStiffnessPerUnitAreaProp(
+        name = "solo.kv", value = 120_000,
+        unit = KILONEWTON.divide(CUBIC_METRE).asSpringStiffnessPerUnitArea()
+    )
+    val coesao = pressureProp(name = "solo.coesao", value = 0, unit = KILOPASCAL)
+    val anguloDeAtrito = angleProp(name = "solo.anguloDeAtrito", value = 30, unit = DEGREE)
+    val pesoEspecifico = specificWeightProp(
+        name = "solo.pesoEspecifico", value = 18,
+        unit = KILONEWTON.divide(CUBIC_METRE).asSpecificWeight()
+    )
+    val tensaoAdmissivel = pressureProp(name = "solo.tensaoAdmissivel", value = 200, unit = KILOPASCAL)
 }
 
 class BeanSoloModel(

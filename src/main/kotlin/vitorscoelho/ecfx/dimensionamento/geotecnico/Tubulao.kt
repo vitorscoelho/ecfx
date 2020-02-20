@@ -8,6 +8,7 @@ import kotlin.math.sqrt
 interface FusteTubulao {
     val dimensao: Double
     val area: Double
+    val momentoDeInercia: Double
 }
 
 interface BaseTubulao {
@@ -23,6 +24,7 @@ class FusteCircular(val diametro: Double) : FusteTubulao {
     override val dimensao: Double
         get() = diametro
     override val area = PI * diametro * diametro / 4.0
+    override val momentoDeInercia = PI * diametro.pow(4) / 64.0
 }
 
 class BaseCircular(val diametroInferior: Double, val diametroSuperior: Double, val altura: Double, val rodape: Double) :

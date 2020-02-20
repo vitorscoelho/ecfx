@@ -1,24 +1,20 @@
 package vitorscoelho.ecfx.gui.view
 
-import javafx.beans.property.SimpleObjectProperty
-import javafx.collections.FXCollections
 import javafx.geometry.Orientation
-import javafx.scene.control.Tooltip
-import javafx.scene.image.Image
-import tech.units.indriya.unit.Units.*
 import tornadofx.*
 import vitorscoelho.ecfx.gui.controller.ControllerInicial
 import vitorscoelho.ecfx.gui.descricoes
 import vitorscoelho.ecfx.gui.estilo.EstiloPrincipal
-import vitorscoelho.ecfx.gui.model.*
-import vitorscoelho.ecfx.utils.*
+import vitorscoelho.ecfx.gui.model.TipoSolo
+import vitorscoelho.ecfx.gui.model.agregados
+import vitorscoelho.ecfx.gui.model.tiposDeEstaca
+import vitorscoelho.ecfx.utils.ICONE_DO_PROGRAMA
+import vitorscoelho.ecfx.utils.TITULO_VIEW_INICIAL
+import vitorscoelho.utils.tfx.checkboxField
 import vitorscoelho.utils.tfx.comboboxField
 import vitorscoelho.utils.tfx.inputTextFieldPositiveDouble
-import javax.measure.quantity.Moment
-import javax.measure.quantity.SpecificWeight
-import javax.measure.quantity.SpringStiffnessPerUnitArea
 
-class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
+internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
     private val controller: ControllerInicial by inject()
 
     init {
@@ -35,16 +31,25 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             fieldset(text = descricoes.rb["fieldsetConcreto"]) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.concreto) {
-                    inputTextFieldPositiveDouble(property = fck)
-                    inputTextFieldPositiveDouble(property = gamaC)
-                    inputTextFieldPositiveDouble(property = ecs)
+                    inputTextFieldPositiveDouble(property = fck) {
+                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
+                    }
+                    inputTextFieldPositiveDouble(property = gamaC) {
+                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
+                    }
+                    inputTextFieldPositiveDouble(property = ecs) {
+                        enableWhen { ecsNaoPredefinido }
+                    }
+                    comboboxField(property = agregado, values = agregados.toObservable())
                 }
             }
             fieldset(text = descricoes.rb["fieldsetArmaduraTransversal"]) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.armaduraTransversal) {
                     inputTextFieldPositiveDouble(property = fyk)
-                    inputTextFieldPositiveDouble(property = gamaS)
+                    inputTextFieldPositiveDouble(property = gamaS) {
+                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
+                    }
                     inputTextFieldPositiveDouble(property = bitola)
                 }
             }
@@ -52,7 +57,9 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.armaduraLongitudinal) {
                     inputTextFieldPositiveDouble(property = fyk)
-                    inputTextFieldPositiveDouble(property = gamaS)
+                    inputTextFieldPositiveDouble(property = gamaS) {
+                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
+                    }
                     inputTextFieldPositiveDouble(property = moduloElasticidade)
                     inputTextFieldPositiveDouble(property = bitola)
                 }
@@ -62,9 +69,14 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             fieldset(text = descricoes.rb["fieldsetTipoEstaca"]) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.tipoEstaca) {
-                    comboboxField(property = tipo, values = listaEstacas)
-                    inputTextFieldPositiveDouble(property = comprimentoMinimoArmadura)
-                    inputTextFieldPositiveDouble(property = tensaoMediaMaxima)
+                    comboboxField(property = tipo, values = tiposDeEstaca.toObservable())
+                    checkboxField(property = armaduraIntegral)
+                    inputTextFieldPositiveDouble(property = comprimentoMinimoArmadura) {
+                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
+                    }
+                    inputTextFieldPositiveDouble(property = tensaoMediaMaxima) {
+                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
+                    }
                 }
             }
             fieldset(text = descricoes.rb["fieldsetSolo"]) {
@@ -107,7 +119,10 @@ class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                 action { controller.acaoBtnValoresSugeridos() }
             }
             button(descricoes.rb["botao.visualizarResultados"]) {
-                action { controller.acaoBtnVisualizarResultados() }
+                isDisable = true
+                enableWhen { controller.concreto.dirty }
+                action { controller.concreto.commit() }
+                //action { controller.acaoBtnVisualizarResultados() }
             }
         }
         //        form {

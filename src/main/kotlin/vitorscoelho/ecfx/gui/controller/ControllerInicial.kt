@@ -1,15 +1,19 @@
 package vitorscoelho.ecfx.gui.controller
 
 import javafx.scene.control.ButtonType
+import javafx.stage.StageStyle
 import javafx.stage.Window
 import tornadofx.Controller
 import tornadofx.confirm
 import tornadofx.get
+import vitorscoelho.ecfx.dimensionamento.Esforco
+import vitorscoelho.ecfx.dimensionamento.geotecnico.*
 import vitorscoelho.ecfx.gui.descricoes
 import vitorscoelho.ecfx.gui.model.*
+import vitorscoelho.ecfx.gui.view.ViewSobre
+import vitorscoelho.utils.measure.toDoubleSU
 
-class ControllerInicial : Controller() {
-    //private val controller: ControllerInicial by inject()
+internal class ControllerInicial : Controller() {
     val unidades = BeanUnidades()
     val concreto = BeanConcretoModel(unidades = unidades)
     val armaduraTransversal = BeanArmaduraModel(tipo = TipoArmadura.ESTRIBO, unidades = unidades)
@@ -20,7 +24,10 @@ class ControllerInicial : Controller() {
     val solo = BeanSoloModel(unidades = unidades)
 
     fun acaoMenuItemSobre() {
-
+        find(ViewSobre::class.java).openModal(
+            stageStyle = StageStyle.DECORATED,
+            resizable = false
+        )
     }
 
     fun acaoMenuItemAbrir() {
@@ -50,6 +57,40 @@ class ControllerInicial : Controller() {
     }
 
     fun acaoBtnVisualizarResultados() {
-
+        val fuste = FusteCircular(diametro = caracteristicasGeometricas.diametroFuste.value.toDoubleSU())
+        val base = with(caracteristicasGeometricas) {
+            BaseCircular(
+                diametroInferior = diametroBase.toDoubleSU(),
+                diametroSuperior = diametroFuste.toDoubleSU(),
+                altura = alturaBase.toDoubleSU(),
+                rodape = rodape.toDoubleSU()
+            )
+        }
+        val tubulao = Tubulao(
+            fuste = fuste, base = base, comprimento = caracteristicasGeometricas.profundidade.toDoubleSU()
+        )
+        val esforco = with(cargasNoTopo) {
+            Esforco(
+                normal = normal.toDoubleSU(),
+                horizontal = forcaHorizontal.toDoubleSU(),
+                momento = momento.toDoubleSU()
+            )
+        }
+        val analise = when (solo.tipo.value) {
+            TipoSolo.AREIA_OU_ARGILA_MOLE -> AnaliseKhLinearmenteVariavel(
+                tubulao = tubulao,
+                nh = solo.kh.toDoubleSU(),
+                kv = solo.kv.toDoubleSU()
+            )
+            TipoSolo.ARGILA_RIJA_A_DURA -> AnaliseKhDegrau(
+                tubulao = tubulao,
+                kh2 = solo.kh.toDoubleSU(),
+                kv = solo.kv.toDoubleSU(),
+                moduloElasticidade = concreto.ecs.toDoubleSU()
+            )
+            else -> throw IllegalArgumentException("Tipo de solo não suportado")
+        }
+        val resultados = analise.dimensionar(esforco = esforco)
+        println(tubulao.fuste.area)
     }
 }

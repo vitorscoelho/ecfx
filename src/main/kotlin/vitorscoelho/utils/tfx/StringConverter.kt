@@ -2,7 +2,9 @@ package vitorscoelho.utils.tfx
 
 import javafx.beans.property.Property
 import javafx.util.StringConverter
+import tech.units.indriya.quantity.Quantities
 import javax.measure.Quantity
+import javax.measure.Unit
 
 val STRING_CONVERTER_STRING: StringConverter<String> by lazy {
     object : StringConverter<String>() {
@@ -43,9 +45,9 @@ interface QuantityFactory {
     fun <T : Quantity<T>> getQuantity(value: Number, unit: javax.measure.Unit<T>): Quantity<T>
 }
 
-var quantityFactory: QuantityFactory = object : QuantityFactory {
-    override fun <T : Quantity<T>> getQuantity(value: Number, unit: javax.measure.Unit<T>): Quantity<T> {
-        throw NoSuchElementException("Variável |quantityFactory| não foi definida. Defina antes de utilizar qualquer recurso que utilize |stringConverterQuantity|.")
+private val quantityFactory = object : QuantityFactory {
+    override fun <T : Quantity<T>> getQuantity(value: Number, unit: Unit<T>): Quantity<T> {
+        return Quantities.getQuantity(value, unit)
     }
 }
 

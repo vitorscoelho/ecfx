@@ -1,6 +1,7 @@
 package vitorscoelho.utils.tfx
 
 import javafx.beans.DefaultProperty
+import javafx.beans.property.BooleanProperty
 import javafx.beans.property.Property
 import javafx.collections.ObservableList
 import javafx.event.EventTarget
@@ -9,6 +10,7 @@ import javafx.scene.Node
 import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import javafx.geometry.Orientation.HORIZONTAL
+import javafx.scene.control.CheckBox
 import javafx.scene.control.ComboBox
 import javafx.scene.control.Control
 import javafx.scene.control.Tooltip
@@ -66,10 +68,10 @@ class ComboBoxField<T> internal constructor(
     forceLabelIndent: Boolean,
     property: Property<T>,
     values: ObservableList<T>? = null
-) : InputFields<T, ComboBox<T>>(text, forceLabelIndent, orientation, property,ComboBox<T>()) {
+) : InputFields<T, ComboBox<T>>(text, forceLabelIndent, orientation, property, ComboBox<T>()) {
     init {
         if (values != null) control.items = values
-        control.bind(property,false)
+        control.bind(property, false)
 //        control.bindSelected(property)
     }
 }
@@ -88,6 +90,37 @@ fun <T> EventTarget.comboboxField(
         property = property,
         values = values
     )
+    opcr(this, field) {}
+    op(field)
+    return field
+}
+
+@DefaultProperty("inputs")
+class CheckBoxField internal constructor(
+    text: String?,
+    orientation: Orientation,
+    forceLabelIndent: Boolean,
+    property: Property<Boolean>
+) : InputFields<Boolean, CheckBox>(text, forceLabelIndent, orientation, property, CheckBox()) {
+    init {
+        property.bind(control.selectedProperty())
+    }
+}
+
+fun EventTarget.checkboxField(
+    property: Property<Boolean>,
+    orientation: Orientation = HORIZONTAL,
+    forceLabelIndent: Boolean = false,
+    op: CheckBoxField.() -> Unit = {}
+): CheckBoxField {
+    val field = CheckBoxField(
+        text = null,
+        orientation = orientation,
+        forceLabelIndent = forceLabelIndent,
+        property = property
+    )
+    field.control.text = field.text
+    field.text = ""
     opcr(this, field) {}
     op(field)
     return field

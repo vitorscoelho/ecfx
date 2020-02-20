@@ -4,8 +4,20 @@ import vitorscoelho.ecfx.dimensionamento.Esforco
 import kotlin.math.pow
 
 class AnaliseKhDegrau(
-    val tubulao: Tubulao, val kh1: Double, val kh2: Double, val l1: Double, val kv: Double
+    val tubulao: Tubulao, val kh1: Double, val kh2: Double, val l1: Double = 0.0, val kv: Double
 ) : AnaliseTubulao {
+    constructor(tubulao: Tubulao, kh2: Double, kv: Double, moduloElasticidade: Double) : this(
+        tubulao = tubulao,
+        kh1 = kh1Padrao(kh2 = kh2),
+        kh2 = kh2,
+        l1 = l1Padrao(
+            moduloElasticidade = moduloElasticidade,
+            inerciaFuste = tubulao.fuste.momentoDeInercia,
+            kh2 = kh2
+        ),
+        kv = kv
+    )
+
     override fun dimensionar(esforco: Esforco): ResultadosAnaliseTubulao = ResultadosKhDegrau(esforco = esforco)
 
     private inner class ResultadosKhDegrau(override val esforco: Esforco) : ResultadosAnaliseTubulao {
@@ -73,5 +85,14 @@ class AnaliseKhDegrau(
                 kh1 * rotacao * fuste.dimensao * l1.pow(3) + kh2 * rotacao * fuste.dimensao * (z.pow(3) - l1.pow(3))
             return parcial1 - parcial2 * parcial3 + parcial4 * parcial5
         }
+    }
+
+    companion object {
+        fun l1Padrao(moduloElasticidade: Double, inerciaFuste: Double, kh2: Double): Double {
+            val r = (moduloElasticidade * inerciaFuste / kh2).pow(1.0 / 4.0)
+            return 0.4 * r
+        }
+
+        fun kh1Padrao(kh2: Double): Double = 0.5 * kh2
     }
 }

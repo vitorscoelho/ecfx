@@ -3,18 +3,20 @@ package vitorscoelho.ecfx.gui.model
 import javafx.beans.property.ObjectProperty
 import tornadofx.ItemViewModel
 import vitorscoelho.ecfx.gui.WithDescriptionsEcfx
+import vitorscoelho.utils.measure.CENTIMETRE
+import vitorscoelho.utils.measure.METRE
 import vitorscoelho.utils.measure.lengthProp
 import vitorscoelho.utils.tfxmeasure.bind
 import javax.measure.Unit
 import javax.measure.quantity.Length
 
 class BeanCaracteristicasGeometricas {
-    val cobrimentoProperty = lengthProp(name = "estaca.cobrimento", value = 0.0)
-    val diametroFusteProperty = lengthProp(name = "estaca.diametroFuste", value = 0.0)
-    val diametroBaseProperty = lengthProp(name = "estaca.diametroBase", value = 0.0)
-    val alturaBaseProperty = lengthProp(name = "estaca.alturaBase", value = 0.0)
-    val rodapeProperty = lengthProp(name = "estaca.rodape", value = 0.0)
-    val profundidadeProperty = lengthProp(name = "estaca.profundidade", value = 0.0)
+    val cobrimentoProperty = lengthProp(name = "estaca.cobrimento", value = 3, unit = CENTIMETRE)
+    val diametroFusteProperty = lengthProp(name = "estaca.diametroFuste", value = 120, unit = CENTIMETRE)
+    val diametroBaseProperty = lengthProp(name = "estaca.diametroBase", value = 220, unit = CENTIMETRE)
+    val alturaBaseProperty = lengthProp(name = "estaca.alturaBase", value = 110, unit = CENTIMETRE)
+    val rodapeProperty = lengthProp(name = "estaca.rodape", value = 20, unit = CENTIMETRE)
+    val profundidadeProperty = lengthProp(name = "estaca.profundidade", value = 8, unit = METRE)
 }
 
 class BeanCaracteristicasGeometricasModel(

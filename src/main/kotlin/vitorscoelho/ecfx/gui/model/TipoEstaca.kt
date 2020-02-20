@@ -1,66 +1,125 @@
 package vitorscoelho.ecfx.gui.model
 
-import tech.units.indriya.unit.Units.METRE
-import tech.units.indriya.unit.Units.PASCAL
-import tornadofx.toObservable
+import tech.units.indriya.ComparableQuantity
+import vitorscoelho.utils.measure.MEGAPASCAL
+import vitorscoelho.utils.measure.METRE
 import vitorscoelho.utils.measure.lengthOf
 import vitorscoelho.utils.measure.pressureOf
-import javax.measure.MetricPrefix.*
 import javax.measure.Quantity
 import javax.measure.quantity.Length
 import javax.measure.quantity.Pressure
 
-abstract class TipoEstaca() {
-    abstract val nome: String
-    abstract val fck: Quantity<Pressure>
-    abstract val gamaC: Double
-    abstract val gamaS: Double
-    abstract val comprimentoMinimoArmadura: Quantity<Length>
-    abstract val tensaoMediaMaxima: Quantity<Pressure>
-    abstract val personalizada: Boolean
-    abstract val tubulao: Boolean
+class TipoEstaca(
+    val nome: String,
+    val fck: Quantity<Pressure>,
+    val gamaC: Double,
+    val gamaS: Double,
+    val comprimentoMinimoArmadura: Quantity<Length>,
+    val tensaoMediaMaxima: Quantity<Pressure>,
+    val tubulao: Boolean
+) {
+    constructor(
+        nome: String,
+        fck: Quantity<Pressure>,
+        gamaC: Double,
+        gamaS: Double,
+        tubulao: Boolean
+    ) : this(
+        nome = nome, fck = fck, gamaC = gamaC, gamaS = gamaS,
+        comprimentoMinimoArmadura = comprimentoParaConsiderarArmaduraIntegral,
+        tensaoMediaMaxima = pressureOf(value = 0, unit = MEGAPASCAL),
+        tubulao = tubulao
+    )
+
+    val armaduraIntegral: Boolean =
+        ((comprimentoMinimoArmadura as ComparableQuantity<Length>) >= comprimentoParaConsiderarArmaduraIntegral)
 
     override fun toString() = nome
+
+    companion object {
+        private val comprimentoParaConsiderarArmaduraIntegral: ComparableQuantity<Length> =
+            lengthOf(value = 1_000_000, unit = METRE) as ComparableQuantity<Length>
+    }
 }
 
-val ESTACA_PERSONALIZADA = object : TipoEstaca() {
-    override val nome: String = "Estaca personalizada"
-    override val fck: Quantity<Pressure> = pressureOf(value = 20, unit = MEGA(PASCAL))
-    override val gamaC: Double = 1.8
-    override val gamaS: Double = 1.15
-    override val comprimentoMinimoArmadura: Quantity<Length> = lengthOf(value = 4.0, unit = METRE)
-    override val tensaoMediaMaxima: Quantity<Pressure> = pressureOf(value = 6.0, unit = MEGA(PASCAL))
-    override val personalizada: Boolean = true
-    override val tubulao: Boolean = false
-}
+val TUBULAO_NAO_ENCAMISADO = TipoEstaca(
+    nome = "Tubulão não encamisado",
+    fck = pressureOf(value = 20, unit = MEGAPASCAL),
+    gamaC = 1.8,
+    gamaS = 1.15,
+    comprimentoMinimoArmadura = lengthOf(value = 3, unit = METRE),
+    tensaoMediaMaxima = pressureOf(value = 5, unit = MEGAPASCAL),
+    tubulao = true
+)
 
-val HELICE = object : TipoEstaca() {
-    override val nome: String = "Estaca hélice"
-    override val fck: Quantity<Pressure> = pressureOf(value = 20, unit = MEGA(PASCAL))
-    override val gamaC: Double = 1.8
-    override val gamaS: Double = 1.15
-    override val comprimentoMinimoArmadura: Quantity<Length> = lengthOf(value = 4.0, unit = METRE)
-    override val tensaoMediaMaxima: Quantity<Pressure> = pressureOf(value = 6.0, unit = MEGA(PASCAL))
-    override val personalizada: Boolean = false
-    override val tubulao: Boolean = false
-}
+val HELICE = TipoEstaca(
+    nome = "Estaca hélice",
+    fck = pressureOf(value = 20, unit = MEGAPASCAL),
+    gamaC = 1.8,
+    gamaS = 1.15,
+    comprimentoMinimoArmadura = lengthOf(value = 4, unit = METRE),
+    tensaoMediaMaxima = pressureOf(value = 6, unit = MEGAPASCAL),
+    tubulao = false
+)
 
-val listaEstacas = listOf(
-    ESTACA_PERSONALIZADA,
-    HELICE
-).toObservable()
+val ESCAVADA_SEM_FLUIDO = TipoEstaca(
+    nome = "Estaca escavada sem fluido",
+    fck = pressureOf(value = 15, unit = MEGAPASCAL),
+    gamaC = 1.9,
+    gamaS = 1.15,
+    comprimentoMinimoArmadura = lengthOf(value = 2, unit = METRE),
+    tensaoMediaMaxima = pressureOf(value = 5, unit = MEGAPASCAL),
+    tubulao = false
+)
 
+val ESCAVADA_COM_FLUIDO = TipoEstaca(
+    nome = "Estaca escavada com fluido",
+    fck = pressureOf(value = 20, unit = MEGAPASCAL),
+    gamaC = 1.8,
+    gamaS = 1.15,
+    comprimentoMinimoArmadura = lengthOf(value = 4, unit = METRE),
+    tensaoMediaMaxima = pressureOf(value = 6, unit = MEGAPASCAL),
+    tubulao = false
+)
 
-/*
-EstacaPersonalizada("Estaca personalizada", 2, 1.8, 1.15, 400, 0.6, true, false),
-        TubulaoPersonalizado("Tubulão personalizado", 2, 1.8, 1.15, 300, 0.5, true, true),
-        Helice("Estaca hélice", 2, 1.8, 1.15, 400, 0.6, false, false),
-        EscavadaSemFluido("Estaca escavada sem fluido", 1.5, 1.9, 1.15, 200, 0.5, false, false),
-        EscavadaComFluido("Estaca escavada com fluido", 2, 1.8, 1.15, 400, 0.6, false, false),
-        Strauss("Estaca Strauss", 1.5, 1.9, 1.15, 200, 0.5, false, false),
-        Franki("Estaca Franki", 2, 1.8, 1.15, -100, 0, false, false),
-        Tubulao("Tubulão não encamisado", 2, 1.8, 1.15, 300, 0.5, false, true),
-        Raiz("Estaca raiz", 2, 1.6, 1.15, -100, 0, false, false),
-        MicroEstaca("Microestaca", 2, 1.8, 1.15, -100, 0, false, false),
-        EstacaTradoVazado("Estaca trado vazado segmetado", 2, 1.8, 1.15, -100, 0, false, false);
- */
+val STRAUSS = TipoEstaca(
+    nome = "Estaca Strauss",
+    fck = pressureOf(value = 15, unit = MEGAPASCAL),
+    gamaC = 1.9,
+    gamaS = 1.15,
+    comprimentoMinimoArmadura = lengthOf(value = 2, unit = METRE),
+    tensaoMediaMaxima = pressureOf(value = 5, unit = MEGAPASCAL),
+    tubulao = false
+)
+
+val FRANKI = TipoEstaca(
+    nome = "Estaca Franki",
+    fck = pressureOf(value = 20, unit = MEGAPASCAL),
+    gamaC = 1.8,
+    gamaS = 1.15,
+    tubulao = false
+)
+
+val RAIZ = TipoEstaca(
+    nome = "Estaca raiz",
+    fck = pressureOf(value = 20, unit = MEGAPASCAL),
+    gamaC = 1.6,
+    gamaS = 1.15,
+    tubulao = false
+)
+
+val MICRO_ESTACA = TipoEstaca(
+    nome = "Microestaca",
+    fck = pressureOf(value = 20, unit = MEGAPASCAL),
+    gamaC = 1.8,
+    gamaS = 1.15,
+    tubulao = false
+)
+
+val ESTACA_TRADO_VAZADO = TipoEstaca(
+    nome = "Estaca trado vazado segmentado",
+    fck = pressureOf(value = 20, unit = MEGAPASCAL),
+    gamaC = 1.8,
+    gamaS = 1.15,
+    tubulao = false
+)

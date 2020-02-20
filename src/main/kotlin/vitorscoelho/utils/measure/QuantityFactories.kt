@@ -1,6 +1,7 @@
 package vitorscoelho.utils.measure
 
 import javafx.beans.property.ObjectProperty
+import javafx.beans.property.Property
 import javafx.beans.property.SimpleObjectProperty
 import tech.units.indriya.AbstractUnit
 import tech.units.indriya.quantity.Quantities
@@ -70,6 +71,9 @@ fun accelerationOf(value: Number): Quantity<Acceleration> {
 }
 fun accelerationProp(name: String? = null, value: Number): ObjectProperty<Quantity<Acceleration>> =
     SimpleObjectProperty(null, name, accelerationOf(value))
+@JvmName("asTypeAcceleration")
+fun Unit<*>.asAcceleration():Unit<Acceleration> = this.asType(Acceleration::class.java)
+
 
 fun amountOfSubstanceOf(value: Number, unit: Unit<AmountOfSubstance>): Quantity<AmountOfSubstance> = criarQuantity(value, unit)
 fun amountOfSubstanceProp(name: String?): ObjectProperty<Quantity<AmountOfSubstance>> =
@@ -90,7 +94,15 @@ fun amountOfSubstanceOf(value: Number): Quantity<AmountOfSubstance> {
 }
 fun amountOfSubstanceProp(name: String? = null, value: Number): ObjectProperty<Quantity<AmountOfSubstance>> =
     SimpleObjectProperty(null, name, amountOfSubstanceOf(value))
+@JvmName("asTypeAmountOfSubstance")
+fun Unit<*>.asAmountOfSubstance():Unit<AmountOfSubstance> = this.asType(AmountOfSubstance::class.java)
 
+@JvmName("toDoubleSUAngle")
+fun Quantity<Angle>.toDoubleSU():Double = this.to(unitAngle).value.toDouble()
+@JvmName("propToDoubleSuAngle")
+fun Property<Quantity<Angle>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun angleSUOf(value:Double):Quantity<Angle> = criarQuantity(value,unitAngle)
+fun angleSUOf(value:Double, toUnit:Unit<Angle>):Quantity<Angle> = criarQuantity(value,unitAngle).to(toUnit)
 fun angleOf(value: Number, unit: Unit<Angle>): Quantity<Angle> = criarQuantity(value, unit)
 fun angleProp(name: String?): ObjectProperty<Quantity<Angle>> =
     SimpleObjectProperty<Quantity<Angle>>(null, name)
@@ -110,7 +122,15 @@ fun angleOf(value: Number): Quantity<Angle> {
 }
 fun angleProp(name: String? = null, value: Number): ObjectProperty<Quantity<Angle>> =
     SimpleObjectProperty(null, name, angleOf(value))
+@JvmName("asTypeAngle")
+fun Unit<*>.asAngle():Unit<Angle> = this.asType(Angle::class.java)
 
+@JvmName("toDoubleSUArea")
+fun Quantity<Area>.toDoubleSU():Double = this.to(unitArea).value.toDouble()
+@JvmName("propToDoubleSuArea")
+fun Property<Quantity<Area>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun areaSUOf(value:Double):Quantity<Area> = criarQuantity(value,unitArea)
+fun areaSUOf(value:Double, toUnit:Unit<Area>):Quantity<Area> = criarQuantity(value,unitArea).to(toUnit)
 fun areaOf(value: Number, unit: Unit<Area>): Quantity<Area> = criarQuantity(value, unit)
 fun areaProp(name: String?): ObjectProperty<Quantity<Area>> =
     SimpleObjectProperty<Quantity<Area>>(null, name)
@@ -130,6 +150,9 @@ fun areaOf(value: Number): Quantity<Area> {
 }
 fun areaProp(name: String? = null, value: Number): ObjectProperty<Quantity<Area>> =
     SimpleObjectProperty(null, name, areaOf(value))
+@JvmName("asTypeArea")
+fun Unit<*>.asArea():Unit<Area> = this.asType(Area::class.java)
+
 
 fun catalyticActivityOf(value: Number, unit: Unit<CatalyticActivity>): Quantity<CatalyticActivity> = criarQuantity(value, unit)
 fun catalyticActivityProp(name: String?): ObjectProperty<Quantity<CatalyticActivity>> =
@@ -150,6 +173,9 @@ fun catalyticActivityOf(value: Number): Quantity<CatalyticActivity> {
 }
 fun catalyticActivityProp(name: String? = null, value: Number): ObjectProperty<Quantity<CatalyticActivity>> =
     SimpleObjectProperty(null, name, catalyticActivityOf(value))
+@JvmName("asTypeCatalyticActivity")
+fun Unit<*>.asCatalyticActivity():Unit<CatalyticActivity> = this.asType(CatalyticActivity::class.java)
+
 
 fun dimensionlessOf(value: Number, unit: Unit<Dimensionless>): Quantity<Dimensionless> = criarQuantity(value, unit)
 fun dimensionlessProp(name: String?): ObjectProperty<Quantity<Dimensionless>> =
@@ -170,6 +196,9 @@ fun dimensionlessOf(value: Number): Quantity<Dimensionless> {
 }
 fun dimensionlessProp(name: String? = null, value: Number): ObjectProperty<Quantity<Dimensionless>> =
     SimpleObjectProperty(null, name, dimensionlessOf(value))
+@JvmName("asTypeDimensionless")
+fun Unit<*>.asDimensionless():Unit<Dimensionless> = this.asType(Dimensionless::class.java)
+
 
 fun electricCapacitanceOf(value: Number, unit: Unit<ElectricCapacitance>): Quantity<ElectricCapacitance> = criarQuantity(value, unit)
 fun electricCapacitanceProp(name: String?): ObjectProperty<Quantity<ElectricCapacitance>> =
@@ -190,6 +219,9 @@ fun electricCapacitanceOf(value: Number): Quantity<ElectricCapacitance> {
 }
 fun electricCapacitanceProp(name: String? = null, value: Number): ObjectProperty<Quantity<ElectricCapacitance>> =
     SimpleObjectProperty(null, name, electricCapacitanceOf(value))
+@JvmName("asTypeElectricCapacitance")
+fun Unit<*>.asElectricCapacitance():Unit<ElectricCapacitance> = this.asType(ElectricCapacitance::class.java)
+
 
 fun electricChargeOf(value: Number, unit: Unit<ElectricCharge>): Quantity<ElectricCharge> = criarQuantity(value, unit)
 fun electricChargeProp(name: String?): ObjectProperty<Quantity<ElectricCharge>> =
@@ -210,6 +242,9 @@ fun electricChargeOf(value: Number): Quantity<ElectricCharge> {
 }
 fun electricChargeProp(name: String? = null, value: Number): ObjectProperty<Quantity<ElectricCharge>> =
     SimpleObjectProperty(null, name, electricChargeOf(value))
+@JvmName("asTypeElectricCharge")
+fun Unit<*>.asElectricCharge():Unit<ElectricCharge> = this.asType(ElectricCharge::class.java)
+
 
 fun electricConductanceOf(value: Number, unit: Unit<ElectricConductance>): Quantity<ElectricConductance> = criarQuantity(value, unit)
 fun electricConductanceProp(name: String?): ObjectProperty<Quantity<ElectricConductance>> =
@@ -230,6 +265,9 @@ fun electricConductanceOf(value: Number): Quantity<ElectricConductance> {
 }
 fun electricConductanceProp(name: String? = null, value: Number): ObjectProperty<Quantity<ElectricConductance>> =
     SimpleObjectProperty(null, name, electricConductanceOf(value))
+@JvmName("asTypeElectricConductance")
+fun Unit<*>.asElectricConductance():Unit<ElectricConductance> = this.asType(ElectricConductance::class.java)
+
 
 fun electricCurrentOf(value: Number, unit: Unit<ElectricCurrent>): Quantity<ElectricCurrent> = criarQuantity(value, unit)
 fun electricCurrentProp(name: String?): ObjectProperty<Quantity<ElectricCurrent>> =
@@ -250,6 +288,9 @@ fun electricCurrentOf(value: Number): Quantity<ElectricCurrent> {
 }
 fun electricCurrentProp(name: String? = null, value: Number): ObjectProperty<Quantity<ElectricCurrent>> =
     SimpleObjectProperty(null, name, electricCurrentOf(value))
+@JvmName("asTypeElectricCurrent")
+fun Unit<*>.asElectricCurrent():Unit<ElectricCurrent> = this.asType(ElectricCurrent::class.java)
+
 
 fun electricInductanceOf(value: Number, unit: Unit<ElectricInductance>): Quantity<ElectricInductance> = criarQuantity(value, unit)
 fun electricInductanceProp(name: String?): ObjectProperty<Quantity<ElectricInductance>> =
@@ -270,6 +311,9 @@ fun electricInductanceOf(value: Number): Quantity<ElectricInductance> {
 }
 fun electricInductanceProp(name: String? = null, value: Number): ObjectProperty<Quantity<ElectricInductance>> =
     SimpleObjectProperty(null, name, electricInductanceOf(value))
+@JvmName("asTypeElectricInductance")
+fun Unit<*>.asElectricInductance():Unit<ElectricInductance> = this.asType(ElectricInductance::class.java)
+
 
 fun electricPotentialOf(value: Number, unit: Unit<ElectricPotential>): Quantity<ElectricPotential> = criarQuantity(value, unit)
 fun electricPotentialProp(name: String?): ObjectProperty<Quantity<ElectricPotential>> =
@@ -290,6 +334,9 @@ fun electricPotentialOf(value: Number): Quantity<ElectricPotential> {
 }
 fun electricPotentialProp(name: String? = null, value: Number): ObjectProperty<Quantity<ElectricPotential>> =
     SimpleObjectProperty(null, name, electricPotentialOf(value))
+@JvmName("asTypeElectricPotential")
+fun Unit<*>.asElectricPotential():Unit<ElectricPotential> = this.asType(ElectricPotential::class.java)
+
 
 fun electricResistanceOf(value: Number, unit: Unit<ElectricResistance>): Quantity<ElectricResistance> = criarQuantity(value, unit)
 fun electricResistanceProp(name: String?): ObjectProperty<Quantity<ElectricResistance>> =
@@ -310,6 +357,9 @@ fun electricResistanceOf(value: Number): Quantity<ElectricResistance> {
 }
 fun electricResistanceProp(name: String? = null, value: Number): ObjectProperty<Quantity<ElectricResistance>> =
     SimpleObjectProperty(null, name, electricResistanceOf(value))
+@JvmName("asTypeElectricResistance")
+fun Unit<*>.asElectricResistance():Unit<ElectricResistance> = this.asType(ElectricResistance::class.java)
+
 
 fun energyOf(value: Number, unit: Unit<Energy>): Quantity<Energy> = criarQuantity(value, unit)
 fun energyProp(name: String?): ObjectProperty<Quantity<Energy>> =
@@ -330,7 +380,15 @@ fun energyOf(value: Number): Quantity<Energy> {
 }
 fun energyProp(name: String? = null, value: Number): ObjectProperty<Quantity<Energy>> =
     SimpleObjectProperty(null, name, energyOf(value))
+@JvmName("asTypeEnergy")
+fun Unit<*>.asEnergy():Unit<Energy> = this.asType(Energy::class.java)
 
+@JvmName("toDoubleSUForce")
+fun Quantity<Force>.toDoubleSU():Double = this.to(unitForce).value.toDouble()
+@JvmName("propToDoubleSuForce")
+fun Property<Quantity<Force>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun forceSUOf(value:Double):Quantity<Force> = criarQuantity(value,unitForce)
+fun forceSUOf(value:Double, toUnit:Unit<Force>):Quantity<Force> = criarQuantity(value,unitForce).to(toUnit)
 fun forceOf(value: Number, unit: Unit<Force>): Quantity<Force> = criarQuantity(value, unit)
 fun forceProp(name: String?): ObjectProperty<Quantity<Force>> =
     SimpleObjectProperty<Quantity<Force>>(null, name)
@@ -350,6 +408,9 @@ fun forceOf(value: Number): Quantity<Force> {
 }
 fun forceProp(name: String? = null, value: Number): ObjectProperty<Quantity<Force>> =
     SimpleObjectProperty(null, name, forceOf(value))
+@JvmName("asTypeForce")
+fun Unit<*>.asForce():Unit<Force> = this.asType(Force::class.java)
+
 
 fun frequencyOf(value: Number, unit: Unit<Frequency>): Quantity<Frequency> = criarQuantity(value, unit)
 fun frequencyProp(name: String?): ObjectProperty<Quantity<Frequency>> =
@@ -370,6 +431,9 @@ fun frequencyOf(value: Number): Quantity<Frequency> {
 }
 fun frequencyProp(name: String? = null, value: Number): ObjectProperty<Quantity<Frequency>> =
     SimpleObjectProperty(null, name, frequencyOf(value))
+@JvmName("asTypeFrequency")
+fun Unit<*>.asFrequency():Unit<Frequency> = this.asType(Frequency::class.java)
+
 
 fun illuminanceOf(value: Number, unit: Unit<Illuminance>): Quantity<Illuminance> = criarQuantity(value, unit)
 fun illuminanceProp(name: String?): ObjectProperty<Quantity<Illuminance>> =
@@ -390,7 +454,15 @@ fun illuminanceOf(value: Number): Quantity<Illuminance> {
 }
 fun illuminanceProp(name: String? = null, value: Number): ObjectProperty<Quantity<Illuminance>> =
     SimpleObjectProperty(null, name, illuminanceOf(value))
+@JvmName("asTypeIlluminance")
+fun Unit<*>.asIlluminance():Unit<Illuminance> = this.asType(Illuminance::class.java)
 
+@JvmName("toDoubleSULength")
+fun Quantity<Length>.toDoubleSU():Double = this.to(unitLength).value.toDouble()
+@JvmName("propToDoubleSuLength")
+fun Property<Quantity<Length>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun lengthSUOf(value:Double):Quantity<Length> = criarQuantity(value,unitLength)
+fun lengthSUOf(value:Double, toUnit:Unit<Length>):Quantity<Length> = criarQuantity(value,unitLength).to(toUnit)
 fun lengthOf(value: Number, unit: Unit<Length>): Quantity<Length> = criarQuantity(value, unit)
 fun lengthProp(name: String?): ObjectProperty<Quantity<Length>> =
     SimpleObjectProperty<Quantity<Length>>(null, name)
@@ -410,6 +482,9 @@ fun lengthOf(value: Number): Quantity<Length> {
 }
 fun lengthProp(name: String? = null, value: Number): ObjectProperty<Quantity<Length>> =
     SimpleObjectProperty(null, name, lengthOf(value))
+@JvmName("asTypeLength")
+fun Unit<*>.asLength():Unit<Length> = this.asType(Length::class.java)
+
 
 fun luminousFluxOf(value: Number, unit: Unit<LuminousFlux>): Quantity<LuminousFlux> = criarQuantity(value, unit)
 fun luminousFluxProp(name: String?): ObjectProperty<Quantity<LuminousFlux>> =
@@ -430,6 +505,9 @@ fun luminousFluxOf(value: Number): Quantity<LuminousFlux> {
 }
 fun luminousFluxProp(name: String? = null, value: Number): ObjectProperty<Quantity<LuminousFlux>> =
     SimpleObjectProperty(null, name, luminousFluxOf(value))
+@JvmName("asTypeLuminousFlux")
+fun Unit<*>.asLuminousFlux():Unit<LuminousFlux> = this.asType(LuminousFlux::class.java)
+
 
 fun luminousIntensityOf(value: Number, unit: Unit<LuminousIntensity>): Quantity<LuminousIntensity> = criarQuantity(value, unit)
 fun luminousIntensityProp(name: String?): ObjectProperty<Quantity<LuminousIntensity>> =
@@ -450,6 +528,9 @@ fun luminousIntensityOf(value: Number): Quantity<LuminousIntensity> {
 }
 fun luminousIntensityProp(name: String? = null, value: Number): ObjectProperty<Quantity<LuminousIntensity>> =
     SimpleObjectProperty(null, name, luminousIntensityOf(value))
+@JvmName("asTypeLuminousIntensity")
+fun Unit<*>.asLuminousIntensity():Unit<LuminousIntensity> = this.asType(LuminousIntensity::class.java)
+
 
 fun magneticFluxOf(value: Number, unit: Unit<MagneticFlux>): Quantity<MagneticFlux> = criarQuantity(value, unit)
 fun magneticFluxProp(name: String?): ObjectProperty<Quantity<MagneticFlux>> =
@@ -470,6 +551,9 @@ fun magneticFluxOf(value: Number): Quantity<MagneticFlux> {
 }
 fun magneticFluxProp(name: String? = null, value: Number): ObjectProperty<Quantity<MagneticFlux>> =
     SimpleObjectProperty(null, name, magneticFluxOf(value))
+@JvmName("asTypeMagneticFlux")
+fun Unit<*>.asMagneticFlux():Unit<MagneticFlux> = this.asType(MagneticFlux::class.java)
+
 
 fun magneticFluxDensityOf(value: Number, unit: Unit<MagneticFluxDensity>): Quantity<MagneticFluxDensity> = criarQuantity(value, unit)
 fun magneticFluxDensityProp(name: String?): ObjectProperty<Quantity<MagneticFluxDensity>> =
@@ -490,7 +574,15 @@ fun magneticFluxDensityOf(value: Number): Quantity<MagneticFluxDensity> {
 }
 fun magneticFluxDensityProp(name: String? = null, value: Number): ObjectProperty<Quantity<MagneticFluxDensity>> =
     SimpleObjectProperty(null, name, magneticFluxDensityOf(value))
+@JvmName("asTypeMagneticFluxDensity")
+fun Unit<*>.asMagneticFluxDensity():Unit<MagneticFluxDensity> = this.asType(MagneticFluxDensity::class.java)
 
+@JvmName("toDoubleSUMass")
+fun Quantity<Mass>.toDoubleSU():Double = this.to(unitMass).value.toDouble()
+@JvmName("propToDoubleSuMass")
+fun Property<Quantity<Mass>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun massSUOf(value:Double):Quantity<Mass> = criarQuantity(value,unitMass)
+fun massSUOf(value:Double, toUnit:Unit<Mass>):Quantity<Mass> = criarQuantity(value,unitMass).to(toUnit)
 fun massOf(value: Number, unit: Unit<Mass>): Quantity<Mass> = criarQuantity(value, unit)
 fun massProp(name: String?): ObjectProperty<Quantity<Mass>> =
     SimpleObjectProperty<Quantity<Mass>>(null, name)
@@ -510,6 +602,9 @@ fun massOf(value: Number): Quantity<Mass> {
 }
 fun massProp(name: String? = null, value: Number): ObjectProperty<Quantity<Mass>> =
     SimpleObjectProperty(null, name, massOf(value))
+@JvmName("asTypeMass")
+fun Unit<*>.asMass():Unit<Mass> = this.asType(Mass::class.java)
+
 
 fun powerOf(value: Number, unit: Unit<Power>): Quantity<Power> = criarQuantity(value, unit)
 fun powerProp(name: String?): ObjectProperty<Quantity<Power>> =
@@ -530,7 +625,15 @@ fun powerOf(value: Number): Quantity<Power> {
 }
 fun powerProp(name: String? = null, value: Number): ObjectProperty<Quantity<Power>> =
     SimpleObjectProperty(null, name, powerOf(value))
+@JvmName("asTypePower")
+fun Unit<*>.asPower():Unit<Power> = this.asType(Power::class.java)
 
+@JvmName("toDoubleSUPressure")
+fun Quantity<Pressure>.toDoubleSU():Double = this.to(unitPressure).value.toDouble()
+@JvmName("propToDoubleSuPressure")
+fun Property<Quantity<Pressure>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun pressureSUOf(value:Double):Quantity<Pressure> = criarQuantity(value,unitPressure)
+fun pressureSUOf(value:Double, toUnit:Unit<Pressure>):Quantity<Pressure> = criarQuantity(value,unitPressure).to(toUnit)
 fun pressureOf(value: Number, unit: Unit<Pressure>): Quantity<Pressure> = criarQuantity(value, unit)
 fun pressureProp(name: String?): ObjectProperty<Quantity<Pressure>> =
     SimpleObjectProperty<Quantity<Pressure>>(null, name)
@@ -550,6 +653,9 @@ fun pressureOf(value: Number): Quantity<Pressure> {
 }
 fun pressureProp(name: String? = null, value: Number): ObjectProperty<Quantity<Pressure>> =
     SimpleObjectProperty(null, name, pressureOf(value))
+@JvmName("asTypePressure")
+fun Unit<*>.asPressure():Unit<Pressure> = this.asType(Pressure::class.java)
+
 
 fun radiationDoseAbsorbedOf(value: Number, unit: Unit<RadiationDoseAbsorbed>): Quantity<RadiationDoseAbsorbed> = criarQuantity(value, unit)
 fun radiationDoseAbsorbedProp(name: String?): ObjectProperty<Quantity<RadiationDoseAbsorbed>> =
@@ -570,6 +676,9 @@ fun radiationDoseAbsorbedOf(value: Number): Quantity<RadiationDoseAbsorbed> {
 }
 fun radiationDoseAbsorbedProp(name: String? = null, value: Number): ObjectProperty<Quantity<RadiationDoseAbsorbed>> =
     SimpleObjectProperty(null, name, radiationDoseAbsorbedOf(value))
+@JvmName("asTypeRadiationDoseAbsorbed")
+fun Unit<*>.asRadiationDoseAbsorbed():Unit<RadiationDoseAbsorbed> = this.asType(RadiationDoseAbsorbed::class.java)
+
 
 fun radiationDoseEffectiveOf(value: Number, unit: Unit<RadiationDoseEffective>): Quantity<RadiationDoseEffective> = criarQuantity(value, unit)
 fun radiationDoseEffectiveProp(name: String?): ObjectProperty<Quantity<RadiationDoseEffective>> =
@@ -590,6 +699,9 @@ fun radiationDoseEffectiveOf(value: Number): Quantity<RadiationDoseEffective> {
 }
 fun radiationDoseEffectiveProp(name: String? = null, value: Number): ObjectProperty<Quantity<RadiationDoseEffective>> =
     SimpleObjectProperty(null, name, radiationDoseEffectiveOf(value))
+@JvmName("asTypeRadiationDoseEffective")
+fun Unit<*>.asRadiationDoseEffective():Unit<RadiationDoseEffective> = this.asType(RadiationDoseEffective::class.java)
+
 
 fun radioactivityOf(value: Number, unit: Unit<Radioactivity>): Quantity<Radioactivity> = criarQuantity(value, unit)
 fun radioactivityProp(name: String?): ObjectProperty<Quantity<Radioactivity>> =
@@ -610,6 +722,9 @@ fun radioactivityOf(value: Number): Quantity<Radioactivity> {
 }
 fun radioactivityProp(name: String? = null, value: Number): ObjectProperty<Quantity<Radioactivity>> =
     SimpleObjectProperty(null, name, radioactivityOf(value))
+@JvmName("asTypeRadioactivity")
+fun Unit<*>.asRadioactivity():Unit<Radioactivity> = this.asType(Radioactivity::class.java)
+
 
 fun solidAngleOf(value: Number, unit: Unit<SolidAngle>): Quantity<SolidAngle> = criarQuantity(value, unit)
 fun solidAngleProp(name: String?): ObjectProperty<Quantity<SolidAngle>> =
@@ -630,6 +745,9 @@ fun solidAngleOf(value: Number): Quantity<SolidAngle> {
 }
 fun solidAngleProp(name: String? = null, value: Number): ObjectProperty<Quantity<SolidAngle>> =
     SimpleObjectProperty(null, name, solidAngleOf(value))
+@JvmName("asTypeSolidAngle")
+fun Unit<*>.asSolidAngle():Unit<SolidAngle> = this.asType(SolidAngle::class.java)
+
 
 fun speedOf(value: Number, unit: Unit<Speed>): Quantity<Speed> = criarQuantity(value, unit)
 fun speedProp(name: String?): ObjectProperty<Quantity<Speed>> =
@@ -650,6 +768,9 @@ fun speedOf(value: Number): Quantity<Speed> {
 }
 fun speedProp(name: String? = null, value: Number): ObjectProperty<Quantity<Speed>> =
     SimpleObjectProperty(null, name, speedOf(value))
+@JvmName("asTypeSpeed")
+fun Unit<*>.asSpeed():Unit<Speed> = this.asType(Speed::class.java)
+
 
 fun temperatureOf(value: Number, unit: Unit<Temperature>): Quantity<Temperature> = criarQuantity(value, unit)
 fun temperatureProp(name: String?): ObjectProperty<Quantity<Temperature>> =
@@ -670,6 +791,9 @@ fun temperatureOf(value: Number): Quantity<Temperature> {
 }
 fun temperatureProp(name: String? = null, value: Number): ObjectProperty<Quantity<Temperature>> =
     SimpleObjectProperty(null, name, temperatureOf(value))
+@JvmName("asTypeTemperature")
+fun Unit<*>.asTemperature():Unit<Temperature> = this.asType(Temperature::class.java)
+
 
 fun timeOf(value: Number, unit: Unit<Time>): Quantity<Time> = criarQuantity(value, unit)
 fun timeProp(name: String?): ObjectProperty<Quantity<Time>> =
@@ -690,7 +814,15 @@ fun timeOf(value: Number): Quantity<Time> {
 }
 fun timeProp(name: String? = null, value: Number): ObjectProperty<Quantity<Time>> =
     SimpleObjectProperty(null, name, timeOf(value))
+@JvmName("asTypeTime")
+fun Unit<*>.asTime():Unit<Time> = this.asType(Time::class.java)
 
+@JvmName("toDoubleSUVolume")
+fun Quantity<Volume>.toDoubleSU():Double = this.to(unitVolume).value.toDouble()
+@JvmName("propToDoubleSuVolume")
+fun Property<Quantity<Volume>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun volumeSUOf(value:Double):Quantity<Volume> = criarQuantity(value,unitVolume)
+fun volumeSUOf(value:Double, toUnit:Unit<Volume>):Quantity<Volume> = criarQuantity(value,unitVolume).to(toUnit)
 fun volumeOf(value: Number, unit: Unit<Volume>): Quantity<Volume> = criarQuantity(value, unit)
 fun volumeProp(name: String?): ObjectProperty<Quantity<Volume>> =
     SimpleObjectProperty<Quantity<Volume>>(null, name)
@@ -710,7 +842,15 @@ fun volumeOf(value: Number): Quantity<Volume> {
 }
 fun volumeProp(name: String? = null, value: Number): ObjectProperty<Quantity<Volume>> =
     SimpleObjectProperty(null, name, volumeOf(value))
+@JvmName("asTypeVolume")
+fun Unit<*>.asVolume():Unit<Volume> = this.asType(Volume::class.java)
 
+@JvmName("toDoubleSUMoment")
+fun Quantity<Moment>.toDoubleSU():Double = this.to(unitMoment).value.toDouble()
+@JvmName("propToDoubleSuMoment")
+fun Property<Quantity<Moment>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun momentSUOf(value:Double):Quantity<Moment> = criarQuantity(value,unitMoment)
+fun momentSUOf(value:Double, toUnit:Unit<Moment>):Quantity<Moment> = criarQuantity(value,unitMoment).to(toUnit)
 fun momentOf(value: Number, unit: Unit<Moment>): Quantity<Moment> = criarQuantity(value, unit)
 fun momentProp(name: String?): ObjectProperty<Quantity<Moment>> =
     SimpleObjectProperty<Quantity<Moment>>(null, name)
@@ -730,7 +870,15 @@ fun momentOf(value: Number): Quantity<Moment> {
 }
 fun momentProp(name: String? = null, value: Number): ObjectProperty<Quantity<Moment>> =
     SimpleObjectProperty(null, name, momentOf(value))
+@JvmName("asTypeMoment")
+fun Unit<*>.asMoment():Unit<Moment> = this.asType(Moment::class.java)
 
+@JvmName("toDoubleSUSpringStiffness")
+fun Quantity<SpringStiffness>.toDoubleSU():Double = this.to(unitSpringStiffness).value.toDouble()
+@JvmName("propToDoubleSuSpringStiffness")
+fun Property<Quantity<SpringStiffness>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun springStiffnessSUOf(value:Double):Quantity<SpringStiffness> = criarQuantity(value,unitSpringStiffness)
+fun springStiffnessSUOf(value:Double, toUnit:Unit<SpringStiffness>):Quantity<SpringStiffness> = criarQuantity(value,unitSpringStiffness).to(toUnit)
 fun springStiffnessOf(value: Number, unit: Unit<SpringStiffness>): Quantity<SpringStiffness> = criarQuantity(value, unit)
 fun springStiffnessProp(name: String?): ObjectProperty<Quantity<SpringStiffness>> =
     SimpleObjectProperty<Quantity<SpringStiffness>>(null, name)
@@ -750,7 +898,15 @@ fun springStiffnessOf(value: Number): Quantity<SpringStiffness> {
 }
 fun springStiffnessProp(name: String? = null, value: Number): ObjectProperty<Quantity<SpringStiffness>> =
     SimpleObjectProperty(null, name, springStiffnessOf(value))
+@JvmName("asTypeSpringStiffness")
+fun Unit<*>.asSpringStiffness():Unit<SpringStiffness> = this.asType(SpringStiffness::class.java)
 
+@JvmName("toDoubleSUSpringStiffnessPerUnitLength")
+fun Quantity<SpringStiffnessPerUnitLength>.toDoubleSU():Double = this.to(unitSpringStiffnessPerUnitLength).value.toDouble()
+@JvmName("propToDoubleSuSpringStiffnessPerUnitLength")
+fun Property<Quantity<SpringStiffnessPerUnitLength>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun springStiffnessPerUnitLengthSUOf(value:Double):Quantity<SpringStiffnessPerUnitLength> = criarQuantity(value,unitSpringStiffnessPerUnitLength)
+fun springStiffnessPerUnitLengthSUOf(value:Double, toUnit:Unit<SpringStiffnessPerUnitLength>):Quantity<SpringStiffnessPerUnitLength> = criarQuantity(value,unitSpringStiffnessPerUnitLength).to(toUnit)
 fun springStiffnessPerUnitLengthOf(value: Number, unit: Unit<SpringStiffnessPerUnitLength>): Quantity<SpringStiffnessPerUnitLength> = criarQuantity(value, unit)
 fun springStiffnessPerUnitLengthProp(name: String?): ObjectProperty<Quantity<SpringStiffnessPerUnitLength>> =
     SimpleObjectProperty<Quantity<SpringStiffnessPerUnitLength>>(null, name)
@@ -770,7 +926,15 @@ fun springStiffnessPerUnitLengthOf(value: Number): Quantity<SpringStiffnessPerUn
 }
 fun springStiffnessPerUnitLengthProp(name: String? = null, value: Number): ObjectProperty<Quantity<SpringStiffnessPerUnitLength>> =
     SimpleObjectProperty(null, name, springStiffnessPerUnitLengthOf(value))
+@JvmName("asTypeSpringStiffnessPerUnitLength")
+fun Unit<*>.asSpringStiffnessPerUnitLength():Unit<SpringStiffnessPerUnitLength> = this.asType(SpringStiffnessPerUnitLength::class.java)
 
+@JvmName("toDoubleSUSpringStiffnessPerUnitArea")
+fun Quantity<SpringStiffnessPerUnitArea>.toDoubleSU():Double = this.to(unitSpringStiffnessPerUnitArea).value.toDouble()
+@JvmName("propToDoubleSuSpringStiffnessPerUnitArea")
+fun Property<Quantity<SpringStiffnessPerUnitArea>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun springStiffnessPerUnitAreaSUOf(value:Double):Quantity<SpringStiffnessPerUnitArea> = criarQuantity(value,unitSpringStiffnessPerUnitArea)
+fun springStiffnessPerUnitAreaSUOf(value:Double, toUnit:Unit<SpringStiffnessPerUnitArea>):Quantity<SpringStiffnessPerUnitArea> = criarQuantity(value,unitSpringStiffnessPerUnitArea).to(toUnit)
 fun springStiffnessPerUnitAreaOf(value: Number, unit: Unit<SpringStiffnessPerUnitArea>): Quantity<SpringStiffnessPerUnitArea> = criarQuantity(value, unit)
 fun springStiffnessPerUnitAreaProp(name: String?): ObjectProperty<Quantity<SpringStiffnessPerUnitArea>> =
     SimpleObjectProperty<Quantity<SpringStiffnessPerUnitArea>>(null, name)
@@ -790,7 +954,15 @@ fun springStiffnessPerUnitAreaOf(value: Number): Quantity<SpringStiffnessPerUnit
 }
 fun springStiffnessPerUnitAreaProp(name: String? = null, value: Number): ObjectProperty<Quantity<SpringStiffnessPerUnitArea>> =
     SimpleObjectProperty(null, name, springStiffnessPerUnitAreaOf(value))
+@JvmName("asTypeSpringStiffnessPerUnitArea")
+fun Unit<*>.asSpringStiffnessPerUnitArea():Unit<SpringStiffnessPerUnitArea> = this.asType(SpringStiffnessPerUnitArea::class.java)
 
+@JvmName("toDoubleSUForcePerUnitLength")
+fun Quantity<ForcePerUnitLength>.toDoubleSU():Double = this.to(unitForcePerUnitLength).value.toDouble()
+@JvmName("propToDoubleSuForcePerUnitLength")
+fun Property<Quantity<ForcePerUnitLength>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun forcePerUnitLengthSUOf(value:Double):Quantity<ForcePerUnitLength> = criarQuantity(value,unitForcePerUnitLength)
+fun forcePerUnitLengthSUOf(value:Double, toUnit:Unit<ForcePerUnitLength>):Quantity<ForcePerUnitLength> = criarQuantity(value,unitForcePerUnitLength).to(toUnit)
 fun forcePerUnitLengthOf(value: Number, unit: Unit<ForcePerUnitLength>): Quantity<ForcePerUnitLength> = criarQuantity(value, unit)
 fun forcePerUnitLengthProp(name: String?): ObjectProperty<Quantity<ForcePerUnitLength>> =
     SimpleObjectProperty<Quantity<ForcePerUnitLength>>(null, name)
@@ -810,7 +982,15 @@ fun forcePerUnitLengthOf(value: Number): Quantity<ForcePerUnitLength> {
 }
 fun forcePerUnitLengthProp(name: String? = null, value: Number): ObjectProperty<Quantity<ForcePerUnitLength>> =
     SimpleObjectProperty(null, name, forcePerUnitLengthOf(value))
+@JvmName("asTypeForcePerUnitLength")
+fun Unit<*>.asForcePerUnitLength():Unit<ForcePerUnitLength> = this.asType(ForcePerUnitLength::class.java)
 
+@JvmName("toDoubleSUSpecificWeight")
+fun Quantity<SpecificWeight>.toDoubleSU():Double = this.to(unitSpecificWeight).value.toDouble()
+@JvmName("propToDoubleSuSpecificWeight")
+fun Property<Quantity<SpecificWeight>>.toDoubleSU():Double = this.value.toDoubleSU()
+fun specificWeightSUOf(value:Double):Quantity<SpecificWeight> = criarQuantity(value,unitSpecificWeight)
+fun specificWeightSUOf(value:Double, toUnit:Unit<SpecificWeight>):Quantity<SpecificWeight> = criarQuantity(value,unitSpecificWeight).to(toUnit)
 fun specificWeightOf(value: Number, unit: Unit<SpecificWeight>): Quantity<SpecificWeight> = criarQuantity(value, unit)
 fun specificWeightProp(name: String?): ObjectProperty<Quantity<SpecificWeight>> =
     SimpleObjectProperty<Quantity<SpecificWeight>>(null, name)
@@ -830,3 +1010,5 @@ fun specificWeightOf(value: Number): Quantity<SpecificWeight> {
 }
 fun specificWeightProp(name: String? = null, value: Number): ObjectProperty<Quantity<SpecificWeight>> =
     SimpleObjectProperty(null, name, specificWeightOf(value))
+@JvmName("asTypeSpecificWeight")
+fun Unit<*>.asSpecificWeight():Unit<SpecificWeight> = this.asType(SpecificWeight::class.java)

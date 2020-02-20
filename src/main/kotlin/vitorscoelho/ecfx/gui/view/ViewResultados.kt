@@ -5,7 +5,7 @@ import tornadofx.*
 import vitorscoelho.ecfx.gui.descricoes
 import vitorscoelho.ecfx.gui.estilo.EstiloPrincipal
 
-class ViewResultados : View(title = descricoes.rb["tituloJanelaResultados"]) {
+internal class ViewResultados : View(title = descricoes.rb["tituloJanelaResultados"]) {
     override val root = hbox {
         addClass(EstiloPrincipal.vboxDados)
         form {

@@ -79,9 +79,20 @@ internal class EstiloPrincipal : Stylesheet() {
                 setMinMaxPrefWidth(larguraBotaoETextArea)
             }
         }
-        vboxCanvas {
+        val fontSizeSobre = fontSizePadrao * 1.1
+        vboxSobre {
             font = fonteRegular
-            fontSize = fontSizePadrao * 1.2
+            fontSize = fontSizeSobre
+            spacing = 20.px
+            padding = box(20.px)
+        }
+        h1Sobre {
+            font = fonteBold
+            fontSize = fontSizeSobre * 1.2
+        }
+        h2Sobre {
+            font = fonteBold
+            fontSize = fontSizeSobre * 1.07
         }
     }
 
@@ -98,7 +109,9 @@ internal class EstiloPrincipal : Stylesheet() {
         private val hbox by csselement("HBox")
         val tooltipErro by cssclass()
         val vboxDados by cssclass()
-        val vboxCanvas by cssclass()
+        val vboxSobre by cssclass()
+        val h1Sobre by cssclass()
+        val h2Sobre by cssclass()
     }
 }
 

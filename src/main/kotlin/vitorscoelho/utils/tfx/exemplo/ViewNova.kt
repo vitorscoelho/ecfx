@@ -16,11 +16,6 @@ import javax.measure.quantity.Length
 internal fun main(args: Array<String>) {
     Locale.setDefault(Locale.US)
     FX.locale = Locale("en", "US")
-    quantityFactory = object : QuantityFactory {
-        override fun <T : Quantity<T>> getQuantity(value: Number, unit: Unit<T>): Quantity<T> {
-            return Quantities.getQuantity(value, unit)
-        }
-    }
     Application.launch(Aplicacao::class.java, *args)
 }
 
@@ -73,15 +68,15 @@ internal class ViewNova : View() {
             inputTextFieldInt(property = elemento.quantityInteiro) {
                 //                addValidator(validationContext=validationContext,validator = )
 //                addValidator(validationContext, ERROR_IF_NOT_POSITIVE_INT)
-                addValidator(validationContext) { texto ->
-                    val valorDouble = texto?.toDouble() ?: 0.0
-                    val qtd = quantityFactory.getQuantity(valorDouble, property.value.unit)
-                    val qtdMinima =
-                        quantityFactory.getQuantity(20.0, METRE).to(property.value.unit.asType(Length::class.java))
-                    if (qtd.value.toDouble() < qtdMinima.value.toDouble()) {
-                        error("Deveria ser maior que $qtdMinima")
-                    } else null
-                }
+//                addValidator(validationContext) { texto ->
+//                    val valorDouble = texto?.toDouble() ?: 0.0
+//                    val qtd = quantityFactory.getQuantity(valorDouble, property.value.unit)
+//                    val qtdMinima =
+//                        quantityFactory.getQuantity(20.0, METRE).to(property.value.unit.asType(Length::class.java))
+//                    if (qtd.value.toDouble() < qtdMinima.value.toDouble()) {
+//                        error("Deveria ser maior que $qtdMinima")
+//                    } else null
+//                }
             }
             inputTextFieldDouble(property = elemento.quantityReal) {
                 addValidator(

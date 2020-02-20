@@ -1,21 +1,23 @@
 package vitorscoelho.ecfx.gui.model
 
 import javafx.beans.property.ObjectProperty
-import javafx.beans.property.SimpleDoubleProperty
 import tornadofx.ItemViewModel
 import vitorscoelho.ecfx.gui.WithDescriptionsEcfx
-import vitorscoelho.utils.measure.lengthProp
-import vitorscoelho.utils.measure.pressureProp
+import vitorscoelho.utils.measure.*
+import vitorscoelho.utils.tfx.doubleProp
+import vitorscoelho.utils.tfx.objectProp
 import vitorscoelho.utils.tfxmeasure.bind
 import javax.measure.Unit
 import javax.measure.quantity.Length
 import javax.measure.quantity.Pressure
 
 class BeanArmadura(tipo: TipoArmadura) {
-    val fykProperty = pressureProp(name = "${tipo.nome}.fyk", value = 0.0)
-    val gamaSProperty = SimpleDoubleProperty(null, "${tipo.nome}.gamaS").apply { value = 0.0 }
-    val moduloElasticidadeProperty = pressureProp(name = "${tipo.nome}.moduloElasticidade", value = 0.0)
-    val bitolaProperty = lengthProp(name = "${tipo.nome}.bitola", value = 0.0)
+    val fykProperty = pressureProp(name = "${tipo.nome}.fyk", value = 500, unit = MEGAPASCAL)
+    val gamaSProperty = doubleProp(name = "${tipo.nome}.gamaS", value = 1.15)
+    val moduloElasticidadeProperty = pressureProp(
+        name = "${tipo.nome}.moduloElasticidade", value = 210, unit = GIGAPASCAL
+    )
+    val bitolaProperty = lengthProp(name = "${tipo.nome}.bitola", value = 10, unit = MILLIMETRE)
 }
 
 class BeanArmaduraModel(

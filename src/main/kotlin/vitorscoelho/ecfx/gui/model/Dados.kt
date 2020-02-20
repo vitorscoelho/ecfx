@@ -9,7 +9,6 @@ import vitorscoelho.ecfx.dimensionamento.estrutural.AgregadoGraudo
 import vitorscoelho.ecfx.dimensionamento.geotecnico.AnaliseKhDegrau
 import vitorscoelho.ecfx.dimensionamento.geotecnico.AnaliseKhLinearmenteVariavel
 import vitorscoelho.ecfx.dimensionamento.geotecnico.AnaliseTubulao
-import vitorscoelho.ecfx.dimensionamento.geotecnico.TipoEstaca
 import vitorscoelho.ecfx.utils.*
 import javax.measure.MetricPrefix.*
 import javax.measure.Unit
