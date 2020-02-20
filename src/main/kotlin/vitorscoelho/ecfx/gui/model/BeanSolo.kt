@@ -4,7 +4,6 @@ import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
 import tornadofx.ItemViewModel
 import tornadofx.get
-import tornadofx.onChange
 import vitorscoelho.ecfx.gui.WithDescriptionsEcfx
 import vitorscoelho.ecfx.gui.descricoes
 import vitorscoelho.utils.measure.*
@@ -42,11 +41,11 @@ class BeanSoloModel(
     unitTensaoSolo: ObjectProperty<Unit<Pressure>>
 ) : ItemViewModel<BeanSolo>(initialValue = BeanSolo()), WithDescriptionsEcfx {
     constructor(unidades: BeanUnidades) : this(
-        unitCoeficienteReacao = unidades.unitCoeficienteReacao,
-        unitCoesao = unidades.unitCoesao,
-        unitAnguloDeAtrito = unidades.unitAnguloDeAtrito,
-        unitPesoEspecifico = unidades.unitPesoEspecifico,
-        unitTensaoSolo = unidades.unitTensaoSolo
+        unitCoeficienteReacao = unidades.unitCoeficienteReacaoProperty,
+        unitCoesao = unidades.unitCoesaoProperty,
+        unitAnguloDeAtrito = unidades.unitAnguloDeAtritoProperty,
+        unitPesoEspecifico = unidades.unitPesoEspecificoProperty,
+        unitTensaoSolo = unidades.unitTensaoSoloProperty
     )
 
     val tipo = bind(BeanSolo::tipo)

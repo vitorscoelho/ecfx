@@ -18,9 +18,8 @@ internal class ControllerInicial : Controller() {
     val concreto = BeanConcretoModel(unidades = unidades)
     val armaduraTransversal = BeanArmaduraModel(tipo = TipoArmadura.ESTRIBO, unidades = unidades)
     val armaduraLongitudinal = BeanArmaduraModel(tipo = TipoArmadura.LONGITUDINAL, unidades = unidades)
-    val caracteristicasGeometricas = BeanCaracteristicasGeometricasModel(unidades = unidades)
+    val dadosDaFundacao = BeanDadosDaFundacaoModel(unidades = unidades)
     val cargasNoTopo = BeanCargasNoTopoModel(unidades = unidades)
-    val tipoEstaca = BeanTipoEstacaModel(unidades = unidades)
     val solo = BeanSoloModel(unidades = unidades)
 
     fun acaoMenuItemSobre() {
@@ -57,8 +56,8 @@ internal class ControllerInicial : Controller() {
     }
 
     fun acaoBtnVisualizarResultados() {
-        val fuste = FusteCircular(diametro = caracteristicasGeometricas.diametroFuste.value.toDoubleSU())
-        val base = with(caracteristicasGeometricas) {
+        val fuste = FusteCircular(diametro = dadosDaFundacao.diametroFuste.value.toDoubleSU())
+        val base = with(dadosDaFundacao) {
             BaseCircular(
                 diametroInferior = diametroBase.toDoubleSU(),
                 diametroSuperior = diametroFuste.toDoubleSU(),
@@ -67,7 +66,7 @@ internal class ControllerInicial : Controller() {
             )
         }
         val tubulao = Tubulao(
-            fuste = fuste, base = base, comprimento = caracteristicasGeometricas.profundidade.toDoubleSU()
+            fuste = fuste, base = base, comprimento = dadosDaFundacao.profundidade.toDoubleSU()
         )
         val esforco = with(cargasNoTopo) {
             Esforco(

@@ -6,8 +6,6 @@ import vitorscoelho.ecfx.gui.controller.ControllerInicial
 import vitorscoelho.ecfx.gui.descricoes
 import vitorscoelho.ecfx.gui.estilo.EstiloPrincipal
 import vitorscoelho.ecfx.gui.model.TipoSolo
-import vitorscoelho.ecfx.gui.model.agregados
-import vitorscoelho.ecfx.gui.model.tiposDeEstaca
 import vitorscoelho.ecfx.utils.ICONE_DO_PROGRAMA
 import vitorscoelho.ecfx.utils.TITULO_VIEW_INICIAL
 import vitorscoelho.utils.tfx.checkboxField
@@ -31,25 +29,16 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             fieldset(text = descricoes.rb["fieldsetConcreto"]) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.concreto) {
-                    inputTextFieldPositiveDouble(property = fck) {
-                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
-                    }
-                    inputTextFieldPositiveDouble(property = gamaC) {
-                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
-                    }
-                    inputTextFieldPositiveDouble(property = ecs) {
-                        enableWhen { ecsNaoPredefinido }
-                    }
-                    comboboxField(property = agregado, values = agregados.toObservable())
+                    inputTextFieldPositiveDouble(property = fck)
+                    inputTextFieldPositiveDouble(property = gamaC)
+                    inputTextFieldPositiveDouble(property = ecs)
                 }
             }
             fieldset(text = descricoes.rb["fieldsetArmaduraTransversal"]) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.armaduraTransversal) {
                     inputTextFieldPositiveDouble(property = fyk)
-                    inputTextFieldPositiveDouble(property = gamaS) {
-                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
-                    }
+                    inputTextFieldPositiveDouble(property = gamaS)
                     inputTextFieldPositiveDouble(property = bitola)
                 }
             }
@@ -57,28 +46,13 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.armaduraLongitudinal) {
                     inputTextFieldPositiveDouble(property = fyk)
-                    inputTextFieldPositiveDouble(property = gamaS) {
-                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
-                    }
+                    inputTextFieldPositiveDouble(property = gamaS)
                     inputTextFieldPositiveDouble(property = moduloElasticidade)
                     inputTextFieldPositiveDouble(property = bitola)
                 }
             }
         }
         form {
-            fieldset(text = descricoes.rb["fieldsetTipoEstaca"]) {
-                labelPosition = Orientation.VERTICAL
-                with(controller.tipoEstaca) {
-                    comboboxField(property = tipo, values = tiposDeEstaca.toObservable())
-                    checkboxField(property = armaduraIntegral)
-                    inputTextFieldPositiveDouble(property = comprimentoMinimoArmadura) {
-                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
-                    }
-                    inputTextFieldPositiveDouble(property = tensaoMediaMaxima) {
-                        enableWhen { controller.tipoEstaca.tipoPersonalizado }
-                    }
-                }
-            }
             fieldset(text = descricoes.rb["fieldsetSolo"]) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.solo) {
@@ -93,9 +67,16 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             }
         }
         form {
-            fieldset(text = descricoes.rb["fieldsetCaracteristicasGeometricas"]) {
+            fieldset(text = descricoes.rb["fieldsetDadosDaFundacao"]) {
                 labelPosition = Orientation.VERTICAL
-                with(controller.caracteristicasGeometricas) {
+                with(controller.dadosDaFundacao) {
+                    checkboxField(property = armaduraIntegral)
+                    inputTextFieldPositiveDouble(property = comprimentoMinimoArmadura) {
+                        disableWhen { armaduraIntegral }
+                    }
+                    inputTextFieldPositiveDouble(property = tensaoMediaMaxima) {
+                        disableWhen { armaduraIntegral }
+                    }
                     inputTextFieldPositiveDouble(property = cobrimento)
                     inputTextFieldPositiveDouble(property = diametroFuste)
                     inputTextFieldPositiveDouble(property = diametroBase)
