@@ -60,8 +60,8 @@ internal class ControllerInicial : Controller() {
             BaseCircular(
                 diametroInferior = diametroBase.toDoubleSU(),
                 diametroSuperior = diametroFuste.toDoubleSU(),
-                altura = alturaBase.toDoubleSU(),
-                rodape = rodape.toDoubleSU()
+                altura = 0.0,
+                rodape = 0.0
             )
         }
         val tubulao = Tubulao(

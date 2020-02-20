@@ -74,8 +74,6 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                     inputTextFieldPositiveDouble(property = cobrimento)
                     inputTextFieldPositiveDouble(property = diametroFuste)
                     inputTextFieldPositiveDouble(property = diametroBase)
-                    inputTextFieldPositiveDouble(property = alturaBase)
-                    inputTextFieldPositiveDouble(property = rodape)
                     inputTextFieldPositiveDouble(property = profundidade)
                 }
             }

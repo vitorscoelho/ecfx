@@ -20,8 +20,6 @@ class BeanDadosDaFundacao {
     val cobrimentoProperty = lengthProp(name = "estaca.cobrimento", value = 3, unit = CENTIMETRE)
     val diametroFusteProperty = lengthProp(name = "estaca.diametroFuste", value = 120, unit = CENTIMETRE)
     val diametroBaseProperty = lengthProp(name = "estaca.diametroBase", value = 220, unit = CENTIMETRE)
-    val alturaBaseProperty = lengthProp(name = "estaca.alturaBase", value = 110, unit = CENTIMETRE)
-    val rodapeProperty = lengthProp(name = "estaca.rodape", value = 20, unit = CENTIMETRE)
     val profundidadeProperty = lengthProp(name = "estaca.profundidade", value = 8, unit = METRE)
 }
 
@@ -45,8 +43,6 @@ class BeanDadosDaFundacaoModel(
     val cobrimento = bind(BeanDadosDaFundacao::cobrimentoProperty, unitCobrimento)
     val diametroFuste = bind(BeanDadosDaFundacao::diametroFusteProperty, unitDimensoesEstaca)
     val diametroBase = bind(BeanDadosDaFundacao::diametroBaseProperty, unitDimensoesEstaca)
-    val alturaBase = bind(BeanDadosDaFundacao::alturaBaseProperty, unitDimensoesEstaca)
-    val rodape = bind(BeanDadosDaFundacao::rodapeProperty, unitDimensoesEstaca)
     val profundidade = bind(BeanDadosDaFundacao::profundidadeProperty, unitProfundidade)
 
     init {
