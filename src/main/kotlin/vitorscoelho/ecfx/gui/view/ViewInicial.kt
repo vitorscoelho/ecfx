@@ -8,12 +8,21 @@ import vitorscoelho.ecfx.gui.estilo.EstiloPrincipal
 import vitorscoelho.ecfx.gui.model.TipoSolo
 import vitorscoelho.ecfx.utils.ICONE_DO_PROGRAMA
 import vitorscoelho.ecfx.utils.TITULO_VIEW_INICIAL
-import vitorscoelho.utils.tfx.checkboxField
-import vitorscoelho.utils.tfx.comboboxField
-import vitorscoelho.utils.tfx.inputTextFieldPositiveDouble
+import vitorscoelho.utils.tfx.*
+import javax.measure.Quantity
 
 internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
     private val controller: ControllerInicial by inject()
+
+    private val validationContext = ValidationContext().apply {
+        decorationProvider = {
+            MessageDecorator(
+                message = it.message,
+                severity = it.severity,
+                tooltipCssRule = EstiloPrincipal.tooltipErro
+            )
+        }
+    }
 
     init {
         setStageIcon(icon = ICONE_DO_PROGRAMA)
@@ -29,20 +38,20 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
             fieldset(text = descricoes.rb["fieldsetConcreto"]) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.concreto) {
-                    inputTextFieldPositiveDouble(property = fck)
-                    inputTextFieldPositiveDouble(property = gamaC)
-                    inputTextFieldPositiveDouble(property = ecs)
+                    inputTextFieldPositiveDouble(property = fck).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = gamaC).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = ecs).maiorQueZero()
                 }
             }
             fieldset(text = descricoes.rb["fieldsetArmaduras"]) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.armaduras) {
-                    inputTextFieldPositiveDouble(property = fykEstribo)
-                    inputTextFieldPositiveDouble(property = bitolaEstribo)
-                    inputTextFieldPositiveDouble(property = fykLongitudinal)
-                    inputTextFieldPositiveDouble(property = bitolaLongitudinal)
-                    inputTextFieldPositiveDouble(property = gamaS)
-                    inputTextFieldPositiveDouble(property = moduloElasticidade)
+                    inputTextFieldPositiveDouble(property = fykEstribo).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = bitolaEstribo).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = fykLongitudinal).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = bitolaLongitudinal).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = gamaS).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = moduloElasticidade).maiorQueZero()
                 }
             }
         }
@@ -51,12 +60,12 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                 labelPosition = Orientation.VERTICAL
                 with(controller.solo) {
                     comboboxField(property = tipo, values = TipoSolo.values().toList().toObservable())
-                    inputTextFieldPositiveDouble(property = kh)
-                    inputTextFieldPositiveDouble(property = kv)
+                    inputTextFieldPositiveDouble(property = kh).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = kv).maiorQueZero()
                     inputTextFieldPositiveDouble(property = coesao)
                     inputTextFieldPositiveDouble(property = anguloDeAtrito)
-                    inputTextFieldPositiveDouble(property = pesoEspecifico)
-                    inputTextFieldPositiveDouble(property = tensaoAdmissivel)
+                    inputTextFieldPositiveDouble(property = pesoEspecifico).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = tensaoAdmissivel).maiorQueZero()
                 }
             }
         }
@@ -71,10 +80,10 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                     inputTextFieldPositiveDouble(property = tensaoMediaMaxima) {
                         disableWhen { armaduraIntegral }
                     }
-                    inputTextFieldPositiveDouble(property = cobrimento)
-                    inputTextFieldPositiveDouble(property = diametroFuste)
-                    inputTextFieldPositiveDouble(property = diametroBase)
-                    inputTextFieldPositiveDouble(property = profundidade)
+                    inputTextFieldPositiveDouble(property = cobrimento).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = diametroFuste).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = diametroBase).maiorQueZero()
+                    inputTextFieldPositiveDouble(property = profundidade).maiorQueZero()
                 }
             }
             fieldset(text = descricoes.rb["fieldsetCargasNoTopo"]) {
@@ -92,87 +101,12 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                 action { controller.acaoBtnValoresSugeridos() }
             }
             button(descricoes.rb["botao.visualizarResultados"]) {
-                isDisable = true
-                enableWhen { controller.concreto.dirty }
+                //                enableWhen { controller.concreto.dirty }
                 action { controller.concreto.commit() }
-                //action { controller.acaoBtnVisualizarResultados() }
+                action { controller.acaoBtnVisualizarResultados() }
             }
         }
-        //        form {
-//            hbox {
-//                vbox {
-//                    fieldset("Concreto") {
-//                        labelPosition = Orientation.VERTICAL
-//                        fieldQuantity(property = dados.fckProperty)
-//                        fieldQuantity(property = dados.gamaCProperty)
-//                        fieldQuantity(property = dados.moduloDeformacaoConcretoProperty) { tf ->
-//                            tf.editableWhen(dados.agregadoProperty.isEqualTo(AGREGADO_QUALQUER))
-//                        }
-//                        field("Agregado graúdo") {
-//                            combobox(values = AGREGADOS_DISPONIVEIS, property = dados.agregadoProperty) {
-//                                tooltip(
-//                                    """
-//                                Selecione o agregado graúdo usado no concreto.
-//                                O módulo de deformação será calculado baseado no agregado selecionado.
-//                                Para informar manualmente o módulo de deformação, selecione "Outro".
-//                            """.trimIndent()
-//                                ).apply { showDelay = DELAY_TOOLTIP }
-//                            }
-//                        }
-//                    }
-//                    fieldset("Armadura transversal\r\n(Estribos)") {
-//                        labelPosition = Orientation.VERTICAL
-//                        fieldQuantity(property = dados.estriboFywkProperty)
-//                        fieldQuantity(property = dados.estriboGamaSProperty)
-//                        fieldQuantity(property = dados.estriboBitolaProperty)
-//                    }
-//                    fieldset("Armadura longitudinal") {
-//                        labelPosition = Orientation.VERTICAL
-//                        fieldQuantity(property = dados.longitudinalFykProperty)
-//                        fieldQuantity(property = dados.longitudinalGamaSProperty)
-//                        fieldQuantity(property = dados.longitudinalModuloDeformacaoProperty)
-//                        fieldQuantity(property = dados.longitudinalBitolaProperty)
-//                    }
-//                }
-//                vbox {
-//                    fieldset("Características geométricas") {
-//                        labelPosition = Orientation.VERTICAL
-//                        fieldQuantity(property = dados.cobrimentoProperty)
-//                        fieldQuantity(property = dados.diametroFusteProperty)
-//                        fieldQuantity(property = dados.diametroBaseProperty)
-//                        fieldQuantity(property = dados.alturaBaseProperty)
-//                        fieldQuantity(property = dados.rodapeBaseProperty)
-//                        fieldQuantity(property = dados.profundidadeProperty)
-//                    }
-//                    fieldset("Cargas no topo") {
-//                        labelPosition = Orientation.VERTICAL
-//                        fieldQuantity(property = dados.normalProperty)
-//                        fieldQuantity(property = dados.forcaHorizontalProperty)
-//                        fieldQuantity(property = dados.momentoProperty)
-//                        fieldQuantity(property = dados.gamaNProperty)
-//                    }
-//                }
-//                vbox {
-//                    fieldset("Características do elemento de fundação") {
-//                        labelPosition = Orientation.VERTICAL
-//                        field("Tipo") {
-//                            combobox(property = dados.tipoEstaca)
-//                        }
-//                    }
-//                    fieldset("Características do solo") {
-//                        labelPosition = Orientation.VERTICAL
-//                        field("Tipo do solo") {
-//                            combobox(property = dados.tipoSolo, values = TipoSoloModel.values().toList()) { }
-//                        }
-//                        fieldQuantity(property = dados.kvProperty)
-//                        fieldQuantity(property = dados.coesaoProperty)
-//                        fieldQuantity(property = dados.anguloDeAtritoProperty)
-//                        fieldQuantity(property = dados.pesoEspecificoProperty)
-//                        fieldQuantity(property = dados.tensaoAdmissivelProperty)
-//                    }
-//                }
-//            }
-//        }
+        validationContext.validate()
     }
 
     private val menu = menubar {
@@ -196,5 +130,9 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
         center {
             this += conteudo
         }
+    }
+
+    private fun InputTextField<*>.maiorQueZero(): InputTextField<*> = this.apply {
+        addValidator(validationContext, ERROR_IF_NOT_POSITIVE_DOUBLE)
     }
 }

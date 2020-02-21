@@ -26,3 +26,5 @@ fun booleanProp(name: String? = null, value: Boolean): BooleanProperty = SimpleB
 fun <T> objectProp(name: String? = null, value: T): ObjectProperty<T> = SimpleObjectProperty<T>(
     null, name
 ).apply { this.value = value }
+
+fun <T : Any> T?.toProperty(name: String? = null) = SimpleObjectProperty<T>(null,name,this)

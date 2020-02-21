@@ -36,6 +36,7 @@ abstract class InputFields<T, S : Control>(
         inputContainer.add(control)
         colocarTitulo()
         adicionarTooltipDescricao()
+//        println(property.viewModel)
         /*
         // Register/deregister with parent Fieldset
         parentProperty().addListener { _, oldParent, newParent ->

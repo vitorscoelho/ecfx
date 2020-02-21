@@ -91,9 +91,9 @@ internal fun criar(nome: String): String {
             fun Quantity<$nome>.toDoubleSU():Double = this.to(unit$nome).value.toDouble()
             @JvmName("propToDoubleSu${nome}")
             fun Property<Quantity<$nome>>.toDoubleSU():Double = this.value.toDoubleSU()
+            fun Number.to${nome}SU():Quantity<$nome> = criarQuantity(this,unit$nome)
             fun ${nomeMinusculo}SUOf(value:Double):Quantity<$nome> = criarQuantity(value,unit$nome)
             fun ${nomeMinusculo}SUOf(value:Double, toUnit:Unit<$nome>):Quantity<$nome> = criarQuantity(value,unit$nome).to(toUnit)
-            fun ${nomeMinusculo}fromSU(value:Double)
         """.trimIndent()
     } else {
         ""

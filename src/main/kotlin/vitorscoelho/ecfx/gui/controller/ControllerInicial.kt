@@ -5,11 +5,13 @@ import javafx.stage.StageStyle
 import javafx.stage.Window
 import tornadofx.Controller
 import tornadofx.confirm
+import tornadofx.find
 import tornadofx.get
 import vitorscoelho.ecfx.dimensionamento.Esforco
 import vitorscoelho.ecfx.dimensionamento.geotecnico.*
 import vitorscoelho.ecfx.gui.descricoes
 import vitorscoelho.ecfx.gui.model.*
+import vitorscoelho.ecfx.gui.view.ViewResultados
 import vitorscoelho.ecfx.gui.view.ViewSobre
 import vitorscoelho.utils.measure.toDoubleSU
 
@@ -89,6 +91,10 @@ internal class ControllerInicial : Controller() {
             else -> throw IllegalArgumentException("Tipo de solo não suportado")
         }
         val resultados = analise.dimensionar(esforco = esforco)
-        println(tubulao.fuste.area)
+        val scopeResultados = ScopeResultados(resultados = resultados, unidades = unidades)
+        find(type = ViewResultados::class, scope = scopeResultados).openModal(
+            stageStyle = StageStyle.DECORATED,
+            resizable = false
+        )
     }
 }
