@@ -6,32 +6,75 @@ import javafx.beans.value.ObservableValue
 import javafx.scene.Node
 import javafx.util.StringConverter
 import tornadofx.View
+import tornadofx.isDouble
+import tornadofx.isInt
 import tornadofx.onChange
+import vitorscoelho.utils.measure.createQuantity
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
 import javax.measure.Quantity
 import javax.measure.Unit
+import javax.measure.quantity.Pressure
 
 val SEM_FILTER_INPUT: (input: String) -> Boolean = { _ -> true }
 val SEMPRE_VALIDO: (input: String) -> Boolean = { _ -> true }
+val regexNumero = """(([0-9]+\.?)|\.)[0-9]*[e|E]?[+|-]?[0-9]*""".toRegex()
 
-//open class GuiQuantityProp<T : Quantity<T>>(
-//    initialValue: Quantity<T>,
-//    name: String? = null,
-//    label: String? = null,
-//    description: String? = null,
-//    format: NumberFormat,
-//    filterInput: (input: String) -> Boolean = SEM_FILTER_INPUT,
-//    valido: (input: String) -> Boolean = SEMPRE_VALIDO
-//) : GuiProp<Quantity<T>>(
-//    initialValue=initialValue,
-//    name = name,
-//    label = label,
-//    description = description,
-//    filterInput = filterInput,
-//    valido = valido
-//)
+/*
+class FckProp(initialValue: Double, format: ObservableValue<DecimalFormat>) : GuiDoubleProp(
+    initialValue = initialValue,
+    name = "fck",
+    label = "fck",
+    description = "Resistência do concreto",
+    format = format,
+    filterInput = { texto ->
+        texto.isDouble() &&
+//                !texto.contains("-") &&
+                !texto.contains(other = "d", ignoreCase = true)
+    },//FILTER_INPUT_POSITIVE_REAL,
+    valido = SEMPRE_VALIDO
+)
+ */
+
+open class GuiQuantityProp<T : Quantity<T>>(
+    initialValue: Quantity<T>,
+    name: String? = null,
+    label: String? = null,
+    description: String? = null,
+    private val format: ObservableValue<DecimalFormat>,
+    private val unit: ObservableValue<Unit<T>>,
+    filterInput: (input: String) -> Boolean = SEM_FILTER_INPUT,
+    valido: (input: String) -> Boolean = SEMPRE_VALIDO
+) : GuiProp<Quantity<T>>(
+    initialValue = initialValue,
+    name = name,
+    label = label,
+    description = description,
+    converter = object : StringConverter<Quantity<T>>() {
+        override fun toString(valor: Quantity<T>): String {
+            return format.value.format(valor.to(unit.value).value)
+        }
+
+        override fun fromString(string: String): Quantity<T> {
+            val magnitude = string.inputToNumber()
+            return createQuantity(value = magnitude, unit = unit.value)
+        }
+    },
+    filterInput = filterInput,
+    valido = valido
+) {
+    init {
+        format.onChange { atualizarTexto() }
+        unit.onChange { atualizarTexto() }
+    }
+
+    private fun atualizarTexto() {
+        val double = converter.fromString(textProp.value)
+        val string = converter.toString(double)
+        textProp.value = string
+    }
+}
 
 open class GuiDoubleProp(
     initialValue: Double,

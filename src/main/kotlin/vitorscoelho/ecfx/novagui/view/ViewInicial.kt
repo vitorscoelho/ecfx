@@ -1,27 +1,61 @@
 package vitorscoelho.ecfx.novagui.view
 
+import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.value.ObservableValue
 import javafx.geometry.Orientation
 import javafx.util.StringConverter
 import tornadofx.*
 import vitorscoelho.ecfx.gui.estilo.EstiloPrincipal
-import vitorscoelho.ecfx.novagui.utils.GuiDoubleProp
-import vitorscoelho.ecfx.novagui.utils.GuiProp
-import vitorscoelho.ecfx.novagui.utils.SEMPRE_VALIDO
+import vitorscoelho.ecfx.novagui.utils.*
+import vitorscoelho.utils.measure.KILOPASCAL
+import vitorscoelho.utils.measure.MEGAPASCAL
+import vitorscoelho.utils.measure.PASCAL
+import vitorscoelho.utils.measure.pressureOf
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
+import javax.measure.quantity.Pressure
 
-class FckProp(initialValue: Double, format: ObservableValue<DecimalFormat>) : GuiDoubleProp(
-    initialValue = initialValue,
+/*
+"" -> 0
+"." -> 0
+"-" -> 0 //Permitido apenas em campos que podem ser negativo
+"+" -> 0
+"#.#E" -> #.#E0
+".#E" -> #.#E0
+"#.E" -> #.#E0
+"#E" -> #.#E0
+"#.#E+" -> #.#E0
+"#.#E-" -> #.#E0
+Permitir inteiros com representação com mantissa. Mas a mantissa deve sempre ser positiva.
+ */
+
+
+//fun intOrNull(texto: String): Int? {
+//    if (texto == "" || texto == "." || texto == "+") return 0
+//}
+//
+//fun doubleOrNull(texto: String): Double? {
+//    if (texto == "" || texto == "." || texto == "-" || texto == "+") return 0.0
+//}
+
+val unidade = SimpleObjectProperty(KILOPASCAL)
+var contador = 0
+
+class FckProp(initialValue: Double, format: ObservableValue<DecimalFormat>) : GuiQuantityProp<Pressure>(
+    initialValue = pressureOf(value = 20, unit = MEGAPASCAL),
     name = "fck",
     label = "fck",
     description = "Resistência do concreto",
     format = format,
+    unit = unidade,
     filterInput = { texto ->
-        texto.isDouble() &&
+        texto.isDouble()
+//        println("${contador++} -> ${texto.inputIsPositiveDouble()}")
+//        texto.inputIsPositiveDouble()
+//        texto.isDouble() &&
 //                !texto.contains("-") &&
-                !texto.contains(other = "d", ignoreCase = true)
+//                !texto.contains(other = "d", ignoreCase = true)
     },//FILTER_INPUT_POSITIVE_REAL,
     valido = SEMPRE_VALIDO
 )
@@ -61,7 +95,11 @@ class ViewInicial : View() {
         fieldset("Concreto") {
             field("fck") {
                 textfield(property = fck.textProp) {
-                    filterInput { discriminator -> fck.filterInput.invoke(discriminator.controlNewText) }
+                    filterInput { discriminator ->
+                        val isValido = fck.filterInput(discriminator.controlNewText)
+                        if (discriminator.isDeleted && !isValido) discriminator.setRange(0, 0)
+                        isValido
+                    }
                     focusedProperty().onChange { noFoco ->
                         if (!noFoco) {
                             val double = fck.converter.fromString(fck.textProp.value)
@@ -74,6 +112,9 @@ class ViewInicial : View() {
             labelPosition = Orientation.VERTICAL
             field("Formato") {
                 textfield(property = formato.textProp)
+            }
+            field("Unidade") {
+                combobox(property = unidade, values = listOf(PASCAL, KILOPASCAL, MEGAPASCAL))
             }
             button("Aplica formato") { action { formato.commit() } }
             button("Commit") { action { fck.commit() } }

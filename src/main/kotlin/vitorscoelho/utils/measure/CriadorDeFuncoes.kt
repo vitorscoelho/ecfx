@@ -2,8 +2,10 @@ package vitorscoelho.utils.measure
 
 import tech.units.indriya.quantity.Quantities
 import javax.measure.MetricPrefix.*
+import javax.measure.Quantity
 import javax.measure.Unit
 import javax.measure.quantity.*
+import kotlin.text.StringBuilder
 
 private val medidas = listOf(
     "Acceleration",
@@ -80,11 +82,26 @@ private val sistemaDeUnidadesAlternativo = listOf(
     "SpecificWeight"
 )
 
+internal fun nomeMinusculo(nome: String): String {
+    val primeiraLetra = nome.first().toLowerCase()
+    return primeiraLetra + nome.drop(1)
+}
+
+internal fun criarMapSistemaDeUnidadesAlternativo():String {
+    return with(StringBuilder()) {
+        appendln("private val mapSistemaDeUnidadesAlternativo: Map<Class<out Quantity<*>>, Unit<*>> = mapOf(")
+        sistemaDeUnidadesAlternativo.forEach { nome ->
+            appendln("$nome::class.java to unit$nome,")
+        }
+        deleteCharAt(lastIndex)
+        deleteCharAt(lastIndex)
+        appendln()
+        appendln(")")
+    }.toString()
+}
+
 internal fun criar(nome: String): String {
-    val nomeMinusculo: String = run {
-        val primeiraLetra = nome.first().toLowerCase()
-        primeiraLetra + nome.drop(1)
-    }
+    val nomeMinusculo: String = nomeMinusculo(nome = nome)
     val funcaoDouble = if (sistemaDeUnidadesAlternativo.contains(nome)) {
         """
             @JvmName("toDoubleSU$nome")
@@ -92,8 +109,8 @@ internal fun criar(nome: String): String {
             @JvmName("propToDoubleSu${nome}")
             fun Property<Quantity<$nome>>.toDoubleSU():Double = this.value.toDoubleSU()
             fun Number.to${nome}SU():Quantity<$nome> = criarQuantity(this,unit$nome)
-            fun ${nomeMinusculo}SUOf(value:Double):Quantity<$nome> = criarQuantity(value,unit$nome)
-            fun ${nomeMinusculo}SUOf(value:Double, toUnit:Unit<$nome>):Quantity<$nome> = criarQuantity(value,unit$nome).to(toUnit)
+            fun ${nomeMinusculo}SUOf(value:Number):Quantity<$nome> = criarQuantity(value,unit$nome)
+            fun ${nomeMinusculo}SUOf(value:Number, toUnit:Unit<$nome>):Quantity<$nome> = criarQuantity(value,unit$nome).to(toUnit)
         """.trimIndent()
     } else {
         ""
@@ -125,6 +142,7 @@ internal fun criar(nome: String): String {
 }//KILONEWTON.divide(CUBIC_METRE).asType(SpringStiffnessPerUnitArea::class.java)
 
 fun main() {
+    println(criarMapSistemaDeUnidadesAlternativo())
     medidas.forEach {
         println(criar(it))
         println()
