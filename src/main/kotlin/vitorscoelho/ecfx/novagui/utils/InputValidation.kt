@@ -1,48 +1,48 @@
 package vitorscoelho.ecfx.novagui.utils
 
-val regexVazioPositivoOuNegativo = """[.\-+]""".toRegex()
-val regexCientifico = """(.+)[eE](.*)""".toRegex()
+private val regexVazioPositivoOuNegativo = """[.\-+]""".toRegex()
+private val regexCientifico = """(.+)[eE](.*)""".toRegex()
 
-fun String.inputIsInt(): Boolean = (this.inputToIntOrNull() != null)
-fun String.inputIsDouble(): Boolean = (this.inputToDoubleOrNull() != null)
-fun String.inputIsNumber(): Boolean = (this.inputToNumberOrNull() != null)
-fun String.inputIsPositiveInt(): Boolean {
-    val valor: Int = this.inputToIntOrNull() ?: return false
+fun inputIsInt(string: String): Boolean = (inputToIntOrNull(string) != null)
+fun inputIsDouble(string: String): Boolean = (inputToDoubleOrNull(string) != null)
+fun inputIsNumber(string: String): Boolean = (inputToNumberOrNull(string) != null)
+fun inputIsPositiveInt(string: String): Boolean {
+    val valor: Int = inputToIntOrNull(string) ?: return false
     return valor >= 0
 }
 
-fun String.inputIsPositiveDouble(): Boolean {
-    val valor: Double = this.inputToDoubleOrNull() ?: return false
+fun inputIsPositiveDouble(string: String): Boolean {
+    val valor: Double = inputToDoubleOrNull(string) ?: return false
     return valor >= 0.0
 }
 
-fun String.inputIsPositiveNumber(): Boolean {
-    return (this.inputIsPositiveInt() || this.inputIsPositiveDouble())
+fun inputIsPositiveNumber(string: String): Boolean {
+    return (inputIsPositiveInt(string) || inputIsPositiveDouble(string))
 }
 
-fun String.inputToIntOrNull(): Int? {
-    val retorno: Int? = this.toIntOrNull()
+fun inputToIntOrNull(string: String): Int? {
+    val retorno: Int? = string.toIntOrNull()
     if (retorno == null) {
-        if (this.isBlank() || regexVazioPositivoOuNegativo.matches(this)) return 0
+        if (string.isBlank() || regexVazioPositivoOuNegativo.matches(string)) return 0
     }
     return retorno
 }
 
-fun String.inputToDoubleOrNull(): Double? {
-    val retorno: Double? = this.toDoubleOrNull()
+fun inputToDoubleOrNull(string: String): Double? {
+    val retorno: Double? = string.toDoubleOrNull()
     if (retorno == null) {
-        if (this.isBlank() || regexVazioPositivoOuNegativo.matches(this)) return 0.0
-        if (regexCientifico.matches(this)) {
-            val (_, expoente) = regexCientifico.find(this)!!.destructured
-            if (expoente.isBlank() || expoente == "+" || expoente == "-") return (this + "0").toDoubleOrNull()
+        if (string.isBlank() || regexVazioPositivoOuNegativo.matches(string)) return 0.0
+        if (regexCientifico.matches(string)) {
+            val (_, expoente) = regexCientifico.find(string)!!.destructured
+            if (expoente.isBlank() || expoente == "+" || expoente == "-") return (string + "0").toDoubleOrNull()
         }
     }
-    if (this.last() == 'd' || this.last() == 'D') return null
+    if (string.last() == 'd' || string.last() == 'D') return null
     return retorno
 }
 
-fun String.inputToNumberOrNull(): Number? = this.inputToIntOrNull() ?: this.inputToDoubleOrNull()
+fun inputToNumberOrNull(string: String): Number? = inputToIntOrNull(string) ?: inputToDoubleOrNull(string)
 
-fun String.inputToInt(): Int = this.inputToIntOrNull() ?: throw NumberFormatException()
-fun String.inputToDouble(): Double = this.inputToDoubleOrNull() ?: throw NumberFormatException()
-fun String.inputToNumber(): Number = this.inputToNumberOrNull() ?: throw NumberFormatException()
+fun inputToInt(string: String): Int = inputToIntOrNull(string) ?: throw NumberFormatException()
+fun inputToDouble(string: String): Double = inputToDoubleOrNull(string) ?: throw NumberFormatException()
+fun inputToNumber(string: String): Number = inputToNumberOrNull(string) ?: throw NumberFormatException()

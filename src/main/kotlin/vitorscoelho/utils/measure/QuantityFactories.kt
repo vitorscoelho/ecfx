@@ -4,6 +4,7 @@ import javafx.beans.property.ObjectProperty
 import javafx.beans.property.Property
 import javafx.beans.property.SimpleObjectProperty
 import tech.units.indriya.AbstractUnit
+import tech.units.indriya.ComparableQuantity
 import tech.units.indriya.quantity.Quantities
 import tech.units.indriya.unit.ProductUnit
 import tech.units.indriya.unit.Units
@@ -45,7 +46,7 @@ private fun <U : AbstractUnit<*>> adicionarViaReflection(unit: U, type: Class<ou
 
 private var unidadesExtrasInicializadas = false
 
-fun <T : Quantity<T>> createQuantity(value: Number, unit: Unit<T>): Quantity<T> {
+fun <T : Quantity<T>> createQuantity(value: Number, unit: Unit<T>): ComparableQuantity<T> {
     if (!unidadesExtrasInicializadas) {
         inicializarUnidadesDeMedidaExtras()
         unidadesExtrasInicializadas = true
