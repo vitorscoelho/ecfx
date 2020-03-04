@@ -8,7 +8,7 @@ import java.util.*
 
 internal val descricoes = DescriptionsWithResource(
     rb = ResourceBundle.getBundle("vitorscoelho.ecfx.gui.Textos"),
-    nameSuffix = "nome", descriptionSuffix = "descricao",
+    nameSuffix = "label", descriptionSuffix = "description",
     tooltipShowDelay = Duration(200.0)
 )
 

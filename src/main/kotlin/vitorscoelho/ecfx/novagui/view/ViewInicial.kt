@@ -1,44 +1,18 @@
 package vitorscoelho.ecfx.novagui.view
 
-import javafx.beans.property.SimpleObjectProperty
-import javafx.beans.value.ObservableValue
+import javafx.event.EventTarget
 import javafx.geometry.Orientation
-import javafx.scene.control.TextField
-import javafx.util.StringConverter
 import tornadofx.*
 import vitorscoelho.ecfx.gui.estilo.EstiloPrincipal
 import vitorscoelho.ecfx.novagui.utils.*
-import vitorscoelho.utils.measure.KILOPASCAL
-import vitorscoelho.utils.measure.MEGAPASCAL
-import vitorscoelho.utils.measure.PASCAL
-import vitorscoelho.utils.measure.pressureOf
+import vitorscoelho.ecfx.utils.TITULO_VIEW_INICIAL
 import vitorscoelho.utils.tfx.MessageDecorator
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
-import java.util.*
-import javax.measure.quantity.Pressure
 
-val unidade = SimpleObjectProperty(KILOPASCAL)
-var contador = 0
+internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
+    private val controller: ControllerInicial by inject()
+    private val model: ModelInicial
+        get() = controller.model
 
-class Formato(initialPattern: String) : GuiProp<DecimalFormat>(
-    initialValue = DecimalFormat(initialPattern, DecimalFormatSymbols(Locale("en", "US")))
-) {
-    override val name = "formato"
-    override val label = "Formato"
-    override val description = "Formato do valor"
-    override val converter = object : StringConverter<DecimalFormat>() {
-        override fun toString(value: DecimalFormat?): String {
-            return value?.toPattern() ?: ""
-        }
-
-        override fun fromString(string: String?): DecimalFormat {
-            return DecimalFormat(string, DecimalFormatSymbols(Locale("en", "US")))
-        }
-    }
-}
-
-class ViewInicial : View() {
     val validationContext = ValidationContext().apply {
         decorationProvider = {
             MessageDecorator(
@@ -49,26 +23,97 @@ class ViewInicial : View() {
         }
     }
 
-    val formato = Formato(initialPattern = "#.00")
-    val fck = FckProp(initialValue = 2000000.0, format = formato.commitValueProp)
+    fun <T> EventTarget.fieldTextField(property: TextGuiProp<T>, op: Field.() -> Unit = {}): Field {
+        val field = fieldTextField(property = property, validationContext = validationContext)
+        op(field)
+        return field
+    }
 
-    private val conteudo = form {
-        fieldset("Concreto") {
-            fieldTextField(property = fck,validationContext = validationContext)
-//            field("fck") {
-//                textfield(property = fck.textProp)
+//    private val conteudo = form {
+//        fieldset("Concreto") {
+//            fieldTextField(property = model.fck, validationContext = validationContext)
+////            field("fck") {
+////                textfield(property = fck.textProp)
+////            }
+//            labelPosition = Orientation.VERTICAL
+////            textfield(property = fck)
+//            field("Formato") {
+//                textfield(Formatos.resistenciaMaterial.format.transitional)
 //            }
-            labelPosition = Orientation.VERTICAL
-//            textfield(property = fck)
-            field("Formato") {
-                textfield(property = formato.textProp)
+//            field("Unidade") {
+//                combobox(
+//                    property = Formatos.resistenciaMaterial.unit.transitional,
+//                    values = listOf(PASCAL, KILOPASCAL, MEGAPASCAL)
+//                )
+//            }
+//            button("Aplica formato") { action { Formatos.resistenciaMaterial.format.commit() } }
+//            button("Aplica unidade") { action { Formatos.resistenciaMaterial.unit.commit() } }
+//            button("Commit") { action { model.fck.commit() };enableWhen(model.fck.dirty) }
+//            button("Rollback") { action { model.fck.rollback() } }
+//        }
+//    }
+
+    private val conteudo = hbox {
+        form {
+            fieldset(rb["fieldsetConcreto"]) {
+                labelPosition = Orientation.VERTICAL
+                fieldTextField(property = model.fck)
+                fieldTextField(property = model.gamaC)
+                fieldTextField(property = model.ecs)
             }
-            field("Unidade") {
-                combobox(property = unidade, values = listOf(PASCAL, KILOPASCAL, MEGAPASCAL))
+            fieldset(rb["fieldsetArmaduras"]) {
+                labelPosition = Orientation.VERTICAL
+                fieldTextField(property = model.fywk)
+                fieldTextField(property = model.bitolaEstribo)
+                fieldTextField(property = model.fyk)
+                fieldTextField(property = model.bitolaLongitudinal)
+                fieldTextField(property = model.gamaS)
+                fieldTextField(property = model.es)
             }
-            button("Aplica formato") { action { formato.commit() } }
-            button("Commit") { action { fck.commit() } }
-            button("Rollback") { action { fck.rollback() } }
+        }
+        form {
+            fieldset(rb["fieldsetSolo"]) {
+                labelPosition = Orientation.VERTICAL
+                val combobox = fieldCombobox(property = model.tipoSolo, values = TipoSolo.values().toList())
+                val fieldKhAreiaOuArgilaMole = fieldTextField(property = model.khAreiaOuArgilaMole)
+                val fieldKhArgilaRijaADura = fieldTextField(property = model.khArgilaRijaADura)
+                fieldTextField(property = model.kv)
+                fieldTextField(property = model.coesao)
+                fieldTextField(property = model.anguloDeAtrito)
+                fieldTextField(property = model.pesoEspecifico)
+                fieldTextField(property = model.tensaoAdmissivel)
+                model.tipoSolo.transitional.doNowAndOnChange {
+                    children.remove(fieldKhArgilaRijaADura)
+                    children.remove(fieldKhAreiaOuArgilaMole)
+                    when (it) {
+                        TipoSolo.AREIA_OU_ARGILA_MOLE -> children.add(2, fieldKhAreiaOuArgilaMole)
+                        TipoSolo.ARGILA_RIJA_A_DURA -> children.add(2, fieldKhArgilaRijaADura)
+                    }
+                }
+            }
+        }
+        form {
+            fieldset(rb["fieldsetDadosDaFundacao"]) {
+                labelPosition = Orientation.VERTICAL
+                fieldCheckbox(property = model.armaduraIntegral)
+                fieldTextField(property = model.compMinimoArmadura) {
+                    disableWhen(model.armaduraIntegral.transitional)
+                }
+                fieldTextField(property = model.tensaoMediaMaximaConcreto) {
+                    disableWhen(model.armaduraIntegral.transitional)
+                }
+                fieldTextField(property = model.cobrimento)
+                fieldTextField(property = model.diametroFuste)
+                fieldTextField(property = model.diametroBase)
+                fieldTextField(property = model.profundidadeEstaca)
+            }
+            fieldset(rb["fieldsetCargasNoTopo"]) {
+                labelPosition = Orientation.VERTICAL
+                fieldTextField(property = model.forcaNormal)
+                fieldTextField(property = model.forcaHorizontal)
+                fieldTextField(property = model.momentoFletor)
+                fieldTextField(property = model.gamaN)
+            }
         }
     }
 
@@ -83,31 +128,4 @@ class ViewInicial : View() {
             }
         }
     }
-}
-/*
-form {
-            fieldset(text = descricoes.rb["fieldsetConcreto"]) {
-                labelPosition = Orientation.VERTICAL
-                with(controller.concreto) {
-                    inputTextFieldPositiveDouble(property = fck).maiorQueZero()
-                    inputTextFieldPositiveDouble(property = gamaC).maiorQueZero()
-                    inputTextFieldPositiveDouble(property = ecs).maiorQueZero()
-                }
-            }
-            fieldset(text = descricoes.rb["fieldsetArmaduras"]) {
-                labelPosition = Orientation.VERTICAL
-                with(controller.armaduras) {
-                    inputTextFieldPositiveDouble(property = fykEstribo).maiorQueZero()
-                    inputTextFieldPositiveDouble(property = bitolaEstribo).maiorQueZero()
-                    inputTextFieldPositiveDouble(property = fykLongitudinal).maiorQueZero()
-                    inputTextFieldPositiveDouble(property = bitolaLongitudinal).maiorQueZero()
-                    inputTextFieldPositiveDouble(property = gamaS).maiorQueZero()
-                    inputTextFieldPositiveDouble(property = moduloElasticidade).maiorQueZero()
-                }
-            }
-        }
- */
-
-interface WithValidationContext {
-    val validationContext: ValidationContext
 }

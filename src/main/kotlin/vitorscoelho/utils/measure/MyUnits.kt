@@ -1,5 +1,6 @@
 package vitorscoelho.utils.measure
 
+import tech.units.indriya.AbstractUnit
 import tech.units.indriya.format.SimpleUnitFormat
 import tech.units.indriya.function.MultiplyConverter
 import tech.units.indriya.unit.TransformedUnit
@@ -7,6 +8,12 @@ import javax.measure.Unit
 import tech.units.indriya.unit.Units
 import javax.measure.MetricPrefix.*
 import javax.measure.quantity.*
+
+val ONE: Unit<Dimensionless>
+    get() = AbstractUnit.ONE
+
+val PERCENT: Unit<Dimensionless>
+    get() = Units.PERCENT
 
 val NEWTON: Unit<Force>
     get() = Units.NEWTON

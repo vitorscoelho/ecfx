@@ -2,15 +2,13 @@ package vitorscoelho.ecfx.novagui.utils
 
 import javafx.event.EventTarget
 import javafx.geometry.Orientation
-import javafx.scene.control.Control
-import javafx.scene.control.TextField
-import javafx.scene.control.Tooltip
+import javafx.scene.control.*
 import javafx.util.Duration
 import tornadofx.*
 
 var TOOLTIP_SHOW_DELAY: Duration = Duration(1000.0)
 
-private fun Control.adicionarTooltip(description: String) {
+fun Control.adicionarTooltip(description: String) {
     if (description.isNotBlank()) {
         tooltip = Tooltip(description).apply {
             showDelay = TOOLTIP_SHOW_DELAY
@@ -19,7 +17,7 @@ private fun Control.adicionarTooltip(description: String) {
 }
 
 fun <T> EventTarget.textfield(
-    property: GuiProp<T>,
+    property: TextGuiProp<T>,
     op: TextField.() -> Unit = {}
 ) = textfield(property = property.textProp).apply {
     adicionarTooltip(description = property.description ?: "")
@@ -30,18 +28,12 @@ fun <T> EventTarget.textfield(
             isValido
         }
     }
-    focusedProperty().onChange { noFoco ->
-        if (!noFoco) {
-            val double = property.converter.fromString(property.textProp.value)
-            val string = property.converter.toString(double)
-            property.textProp.value = string
-        }
-    }
+    focusedProperty().onChange { noFoco -> if (!noFoco) property.reformatText() }
     op(this)
 }
 
 fun <T> EventTarget.textfield(
-    property: GuiProp<T>,
+    property: TextGuiProp<T>,
     validationContext: ValidationContext,
     trigger: ValidationTrigger = ValidationTrigger.OnChange(),
     op: TextField.() -> Unit = {}
@@ -52,16 +44,8 @@ fun <T> EventTarget.textfield(
     op(this)
 }
 
-/**
- * Create a field with the given text and operate on it.
- * @param forceLabelIndent Indent the label even if it's empty, good for aligning buttons etc
- * @orientation Whether to create an HBox (HORIZONTAL) or a VBox (VERTICAL) container for the field content
- * @op Code that will run in the context of the content container (Either HBox or VBox per the orientation)
- *
- * @see buttonbar
- */
 fun <T> EventTarget.fieldTextField(
-    property: GuiProp<T>,
+    property: TextGuiProp<T>,
     orientation: Orientation = Orientation.HORIZONTAL,
     forceLabelIndent: Boolean = false,
     validationContext: ValidationContext? = null,
@@ -70,7 +54,7 @@ fun <T> EventTarget.fieldTextField(
 ): Field {
     val text: String = property.label ?: ""
     val field = Field(text, orientation, forceLabelIndent)
-    if (property is GuiQuantityProp<*>) {
+    if (property is QuantityTextGuiProp<*>) {
         property.unit.doNowAndOnChange { unit ->
             var unidade = unit.toString()
             unidade = if (!unidade.isBlank() && unidade != "one") " ($unidade)" else ""
@@ -82,6 +66,52 @@ fun <T> EventTarget.fieldTextField(
     } else {
         textfield(property = property, validationContext = validationContext, trigger = trigger)
     }
+    opcr(this, field) {}
+    op(field)
+    return field
+}
+
+fun EventTarget.checkbox(
+    property: BooleanGuiProp,
+    op: CheckBox.() -> Unit = {}
+) = checkbox(property = property.transitional).apply {
+    text = property.label ?: ""
+    adicionarTooltip(description = property.description ?: "")
+    op(this)
+}
+
+fun EventTarget.fieldCheckbox(
+    property: BooleanGuiProp,
+    orientation: Orientation = Orientation.HORIZONTAL,
+    forceLabelIndent: Boolean = false,
+    op: Field.() -> Unit = {}
+): Field {
+    val field = Field(orientation = orientation, forceLabelIndent = forceLabelIndent)
+    field += checkbox(property = property)
+    opcr(this, field) {}
+    op(field)
+    return field
+}
+
+fun <T> EventTarget.combobox(
+    property: ObjectGuiProp<T>,
+    values: List<T>? = null,
+    op: ComboBox<T>.() -> Unit = {}
+) = combobox(property = property.transitional, values = values).apply {
+    adicionarTooltip(description = property.description ?: "")
+    op(this)
+}
+
+fun <T> EventTarget.fieldCombobox(
+    property: ObjectGuiProp<T>,
+    values: List<T>? = null,
+    orientation: Orientation = Orientation.HORIZONTAL,
+    forceLabelIndent: Boolean = false,
+    op: Field.() -> Unit = {}
+): Field {
+    val text: String = property.label ?: ""
+    val field = Field(text = text, orientation = orientation, forceLabelIndent = forceLabelIndent)
+    field += combobox(property = property, values = values)
     opcr(this, field) {}
     op(field)
     return field
