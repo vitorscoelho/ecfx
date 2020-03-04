@@ -5,6 +5,7 @@ import javafx.geometry.Orientation
 import tornadofx.*
 import vitorscoelho.ecfx.gui.estilo.EstiloPrincipal
 import vitorscoelho.ecfx.novagui.utils.*
+import vitorscoelho.ecfx.utils.ICONE_DO_PROGRAMA
 import vitorscoelho.ecfx.utils.TITULO_VIEW_INICIAL
 import vitorscoelho.utils.tfx.MessageDecorator
 
@@ -13,13 +14,21 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
     private val model: ModelInicial
         get() = controller.model
 
-    val validationContext = ValidationContext().apply {
+    private val validationContext = ValidationContext().apply {
         decorationProvider = {
             MessageDecorator(
                 message = it.message,
                 severity = it.severity,
                 tooltipCssRule = vitorscoelho.utils.tfx.exemplo.EstiloPrincipal.tooltipErro
             )
+        }
+    }
+
+    init {
+        setStageIcon(icon = ICONE_DO_PROGRAMA)
+        primaryStage.setOnCloseRequest { windowEvent ->
+            windowEvent.consume()
+            controller.acaoFecharPrograma(currentWindow!!)
         }
     }
 
