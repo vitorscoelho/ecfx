@@ -74,7 +74,7 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
         form {
             fieldset(rb["fieldsetSolo"]) {
                 labelPosition = Orientation.VERTICAL
-                val combobox = fieldCombobox(property = model.tipoSolo, values = TipoSolo.values().toList())
+                fieldCombobox(property = model.tipoSolo, values = TipoSolo.values().toList())
                 val fieldKhAreiaOuArgilaMole = fieldTextField(property = model.khAreiaOuArgilaMole)
                 val fieldKhArgilaRijaADura = fieldTextField(property = model.khArgilaRijaADura)
                 fieldTextField(property = model.kv)
