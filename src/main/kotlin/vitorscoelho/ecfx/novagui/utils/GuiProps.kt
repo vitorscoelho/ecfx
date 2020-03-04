@@ -12,6 +12,7 @@ import vitorscoelho.ecfx.novagui.configuracoes.Formato
 import vitorscoelho.ecfx.novagui.configuracoes.Formatos
 import vitorscoelho.utils.measure.MEGAPASCAL
 import vitorscoelho.utils.measure.createQuantity
+import vitorscoelho.utils.measure.toDoubleSU
 import vitorscoelho.utils.tfx.ERROR_IF_NEGATIVE_DOUBLE
 import vitorscoelho.utils.tfx.ERROR_IF_NOT_DOUBLE
 import vitorscoelho.utils.tfx.ERROR_IF_NOT_POSITIVE_DOUBLE
@@ -244,6 +245,8 @@ abstract class QuantityTextGuiProp<T : Quantity<T>>(
             textProp.value = toString(qtdNova)
         }
     }
+
+    fun toDoubleSU(): Double = committed.value.toDoubleSU()
 }
 
 abstract class DoubleTextGuiProp(

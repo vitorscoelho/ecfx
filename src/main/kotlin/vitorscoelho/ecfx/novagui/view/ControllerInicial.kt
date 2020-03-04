@@ -5,6 +5,7 @@ import javafx.stage.Window
 import tornadofx.Controller
 import tornadofx.confirm
 import tornadofx.get
+import vitorscoelho.ecfx.dimensionamento.geotecnico.*
 import vitorscoelho.ecfx.gui.descricoes
 
 internal class ControllerInicial : Controller() {
@@ -22,5 +23,32 @@ internal class ControllerInicial : Controller() {
                 primaryStage.close()
             }
         )
+    }
+
+    fun acaoDimensionar() {
+//        model.commit()
+//        val fuste: FusteTubulao = FusteCircular(diametro = model.diametroFuste)
+//        val base: BaseTubulao = BaseCircular(
+//            diametroInferior = model.diametroFuste,
+//            diametroSuperior = model.diametroBase,
+//            altura = 0.0,
+//            rodape = 0.0
+//        )
+//        val tubulao: Tubulao = Tubulao(
+//            fuste = fuste, base = base, comprimento = model.profundidadeEstaca
+//        )
+//        val kv: Double = model.kv
+////        val resultados = if (model.tipoSolo == TipoSolo.AREIA_OU_ARGILA_MOLE) {
+////            AnaliseKhLinearmenteVariavel()
+////        }
+//        val resultados: ResultadosAnaliseTubulao = when (model.tipoSolo) {
+//            TipoSolo.AREIA_OU_ARGILA_MOLE -> AnaliseKhLinearmenteVariavel(
+//
+//            )
+//            TipoSolo.ARGILA_RIJA_A_DURA -> AnaliseKhDegrau(
+//
+//            )
+//            else -> IllegalArgumentException()
+//        }
     }
 }
