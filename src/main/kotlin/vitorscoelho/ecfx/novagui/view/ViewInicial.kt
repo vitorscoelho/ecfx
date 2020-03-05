@@ -124,6 +124,11 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
                 fieldTextField(property = model.gamaN)
             }
         }
+        vbox {
+            button("Dimensionar") { action { controller.acaoDimensionar() } }
+            button("Rollback") { action { controller.model.rollback() } }
+            button("Dirty") { enableWhen { controller.model.createDirtyBinding() } }
+        }
     }
 
     override val root = borderpane {

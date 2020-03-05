@@ -1,12 +1,24 @@
 package vitorscoelho.ecfx.novagui.view
 
+import javafx.beans.binding.Bindings
+import javafx.beans.binding.BooleanBinding
 import javafx.beans.property.ObjectProperty
+import javafx.beans.property.Property
 import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.value.ObservableValue
 import tornadofx.get
 import vitorscoelho.ecfx.novagui.utils.*
 import vitorscoelho.utils.measure.*
+import java.lang.Exception
+import kotlin.reflect.KProperty
+import kotlin.reflect.KVisibility
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.isSubtypeOf
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
+import kotlin.reflect.jvm.javaField
 
-class ModelInicial {
+class ModelInicial : CommittableModel() {
     private val unitInicialModuloReacao = KILONEWTON.divide(CUBIC_METRE).asSpringStiffnessPerUnitArea()
     private val unitInicialPesoEspecifico = KILONEWTON.divide(CUBIC_METRE).asSpecificWeight()
 

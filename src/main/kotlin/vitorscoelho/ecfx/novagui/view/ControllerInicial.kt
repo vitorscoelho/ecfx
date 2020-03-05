@@ -26,29 +26,28 @@ internal class ControllerInicial : Controller() {
     }
 
     fun acaoDimensionar() {
-//        model.commit()
-//        val fuste: FusteTubulao = FusteCircular(diametro = model.diametroFuste)
-//        val base: BaseTubulao = BaseCircular(
-//            diametroInferior = model.diametroFuste,
-//            diametroSuperior = model.diametroBase,
-//            altura = 0.0,
-//            rodape = 0.0
-//        )
-//        val tubulao: Tubulao = Tubulao(
-//            fuste = fuste, base = base, comprimento = model.profundidadeEstaca
-//        )
-//        val kv: Double = model.kv
-////        val resultados = if (model.tipoSolo == TipoSolo.AREIA_OU_ARGILA_MOLE) {
-////            AnaliseKhLinearmenteVariavel()
-////        }
-//        val resultados: ResultadosAnaliseTubulao = when (model.tipoSolo) {
-//            TipoSolo.AREIA_OU_ARGILA_MOLE -> AnaliseKhLinearmenteVariavel(
-//
-//            )
-//            TipoSolo.ARGILA_RIJA_A_DURA -> AnaliseKhDegrau(
-//
-//            )
-//            else -> IllegalArgumentException()
-//        }
+        model.commit()
+        val moduloConcreto = model.ecs.toDoubleSU()
+        val fuste: FusteTubulao = FusteCircular(diametro = model.diametroFuste.toDoubleSU())
+        val base: BaseTubulao = BaseCircular(
+            diametroInferior = model.diametroFuste.toDoubleSU(),
+            diametroSuperior = model.diametroBase.toDoubleSU(),
+            altura = 0.0,
+            rodape = 0.0
+        )
+        val tubulao: Tubulao = Tubulao(
+            fuste = fuste, base = base, comprimento = model.profundidadeEstaca.toDoubleSU()
+        )
+        val kv: Double = model.kv.toDoubleSU()
+        val resultados: AnaliseTubulao = when (model.tipoSolo.value) {
+            TipoSolo.AREIA_OU_ARGILA_MOLE -> AnaliseKhLinearmenteVariavel(
+                tubulao = tubulao, kv = kv,
+                nh = model.khAreiaOuArgilaMole.toDoubleSU()
+            )
+            TipoSolo.ARGILA_RIJA_A_DURA -> AnaliseKhDegrau(
+                tubulao = tubulao, kv = kv,
+                kh2 = model.khArgilaRijaADura.toDoubleSU(), moduloElasticidade = moduloConcreto
+            )
+        }
     }
 }
