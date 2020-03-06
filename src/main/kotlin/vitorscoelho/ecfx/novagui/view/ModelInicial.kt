@@ -11,7 +11,7 @@ class ModelInicial : CommittableModel() {
     //Concreto
     val fck = FckProp(pressureOf(20, MEGAPASCAL))
     val gamaC = GamaCProp(1.8)
-    val ecs = EcsProp(pressureOf(25_000, MEGAPASCAL))
+    val ecs = EcsProp(pressureOf(21_287.36, MEGAPASCAL))
 
     //Armaduras
     val fywk = FywkProp(pressureOf(500, MEGAPASCAL))

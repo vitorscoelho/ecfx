@@ -44,7 +44,7 @@ internal class ControllerInicial : Controller() {
             altura = 0.0,
             rodape = 0.0
         )
-        val tubulao: Tubulao = Tubulao(
+        val tubulao = Tubulao(
             fuste = fuste, base = base, comprimento = model.profundidadeEstaca.toDoubleSU()
         )
         val kv: Double = model.kv.toDoubleSU()
@@ -64,6 +64,24 @@ internal class ControllerInicial : Controller() {
             )
         }
         val resultadosAnaliseTubulao = analiseTubulao.dimensionar(esforco = esforcoTopo)
+//        println("moduloConcreto = $moduloConcreto")
+//        with(fuste) {
+//            println("diametroFuste = $dimensao")
+//        }
+//        with(base) {
+//            println("diametroBase = $dimensao")
+//        }
+//        with(tubulao) {
+//            println("comprimento = $comprimento")
+//        }
+//        with(esforcoTopo) {
+//            println("normal = $normal")
+//            println("horizontal = $horizontal")
+//            println("momento = $momento")
+//        }
+//        println("kh = ${resultadosAnaliseTubulao.coeficienteReacaoHorizontal(z = tubulao.comprimento)}")
+//        println("kv = $kv")
+
         abrirJanelaResultados(resultados = resultadosAnaliseTubulao)
     }
 
