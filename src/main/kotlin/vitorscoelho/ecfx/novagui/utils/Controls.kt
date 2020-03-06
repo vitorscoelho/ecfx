@@ -3,6 +3,7 @@ package vitorscoelho.ecfx.novagui.utils
 import javafx.event.EventTarget
 import javafx.geometry.Orientation
 import javafx.scene.control.*
+import javafx.scene.layout.Pane
 import javafx.util.Duration
 import tornadofx.*
 
@@ -69,6 +70,18 @@ fun <T> EventTarget.fieldTextField(
     opcr(this, field) {}
     op(field)
     return field
+}
+
+private fun Pane.uneditable(): Pane {
+    children.forEach {
+        if (it is Pane) it.uneditable()
+        else if (it is TextInputControl) it.isEditable = false
+    }
+    return this
+}
+
+fun Field.uneditable(): Field {
+    return (this as Pane).uneditable() as Field
 }
 
 fun EventTarget.checkbox(

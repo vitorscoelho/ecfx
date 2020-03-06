@@ -137,8 +137,8 @@ class ComprimentoMinimoArmaduraProp(initialValue: Quantity<Length>) : GuiTextQua
     initialValue = initialValue, name = "estaca.comprimentoMinimoArmadura", formato = Formatos.profundidade
 ), WithTextInputFilterAndValidator by WithTextInputPositiveDouble()
 
-class TensaoMediaMaximaConcretoProp(initialValue: Quantity<Pressure>) : GuiTextQuantityPropECFX<Pressure>(
-    initialValue = initialValue, name = "estaca.tensaoMediaMaxima", formato = Formatos.resistenciaMaterial
+class TensaoMediaLimiteConcretoProp(initialValue: Quantity<Pressure>) : GuiTextQuantityPropECFX<Pressure>(
+    initialValue = initialValue, name = "estaca.tensaoMediaLimite", formato = Formatos.resistenciaMaterial
 ), WithTextInputFilterAndValidator by WithTextInputNotNegativeDouble()
 
 class CobrimentoProp(initialValue: Quantity<Length>) : GuiTextQuantityPropECFX<Length>(
@@ -172,6 +172,42 @@ class MomentoFletorProp(initialValue: Quantity<Moment>) : GuiTextQuantityPropECF
 class GamaNProp(initialValue: Double) : DoubleTextGuiProp(
     initialValue = initialValue, name = "esforco.gamaN", rb = rb, format = Formatos.coeficienteDeSeguranca.format
 ), WithTextInputFilterAndValidator by WithTextInputPositiveDouble()
+
+class TensaoMediaAtuanteBaseProp(initialValue: Quantity<Pressure>) : GuiTextQuantityPropECFX<Pressure>(
+    initialValue = initialValue, name = "tensaoMediaAtuanteBase", formato = Formatos.tensaoSolo
+)
+
+class TensaoMaxAtuanteBaseProp(initialValue: Quantity<Pressure>) : GuiTextQuantityPropECFX<Pressure>(
+    initialValue = initialValue, name = "tensaoMaximaAtuanteBase", formato = Formatos.tensaoSolo
+)
+
+class TensaoMinAtuanteBaseProp(initialValue: Quantity<Pressure>) : GuiTextQuantityPropECFX<Pressure>(
+    initialValue = initialValue, name = "tensaoMinimaAtuanteBase", formato = Formatos.tensaoSolo
+)
+
+class TensaoMaximaAtuanteNoConcretoFusteProp(initialValue: Quantity<Pressure>) : GuiTextQuantityPropECFX<Pressure>(
+    initialValue = initialValue, name = "tensaoMaximaAtuanteConcretoFuste", formato = Formatos.resistenciaMaterial
+)
+
+class CortanteProp(initialValue: Quantity<Force>) : GuiTextQuantityPropECFX<Force>(
+    initialValue = initialValue, name = "esforco.cortante", formato = Formatos.forca
+)
+
+class TensaoHorizontalSoloFusteProp(initialValue: Quantity<Pressure>) : GuiTextQuantityPropECFX<Pressure>(
+    initialValue = initialValue, name = "solo.tensaoHorizontalFuste", formato = Formatos.tensaoSolo
+)
+
+class RotacaoTubulaoProp(initialValue: Quantity<Angle>) : GuiTextQuantityPropECFX<Angle>(
+    initialValue = initialValue, name = "tubulao.rotacao", formato = Formatos.rotacao
+)
+
+class DeltaHTopoTubulaoProp(initialValue: Quantity<Length>):GuiTextQuantityPropECFX<Length>(
+    initialValue = initialValue,name = "tubulao.deltaH",formato = Formatos.deslocamento
+)
+
+class DeltaVTopoTubulaoProp(initialValue: Quantity<Length>):GuiTextQuantityPropECFX<Length>(
+    initialValue = initialValue,name = "tubulao.deltaV",formato = Formatos.deslocamento
+)
 
 class WithTextInputPositiveDouble : WithTextInputFilterAndValidator {
     override val validator = ERROR_IF_NOT_POSITIVE_DOUBLE

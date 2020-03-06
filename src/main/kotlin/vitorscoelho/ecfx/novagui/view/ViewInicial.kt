@@ -131,9 +131,26 @@ internal class ViewInicial : View(title = TITULO_VIEW_INICIAL) {
         }
     }
 
+    private val menu = menubar {
+        menu(rb["menu.arquivo"]) {
+            item(rb["menu.item.sobre"]) { action { controller.acaoMenuItemSobre() } }
+            item(rb["menu.item.abrir"])
+            item(rb["menu.item.salvar"])
+            item(rb["menu.item.fechar"]) { action { controller.acaoFecharPrograma(currentWindow!!) } }
+        }
+        menu(rb["menu.configuracoes"]) {
+            item(rb["menu.item.parametros"])
+            item(rb["menu.item.unidades"])
+        }
+        menu(rb["menu.calculadoras"]) {
+            item(rb["menu.item.calculadoraDimensionamentoEstrutural"])
+            item(rb["menu.item.calculadoraVolumeTubulao"])
+        }
+    }
+
     override val root = borderpane {
         top {
-            //            this += menu
+            this += menu
         }
         center {
             hbox {
