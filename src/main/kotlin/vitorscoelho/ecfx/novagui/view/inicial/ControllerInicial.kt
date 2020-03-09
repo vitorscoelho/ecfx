@@ -1,4 +1,4 @@
-package vitorscoelho.ecfx.novagui.view
+package vitorscoelho.ecfx.novagui.view.inicial
 
 import javafx.scene.control.ButtonType
 import javafx.stage.StageStyle
@@ -9,6 +9,9 @@ import tornadofx.get
 import vitorscoelho.ecfx.dimensionamento.Esforco
 import vitorscoelho.ecfx.dimensionamento.geotecnico.*
 import vitorscoelho.ecfx.gui.descricoes
+import vitorscoelho.ecfx.novagui.view.resultados.ScopeResultados
+import vitorscoelho.ecfx.novagui.view.resultados.ViewResultados
+import vitorscoelho.ecfx.novagui.view.ViewSobre
 
 internal class ControllerInicial : Controller() {
     val model = ModelInicial()
@@ -86,7 +89,10 @@ internal class ControllerInicial : Controller() {
     }
 
     private fun abrirJanelaResultados(resultados: ResultadosAnaliseTubulao) {
-        find(componentType = ViewResultados::class.java, scope = ScopeResultados(resultados = resultados)).openModal(
+        find(componentType = ViewResultados::class.java, scope = ScopeResultados(
+            resultados = resultados
+        )
+        ).openModal(
         )
     }
 }

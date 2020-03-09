@@ -1,7 +1,8 @@
-package vitorscoelho.ecfx.novagui.view
+package vitorscoelho.ecfx.novagui.view.inicial
 
 import tornadofx.get
 import vitorscoelho.ecfx.novagui.utils.*
+import vitorscoelho.ecfx.novagui.view.CommittableModel
 import vitorscoelho.utils.measure.*
 
 class ModelInicial : CommittableModel() {

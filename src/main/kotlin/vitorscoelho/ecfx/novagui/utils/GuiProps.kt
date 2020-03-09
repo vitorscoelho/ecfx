@@ -39,8 +39,8 @@ val FILTER_INPUT_DOUBLE: (texto: String) -> Boolean by lazy {
 }
 
 val rb: ResourceBundle = ResourceBundle.getBundle("vitorscoelho.ecfx.gui.Textos")
-fun ResourceBundle.label(key: String) = this["$key.label"]
-fun ResourceBundle.description(key: String) = this["$key.description"]
+fun ResourceBundle.label(key: String): String = this["$key.label"]
+fun ResourceBundle.description(key: String): String = this["$key.description"]
 
 private val fckMinimo = createQuantity(value = 20, unit = MEGAPASCAL)
 private val fckMaximo = createQuantity(value = 90, unit = MEGAPASCAL)
@@ -201,12 +201,12 @@ class RotacaoTubulaoProp(initialValue: Quantity<Angle>) : GuiTextQuantityPropECF
     initialValue = initialValue, name = "tubulao.rotacao", formato = Formatos.rotacao
 )
 
-class DeltaHTopoTubulaoProp(initialValue: Quantity<Length>):GuiTextQuantityPropECFX<Length>(
-    initialValue = initialValue,name = "tubulao.deltaH",formato = Formatos.deslocamento
+class DeltaHTopoTubulaoProp(initialValue: Quantity<Length>) : GuiTextQuantityPropECFX<Length>(
+    initialValue = initialValue, name = "tubulao.deltaH", formato = Formatos.deslocamento
 )
 
-class DeltaVTopoTubulaoProp(initialValue: Quantity<Length>):GuiTextQuantityPropECFX<Length>(
-    initialValue = initialValue,name = "tubulao.deltaV",formato = Formatos.deslocamento
+class DeltaVTopoTubulaoProp(initialValue: Quantity<Length>) : GuiTextQuantityPropECFX<Length>(
+    initialValue = initialValue, name = "tubulao.deltaV", formato = Formatos.deslocamento
 )
 
 class WithTextInputPositiveDouble : WithTextInputFilterAndValidator {

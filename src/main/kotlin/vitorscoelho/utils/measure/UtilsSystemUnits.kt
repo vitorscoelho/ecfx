@@ -33,6 +33,22 @@ private val converterForcePerUnitLength = NEWTON_POR_METRO.asForcePerUnitLength(
 private val converterSpecificWeight = NEWTON_POR_METRO_CUBICO.asSpecificWeight()
     .getConverterTo(KILONEWTON_POR_CENTIMETRO_CUBICO.asSpecificWeight())
 
+private val mapUnits: Map<Unit<*>, Unit<*>> = mapOf(
+    RADIAN to DEGREE,
+    SQUARE_METRE to SQUARE_CENTIMETRE,
+    NEWTON to KILONEWTON,
+    METRE to CENTIMETRE,
+    KILOGRAM to KILOGRAM,
+    PASCAL to KILONEWTON_POR_CENTIMETRO_QUADRADO,
+    CUBIC_METRE to CUBIC_CENTIMETRE,
+    NEWTON_METRO to KILONEWTON_CENTIMETRO,
+    NEWTON_POR_METRO to KILONEWTON_POR_CENTIMETRO,
+    NEWTON_POR_METRO_QUADRADO to KILONEWTON_POR_CENTIMETRO_QUADRADO,
+    NEWTON_POR_METRO_CUBICO to KILONEWTON_POR_CENTIMETRO_CUBICO,
+    NEWTON_POR_METRO to KILONEWTON_POR_CENTIMETRO,
+    NEWTON_POR_METRO_CUBICO to KILONEWTON_POR_CENTIMETRO_CUBICO
+)
+
 private val map: Map<Unit<*>, UnitConverter> = mapOf(
     RADIAN to converterAngle,
     SQUARE_METRE to converterArea,
@@ -48,6 +64,14 @@ private val map: Map<Unit<*>, UnitConverter> = mapOf(
     NEWTON_POR_METRO to converterForcePerUnitLength,
     NEWTON_POR_METRO_CUBICO to converterSpecificWeight
 )
+
+fun <T : Quantity<T>> Unit<T>.toSU(): Unit<T> {
+    val unitSystemUnit = this.systemUnit
+    val unitSU = mapUnits[unitSystemUnit] ?: throw IllegalArgumentException(
+        "Não existe unidade alternativa para $this"
+    )
+    return unitSU as Unit<T>
+}
 
 fun <T : Quantity<T>> Quantity<T>.toDoubleSU(): Double {
     val qtdSystemUnit = this.toSystemUnit()

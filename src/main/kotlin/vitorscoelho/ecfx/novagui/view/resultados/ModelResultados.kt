@@ -1,4 +1,4 @@
-package vitorscoelho.ecfx.novagui.view
+package vitorscoelho.ecfx.novagui.view.resultados
 
 import vitorscoelho.ecfx.dimensionamento.geotecnico.ResultadosAnaliseTubulao
 import vitorscoelho.ecfx.novagui.utils.*

@@ -1,4 +1,4 @@
-package vitorscoelho.ecfx.novagui.view
+package vitorscoelho.ecfx.novagui.view.resultados
 
 import javafx.event.EventTarget
 import javafx.geometry.Orientation
