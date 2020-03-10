@@ -36,11 +36,17 @@ object Formatos {
     val deslocamento = Formato(initUnit = MILLIMETRE, initFormat = DUAS_CASAS)
     val rotacao = Formato(initUnit = RADIAN, initFormat = CIENTIFICA_DUAS_CASAS)
     val coeficienteDeSeguranca = Formato(initUnit = ONE, initFormat = TRES_CASAS)
+    val reacaoLateralNaEstaca = Formato(
+        initUnit = KILONEWTON.divide(METRE).asForcePerUnitLength(), initFormat = DUAS_CASAS
+    )
 }
 
 class Formato<Q : Quantity<Q>>(initUnit: Unit<Q>, initFormat: DecimalFormat) {
     val unit = ImplCommittableSameType(initValue = initUnit)
     val format = FormatProp(initValue = initFormat)
+
+    fun toString(qtd: Quantity<Q>): String = format.value.format(qtd.to(unit.value).value)
+    fun toStringComUnidade(qtd: Quantity<Q>): String = "${toString(qtd)}${unit.value}"
 }
 
 private val decimalFormatToString = { from: DecimalFormat -> from.toPattern() }

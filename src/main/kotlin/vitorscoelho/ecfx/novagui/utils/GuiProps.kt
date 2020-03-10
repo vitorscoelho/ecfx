@@ -209,6 +209,10 @@ class DeltaVTopoTubulaoProp(initialValue: Quantity<Length>) : GuiTextQuantityPro
     initialValue = initialValue, name = "tubulao.deltaV", formato = Formatos.deslocamento
 )
 
+class ProfundidadeProp(initialValue: Quantity<Length>) : GuiTextQuantityPropECFX<Length>(
+    initialValue = initialValue, name = "resultados.profundidade", formato = Formatos.profundidade
+), WithTextInputFilterAndValidator by WithTextInputPositiveDouble()
+
 class WithTextInputPositiveDouble : WithTextInputFilterAndValidator {
     override val validator = ERROR_IF_NOT_POSITIVE_DOUBLE
     override val filterInput = FILTER_INPUT_NOT_NEGATIVE_DOUBLE
@@ -428,6 +432,10 @@ interface Committable<T, C> : ObservableValue<C> {
     val dirty: BooleanBinding
     fun commit()
     fun rollback()
+
+    fun setTransitional(value: C) {
+        transitional.value = convertToTransitionalType(value)
+    }
 
     fun convertToTransitionalType(from: C): T
     fun convertToCommitType(from: T): C

@@ -1,5 +1,7 @@
 package vitorscoelho.ecfx.novagui.view.resultadosfuste
 
+import javafx.beans.property.DoubleProperty
+import javafx.beans.property.ReadOnlyDoubleProperty
 import javafx.beans.property.ReadOnlyObjectProperty
 import javafx.geometry.Side
 import javafx.scene.chart.NumberAxis
@@ -9,12 +11,15 @@ import javafx.scene.control.TextArea
 import javafx.scene.layout.Priority
 import javafx.scene.layout.Region
 import javafx.scene.layout.VBox
-import tornadofx.observableListOf
-import tornadofx.onChange
-import tornadofx.toObservable
-import tornadofx.vgrow
+import tornadofx.*
+import vitorscoelho.ecfx.novagui.configuracoes.Formatos
+import vitorscoelho.ecfx.novagui.utils.rb
 
-internal class Grafico(private val dados: List<DadosDoGrafico<*>>, val yMaximo: Double) {
+internal class Grafico(
+    private val dados: List<DadosDoGrafico<*>>,
+    val yMaximo: Double,
+    val yUnidadeCorrente: ReadOnlyDoubleProperty
+) {
     private val textArea = TextArea()
     private val labelMaximo = Label()
     private val combobox = ComboBox<DadosDoGrafico<*>>()
@@ -56,12 +61,27 @@ internal class Grafico(private val dados: List<DadosDoGrafico<*>>, val yMaximo: 
             }
             vgrow = Priority.ALWAYS
         }
-        vbox.maxHeight = Double.MAX_VALUE
+        labelValores.apply {
+            textProperty().bind(stringBinding(tipoGrafico, yUnidadeCorrente) {
+                if (tipoGrafico.value == null || yUnidadeCorrente.value == null) return@stringBinding ""
+                val tipo = tipoGrafico.value
+                val valor = tipo.valorNasUnidadesCorrentes(yUnidadeCorrente.value)
+                val valorFormatado = tipo.formato.format.value.format(valor)
+                val profundidadeFormatada = Formatos.profundidade.format.value.format(yUnidadeCorrente.value)
+                val unidadeValor = tipo.formato.unit.value
+                val unidadeProfundidade = Formatos.profundidade.unit.value
+                val emString = rb["em"]
+                "$valorFormatado$unidadeValor $emString $profundidadeFormatada$unidadeProfundidade"
+            })
+        }
+        vbox.apply {
+            maxHeight = Double.MAX_VALUE
+        }
     }
 
     private fun atualizarVisualizacao() {
         val novoTipo: DadosDoGrafico<*> = tipoGrafico.value
-        textArea.text = novoTipo.descricao
+        textArea.text = "Descrição:\r\n${novoTipo.descricao}"
         chart.apply {
             data.clear()
             data = observableListOf(novoTipo.serie)
@@ -69,6 +89,7 @@ internal class Grafico(private val dados: List<DadosDoGrafico<*>>, val yMaximo: 
     }
 
     companion object {
-        val HEIGHT_TEXT_AREA = 100.0
+        private const val HEIGHT_TEXT_AREA = 100.0
+        private const val PREF_WIDTH = 250.0
     }
 }

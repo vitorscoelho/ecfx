@@ -51,7 +51,7 @@ fun <T> EventTarget.fieldTextField(
     forceLabelIndent: Boolean = false,
     validationContext: ValidationContext? = null,
     trigger: ValidationTrigger = ValidationTrigger.OnChange(),
-    op: Field.() -> Unit = {}
+    op: Field.(field: Field, tf: TextField) -> Unit = { _, _ -> }
 ): Field {
     val text: String = property.label ?: ""
     val field = Field(text, orientation, forceLabelIndent)
@@ -62,13 +62,14 @@ fun <T> EventTarget.fieldTextField(
             field.text = text + unidade
         }
     }
-    field += if (validationContext == null) {
+    val textField = if (validationContext == null) {
         textfield(property = property)
     } else {
         textfield(property = property, validationContext = validationContext, trigger = trigger)
     }
+    field += textField
     opcr(this, field) {}
-    op(field)
+    op(field, field, textField)
     return field
 }
 

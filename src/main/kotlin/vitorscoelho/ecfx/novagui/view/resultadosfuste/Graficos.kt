@@ -7,19 +7,19 @@ import javafx.geometry.Point2D
 import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Region
-import javafx.scene.layout.VBox
 import javafx.scene.shape.Line
 import tornadofx.add
 import tornadofx.onChange
 import vitorscoelho.ecfx.dimensionamento.geotecnico.ResultadosAnaliseTubulao
 import vitorscoelho.ecfx.novagui.configuracoes.Formatos
 import vitorscoelho.utils.measure.CENTIMETRE
+import kotlin.math.max
+import kotlin.math.min
 
 internal class Graficos(resultados: ResultadosAnaliseTubulao) {
-    val yGraficoUnidadeProfundidade: DoubleProperty = SimpleDoubleProperty(0.0)
-    private val _yGraficoEmPixel: DoubleProperty = SimpleDoubleProperty(0.0)
-    val yGraficoEmPixel: ReadOnlyDoubleProperty
-        get() = _yGraficoEmPixel
+    private val _yGraficoUnidadeProfundidade: DoubleProperty = SimpleDoubleProperty(0.0)
+    val yGraficoUnidadeProfundidade: ReadOnlyDoubleProperty
+        get() = _yGraficoUnidadeProfundidade
     private val yMaximoEmPixel: Double
         get() = graficos.first().chart.yAxis.height
     private val yMaximoEmCentimetro = resultados.tubulao.comprimento
@@ -28,13 +28,32 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
     private val yMaximoUnidadeDeProfundidade = converterAPartirDeCentimetro.convert(yMaximoEmCentimetro)
     val dadosCoeficienteDeReacao = CoeficienteDeReacao(resultados)
     val dadosTensaoHorizontalAtuante = TensaoHorizontalAtuante(resultados)
+    val dadosReacao = Reacao(resultados)
+
+    //val dadosTensaoHorizontalResistente = TensaoHorizontalResistente(resultados)
+    //val dadosCoeficienteSegurancaEstabilidade = CoeficienteSegurancaEstabilidade(resultados)
+    //val dadosArmaduraLongitudinal = ArmaduraLongitudinal()
+    //val dadosArmaduraTransversal = ArmaduraTransversal()
+    val dadosCortante = Cortante(resultados)
+    val dadosMomento = Momento(resultados)
     val listaDeDados = listOf(
         dadosCoeficienteDeReacao,
-        dadosTensaoHorizontalAtuante
+        dadosTensaoHorizontalAtuante,
+        dadosReacao,
+//        dadosTensaoHorizontalResistente,
+//        dadosCoeficienteSegurancaEstabilidade,
+        dadosCortante,
+        dadosMomento/*,
+        dadosArmaduraLongitudinal,
+        dadosArmaduraTransversal*/
     )
-    private val graficos: List<Grafico> = listaDeDados.map { Grafico(listaDeDados, yMaximoUnidadeDeProfundidade) }
+    private val graficos: List<Grafico> = Array(size = 4) {
+        Grafico(listaDeDados, yMaximoUnidadeDeProfundidade, yGraficoUnidadeProfundidade)
+    }.toList()
     private val linhaMarcacaoProfundidade = Line()
     val node: Region = AnchorPane().apply {
+        prefWidth = 1000.0
+        println(maxWidth)
         minHeight = 600.0; maxHeight = Double.MAX_VALUE
         val hbox = HBox()
         graficos.forEach { hbox.add(it.vbox) }
@@ -42,6 +61,8 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
         add(linhaMarcacaoProfundidade)
         AnchorPane.setBottomAnchor(hbox, 0.0)
         AnchorPane.setTopAnchor(hbox, 0.0)
+        AnchorPane.setLeftAnchor(hbox, 0.0)
+        AnchorPane.setRightAnchor(hbox, 0.0)
     }
 
     init {
@@ -52,12 +73,19 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
             val mouseNodeCoords = Point2D(event.sceneX, event.sceneY)
             val mouseEixoYCoords = eixoY.sceneToLocal(mouseNodeCoords).y
             if (mouseEixoYCoords in 0.0..yMaximoEmPixel) {
-                yGraficoUnidadeProfundidade.value = pixelParaUnidadeProfundidade(mouseEixoYCoords)
-                _yGraficoEmPixel.value = mouseEixoYCoords
-                linhaMarcacaoProfundidade.startY = mouseNodeCoords.y
-                linhaMarcacaoProfundidade.endY = mouseNodeCoords.y
+                setYGrafico(pixelParaUnidadeProfundidade(mouseEixoYCoords))
             }
         }
+    }
+
+    fun setYGrafico(yEmUnidadeDeProfundidade: Double) {
+        _yGraficoUnidadeProfundidade.value = min(max(0.0, yEmUnidadeDeProfundidade), yMaximoUnidadeDeProfundidade)
+        val yEmPixelEixoY = unidadeDeProfundidadeParaPixel(_yGraficoUnidadeProfundidade.value)
+        val eixoY = graficos.first().chart.yAxis
+        val yEmPixelTela = eixoY.localToScreen(0.0, yEmPixelEixoY).y
+        val yEmPixelNode = node.screenToLocal(0.0, yEmPixelTela).y
+        linhaMarcacaoProfundidade.startY = yEmPixelNode
+        linhaMarcacaoProfundidade.endY = yEmPixelNode
     }
 
     private fun pixelParaCentimetro(valorEmPixel: Double): Double = yMaximoEmCentimetro * valorEmPixel / yMaximoEmPixel
@@ -65,5 +93,14 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
     private fun pixelParaUnidadeProfundidade(valorEmPixel: Double): Double {
         val emCentimetro = pixelParaCentimetro(valorEmPixel)
         return converterAPartirDeCentimetro.convert(emCentimetro)
+    }
+
+    private fun centimetroParaPixel(valorEmCentimetro: Double): Double {
+        return valorEmCentimetro * yMaximoEmPixel / yMaximoEmCentimetro
+    }
+
+    private fun unidadeDeProfundidadeParaPixel(valorEmUnidadeDeProfundidade: Double): Double {
+        val emCentimetro = converterParaCentimetro.convert(valorEmUnidadeDeProfundidade)
+        return centimetroParaPixel(emCentimetro)
     }
 }
