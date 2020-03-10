@@ -31,11 +31,23 @@ val FILTER_INPUT_INT: (formatter: TextFormatter.Change) -> Boolean by lazy {
 }
  */
 val FILTER_INPUT_NOT_NEGATIVE_DOUBLE: (texto: String) -> Boolean by lazy {
-    { texto: String -> inputIsPositiveDouble(texto) }
+    { texto: String ->
+        if (texto.contains(" ") || texto.contains("-")) {
+            false
+        } else {
+            inputIsPositiveDouble(texto)
+        }
+    }
 }
 
 val FILTER_INPUT_DOUBLE: (texto: String) -> Boolean by lazy {
-    { texto: String -> inputIsDouble(texto) }
+    { texto: String ->
+        if (texto.contains(" ")) {
+            false
+        } else {
+            inputIsDouble(texto)
+        }
+    }
 }
 
 val rb: ResourceBundle = ResourceBundle.getBundle("vitorscoelho.ecfx.gui.Textos")
