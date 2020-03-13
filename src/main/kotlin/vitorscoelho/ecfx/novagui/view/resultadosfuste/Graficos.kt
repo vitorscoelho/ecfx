@@ -53,7 +53,6 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
     private val linhaMarcacaoProfundidade = Line()
     val node: Region = AnchorPane().apply {
         prefWidth = 1000.0
-        println(maxWidth)
         minHeight = 600.0; maxHeight = Double.MAX_VALUE
         val hbox = HBox()
         graficos.forEach { hbox.add(it.vbox) }
@@ -66,8 +65,11 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
     }
 
     init {
-        linhaMarcacaoProfundidade.startX = 0.0
-        node.widthProperty().onChange { linhaMarcacaoProfundidade.endX = it - 1.0;println(it) }
+        linhaMarcacaoProfundidade.apply {
+            startX = 0.0
+            node.widthProperty().onChange { linhaMarcacaoProfundidade.endX = it - 1.0 }
+            isVisible = false
+        }
         val eixoY = graficos.first().chart.yAxis
         node.setOnMouseMoved { event ->
             val mouseNodeCoords = Point2D(event.sceneX, event.sceneY)
@@ -75,6 +77,9 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
             if (mouseEixoYCoords in 0.0..yMaximoEmPixel) {
                 setYGrafico(pixelParaUnidadeProfundidade(mouseEixoYCoords))
             }
+        }
+        graficos.first().chart.yAxis.heightProperty().onChange {
+            setYGrafico(_yGraficoUnidadeProfundidade.value)
         }
     }
 
@@ -84,8 +89,11 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
         val eixoY = graficos.first().chart.yAxis
         val yEmPixelTela = eixoY.localToScreen(0.0, yEmPixelEixoY).y
         val yEmPixelNode = node.screenToLocal(0.0, yEmPixelTela).y
-        linhaMarcacaoProfundidade.startY = yEmPixelNode
-        linhaMarcacaoProfundidade.endY = yEmPixelNode
+        linhaMarcacaoProfundidade.apply {
+            isVisible = true
+            startY = yEmPixelNode
+            endY = yEmPixelNode
+        }
     }
 
     private fun pixelParaCentimetro(valorEmPixel: Double): Double = yMaximoEmCentimetro * valorEmPixel / yMaximoEmPixel
