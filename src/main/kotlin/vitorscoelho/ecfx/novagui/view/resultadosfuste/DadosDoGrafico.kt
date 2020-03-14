@@ -24,6 +24,12 @@ internal sealed class DadosDoGrafico<Q : Quantity<Q>>(nome: String, tubulao: Tub
     abstract fun valor(profundidade: Double): Double
     val label: String = rb.label(nome)
     val descricao: String = rb.description(nome)
+    abstract val profundidadeValorMaximo: Double
+    val profundidadeValorMaximoNaUnidadeCorrente: Double by lazy {
+        converterAPartirDeCentimetro.convert(profundidadeValorMaximo)
+    }
+    val valorMaximo: Double by lazy { valor(profundidadeValorMaximo) }
+    val valorMaximoNasUnidadesCorrentes by lazy { converterParaValor.convert(valorMaximo) }
     private val converterParaValor by lazy { unit.toSU().getConverterToAny(unit) }
     private val listaValores: List<XYChart.Data<Number, Number>> by lazy {
         val profundidadeMaxima = lengthSUOf(tubulao.comprimento).to(unidadeProfundidade).value.toDouble()
@@ -57,14 +63,16 @@ internal sealed class DadosDoGrafico<Q : Quantity<Q>>(nome: String, tubulao: Tub
     companion object {
         private val unidadeProfundidade = Formatos.profundidade.unit.value
         private val converterParaCentimetro = unidadeProfundidade.getConverterTo(CENTIMETRE)
+        private val converterAPartirDeCentimetro = CENTIMETRE.getConverterTo(Formatos.profundidade.unit.value)
     }
 }
 
 internal class CoeficienteDeReacao(val resultados: ResultadosAnaliseTubulao) :
     DadosDoGrafico<SpringStiffnessPerUnitArea>(nome = "grafico.coeficienteDeReacao", tubulao = resultados.tubulao) {
+    override val profundidadeValorMaximo: Double
+        get() = resultados.xCoeficienteReacaoHorizontalMax
     override val formato: Formato<SpringStiffnessPerUnitArea>
         get() = Formatos.coeficienteReacao
-
 
     override fun valor(profundidade: Double): Double {
         return resultados.coeficienteReacaoHorizontal(z = profundidade)
@@ -73,9 +81,11 @@ internal class CoeficienteDeReacao(val resultados: ResultadosAnaliseTubulao) :
 
 internal class TensaoHorizontalAtuante(val resultados: ResultadosAnaliseTubulao) :
     DadosDoGrafico<Pressure>(nome = "grafico.tensaoHorizontalAtuante", tubulao = resultados.tubulao) {
+    override val profundidadeValorMaximo: Double
+        get() = resultados.xTensaoHorizontalMax
+
     override val formato: Formato<Pressure>
         get() = Formatos.tensaoSolo
-
 
     override fun valor(profundidade: Double): Double {
         return resultados.tensaoHorizontal(z = profundidade)
@@ -84,6 +94,8 @@ internal class TensaoHorizontalAtuante(val resultados: ResultadosAnaliseTubulao)
 
 internal class Reacao(val resultados: ResultadosAnaliseTubulao) :
     DadosDoGrafico<ForcePerUnitLength>(nome = "grafico.reacao", tubulao = resultados.tubulao) {
+    override val profundidadeValorMaximo: Double
+        get() = resultados.xReacaoHorizontalMax
     override val formato: Formato<ForcePerUnitLength>
         get() = Formatos.reacaoLateralNaEstaca
 
@@ -113,6 +125,8 @@ internal class Reacao(val resultados: ResultadosAnaliseTubulao) :
 //    },
 internal class Cortante(val resultados: ResultadosAnaliseTubulao) :
     DadosDoGrafico<Force>(nome = "grafico.cortante", tubulao = resultados.tubulao) {
+    override val profundidadeValorMaximo: Double
+        get() = resultados.xCortanteMax
     override val formato: Formato<Force>
         get() = Formatos.forca
 
@@ -123,6 +137,8 @@ internal class Cortante(val resultados: ResultadosAnaliseTubulao) :
 
 internal class Momento(val resultados: ResultadosAnaliseTubulao) :
     DadosDoGrafico<Moment>(nome = "grafico.momento", tubulao = resultados.tubulao) {
+    override val profundidadeValorMaximo: Double
+        get() = resultados.xMomentoMax
     override val formato: Formato<Moment>
         get() = Formatos.momento
 

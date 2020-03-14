@@ -47,9 +47,9 @@ internal class Graficos(resultados: ResultadosAnaliseTubulao) {
         dadosArmaduraLongitudinal,
         dadosArmaduraTransversal*/
     )
-    private val graficos: List<Grafico> = Array(size = 4) {
-        Grafico(listaDeDados, yMaximoUnidadeDeProfundidade, yGraficoUnidadeProfundidade)
-    }.toList()
+    private val graficos: List<Grafico> = listOf(
+        dadosCoeficienteDeReacao, dadosTensaoHorizontalAtuante, dadosCortante, dadosMomento
+    ).map { tipo -> Grafico(tipo, listaDeDados, yMaximoUnidadeDeProfundidade, yGraficoUnidadeProfundidade) }
     private val linhaMarcacaoProfundidade = Line()
     val node: Region = AnchorPane().apply {
         prefWidth = 1000.0

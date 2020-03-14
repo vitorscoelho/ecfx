@@ -49,6 +49,20 @@ class AnaliseKhDegrau(
         override val tensaoMinimaBase = tensaoMediaBase - kv * rotacao * base.dimensao / 2.0
         override val tensaoMaximaBase = tensaoMediaBase + kv * rotacao * base.dimensao / 2.0
 
+        override val xCoeficienteReacaoHorizontalMax = tubulao.comprimento
+        override val xTensaoHorizontalMax: Double by lazy { xMaximoAbsoluto { tensaoHorizontal(z = it) } }
+        override val xReacaoHorizontalMax: Double
+            get() = xTensaoHorizontalMax
+        override val xCortanteMax: Double by lazy { xMaximoAbsoluto { cortante(z = it) } }
+        override val xMomentoMax: Double by lazy { xMaximoAbsoluto { momento(z = it) } }
+
+        override val coeficienteReacaoHorizontalMax: Double
+            get() = kh2
+        override val tensaoHorizontalMax: Double by lazy { tensaoHorizontal(xTensaoHorizontalMax) }
+        override val reacaoHorizontalMax: Double by lazy { reacaoHorizontal(xReacaoHorizontalMax) }
+        override val cortanteMax: Double by lazy { cortante(xCortanteMax) }
+        override val momentoMax: Double by lazy { momento(xMomentoMax) }
+
         override fun coeficienteReacaoHorizontal(z: Double) = if (z <= l1) kh1 else kh2
 
         override fun tensaoHorizontal(z: Double): Double {

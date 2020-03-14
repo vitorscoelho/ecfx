@@ -8,6 +8,7 @@ import vitorscoelho.ecfx.dimensionamento.Esforco
 import vitorscoelho.ecfx.dimensionamento.geotecnico.*
 import vitorscoelho.ecfx.gui.estilo.EstiloPrincipal
 import vitorscoelho.ecfx.novagui.view.inicial.ModelInicial
+import vitorscoelho.ecfx.novagui.view.inicial.ViewInicial
 import vitorscoelho.ecfx.novagui.view.resultadosfuste.ScopeGraficosFuste
 import vitorscoelho.ecfx.novagui.view.resultadosfuste.ViewGraficosFuste
 import java.util.*
@@ -18,11 +19,13 @@ fun main(args: Array<String>) {
     Application.launch(Aplicacao::class.java, *args)
 }
 
+
 class Aplicacao : App(
-    ViewGraficosFuste::class, EstiloPrincipal::class, scope = ScopeGraficosFuste(
-    criarDados()
-)
+    ViewGraficosFuste::class, EstiloPrincipal::class, scope = ScopeGraficosFuste(criarDados())
 ) {
+    //class Aplicacao : App(
+//    ViewInicial::class, EstiloPrincipal::class
+//) {
     init {
         reloadStylesheetsOnFocus()
         val versaoJava = System.getProperty("java.version")

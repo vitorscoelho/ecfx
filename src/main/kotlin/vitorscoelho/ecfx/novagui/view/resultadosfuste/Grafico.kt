@@ -1,6 +1,5 @@
 package vitorscoelho.ecfx.novagui.view.resultadosfuste
 
-import javafx.beans.property.DoubleProperty
 import javafx.beans.property.ReadOnlyDoubleProperty
 import javafx.beans.property.ReadOnlyObjectProperty
 import javafx.geometry.Side
@@ -9,13 +8,14 @@ import javafx.scene.control.ComboBox
 import javafx.scene.control.Label
 import javafx.scene.control.TextArea
 import javafx.scene.layout.Priority
-import javafx.scene.layout.Region
 import javafx.scene.layout.VBox
 import tornadofx.*
 import vitorscoelho.ecfx.novagui.configuracoes.Formatos
+import vitorscoelho.ecfx.novagui.utils.doNowAndOnChange
 import vitorscoelho.ecfx.novagui.utils.rb
 
 internal class Grafico(
+    tipoInicial: DadosDoGrafico<*>,
     private val dados: List<DadosDoGrafico<*>>,
     val yMaximo: Double,
     val yUnidadeCorrente: ReadOnlyDoubleProperty
@@ -30,17 +30,18 @@ internal class Grafico(
         get() = combobox.valueProperty()
 
     init {
-        configurarNodes()
-        tipoGrafico.onChange { atualizarVisualizacao() }
+        configurarNodes(tipoInicial)
+        tipoGrafico.doNowAndOnChange { atualizarVisualizacao() }
     }
 
-    private fun configurarNodes() {
+    private fun configurarNodes(tipoInicial: DadosDoGrafico<*>) {
         textArea.apply {
             minHeight = HEIGHT_TEXT_AREA; maxHeight = HEIGHT_TEXT_AREA
             isWrapText = true
             isEditable = false
         }
         combobox.apply {
+            value = tipoInicial
             items = dados.toObservable()
             maxWidth = Double.MAX_VALUE
         }
@@ -81,7 +82,20 @@ internal class Grafico(
 
     private fun atualizarVisualizacao() {
         val novoTipo: DadosDoGrafico<*> = tipoGrafico.value
-        textArea.text = "Descrição:\r\n${novoTipo.descricao}"
+        textArea.text = "${rb["grafico.prefixoDescricao"]}\r\n${novoTipo.descricao}"
+        labelMaximo.apply {
+            if (tipoGrafico.value == null) return@apply
+            val tipo = tipoGrafico.value
+            val prefixo = rb["grafico.prefixoMaximo"]
+            val valor = tipo.valorMaximoNasUnidadesCorrentes
+            val valorFormatado = tipo.formato.format.value.format(valor)
+            val profundidade = tipo.profundidadeValorMaximoNaUnidadeCorrente
+            val profundidadeFormatada = Formatos.profundidade.format.value.format(profundidade)
+            val unidadeValor = tipo.formato.unit.value
+            val unidadeProfundidade = Formatos.profundidade.unit.value
+            val emString = rb["em"]
+            text = "$prefixo  $valorFormatado$unidadeValor $emString $profundidadeFormatada$unidadeProfundidade"
+        }
         chart.apply {
             data.clear()
             data = observableListOf(novoTipo.serie)

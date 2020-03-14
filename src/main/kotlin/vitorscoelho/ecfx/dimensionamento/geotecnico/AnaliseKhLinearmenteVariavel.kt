@@ -31,6 +31,20 @@ class AnaliseKhLinearmenteVariavel(val tubulao: Tubulao, val nh: Double, val kv:
         override val tensaoMinimaBase = tensaoMediaBase - kv * rotacao * base.dimensao / 2.0
         override val tensaoMaximaBase = tensaoMediaBase + kv * rotacao * base.dimensao / 2.0
 
+        override val xCoeficienteReacaoHorizontalMax = tubulao.comprimento
+        override val xTensaoHorizontalMax: Double by lazy { xMaximoAbsoluto { tensaoHorizontal(z = it) } }
+        override val xReacaoHorizontalMax: Double
+            get() = xTensaoHorizontalMax
+        override val xCortanteMax: Double by lazy { xMaximoAbsoluto { cortante(z = it) } }
+        override val xMomentoMax: Double by lazy { xMaximoAbsoluto { momento(z = it) } }
+
+        override val coeficienteReacaoHorizontalMax: Double
+            get() = khMax
+        override val tensaoHorizontalMax: Double by lazy { tensaoHorizontal(xTensaoHorizontalMax) }
+        override val reacaoHorizontalMax: Double by lazy { reacaoHorizontal(xReacaoHorizontalMax) }
+        override val cortanteMax: Double by lazy { cortante(xCortanteMax) }
+        override val momentoMax: Double by lazy { momento(xMomentoMax) }
+
         override fun coeficienteReacaoHorizontal(z: Double) = khMax * z / comprimento
         override fun tensaoHorizontal(z: Double) = (khMax * z / comprimento) * (deltaH - rotacao * z)
         override fun reacaoHorizontal(z: Double) = tensaoHorizontal(z = z) * fuste.dimensao
